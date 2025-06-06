@@ -73,7 +73,7 @@ const Beverages = ({product}) => {
                                 alt={product.name} 
                                 className='w-full h-full object-contain'
                             />
-                        </div>
+                        </div> 
                             </Link>
                         <div className='mt-6 flex flex-row justify-between'>
                             <h1 className='font-semibold text-md/1 text-green-700'>{product.category || 'Fresh Product'}</h1>    
