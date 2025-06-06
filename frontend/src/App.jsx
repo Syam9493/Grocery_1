@@ -1,0 +1,22 @@
+import React from "react";
+import "./App.css";
+import NavBar from "./Components/NavBar/NavBar";
+import Footer from "./Components/Footer/Footer";
+//import HeroSection from "./Components/HeroSection/HeroSection";
+import Categories from "./Components/Slider/Categories";
+//import { FaLifeRing } from "react-icons/fa";
+import { Outlet } from "react-router-dom";
+
+function App() {
+  return (
+    <>
+      <NavBar />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+export default App;

@@ -1,0 +1,23 @@
+
+{
+    "users":[
+        {
+            "FirstName": "admin",
+            "LastName" : "D",
+            "email": "admin@example.com",
+            "password": 1234,
+            "confPassword":1234,
+            "cellNumber" : 8394943939,
+            "isAdmin": true
+        },
+        {
+        "FirstName": "syam",
+        "LastName" : "Dokuparthi",
+        "email": "syam@email.com",
+        "password": 1234,
+        "confPassword":1234,
+        "cellNumber" : 9394943939,
+        "isAdmin": false
+    }
+]
+}

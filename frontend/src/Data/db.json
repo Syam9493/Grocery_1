@@ -1,0 +1,323 @@
+{
+    "Products" :  {
+      "vegetables":[
+            {
+               "id": 0,
+            "image":"/V_Images/Cauliflower.jpeg",
+            "name": " Cauliflower",
+            "description":"vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 1,
+            "image":"/V_Images/pea.png",
+            "name": "Pea",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 2,
+            "image":"/V_Images/Tomato.png",
+            "name": " Tomato",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 3,
+            "image":"/V_Images/Spinach.png",
+            "name": "Fresh Spinach",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 4,
+            "image":"/V_Images/BitterGround.png",
+            "name": "Fresh BitterGround",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 5,
+            "image":"/V_Images/Pumpkin.jpeg",
+            "name": "Fresh Pumpkin",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 6,
+            "image":"/V_Images/Onion.png",
+            "name": "Fresh Onion",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 7,
+            "image":"/V_Images/Mint.png",
+            "name": "Fresh Mint",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 8,
+            "image":"/V_Images/Lettuce.jpeg",
+            "name": "Fresh Lettuce",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 9,
+            "image":"/V_Images/cabbage.png",
+            "name": "Fresh Cabbage",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 10,
+            "image":"/V_Images/Broccoli.png",
+            "name": "Fresh Broccoli",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 11,
+            "image":"/V_Images/eggplant.png",
+            "name": "Fresh EggPlant",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            },
+            {
+               "id": 12,
+            "image":"/V_Images/Radish.png",
+            "name": "Fresh Radish",
+            "description":"Fresh vegetables",
+            "weight" : "500g",
+            "cost" : 10,
+            "rating" : 4.8
+            }
+         ],
+         "Fruits":[   
+            {
+                "id": 17,
+             "image":"/Fruits/Orange.jpeg",
+             "name": "Orange",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 18,
+             "image":"/Fruits/Apple.jpeg",
+             "name": "Apple",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 19,
+             "image":"/Fruits/Avacado.png",
+             "name": " Avacado",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 20,
+             "image":"/Fruits/Mango.png",
+             "name": " Mango",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 21,
+             "image":"/Fruits/Peach.png",
+             "name": " Peach",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 22,
+             "image":"/Fruits/Cherry.jpeg",
+             "name": " Cherry",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 23,
+             "image":"/Fruits/Grape.png",
+             "name": " Grape",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 24,
+             "image":"/Fruits/Banana.jpeg",
+             "name": " Banana",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 25,
+             "image":"/Fruits/Watermelon.jpeg",
+             "name": "Watermelon",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 26,
+             "image":"/Fruits/Blueberry.jpeg",
+             "name": "Blueberry",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 27,
+             "image":"/Fruits/Guava.jpeg",
+             "name": "Guava",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 28,
+             "image":"/Fruits/Raspberry.png",
+             "name": "Raspberry",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 29,
+             "image":"/Fruits/Kiwi.jpeg",
+             "name": "Kiwi",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 30,
+             "image":"/Fruits/Apricot.jpeg",
+             "name": "Apricot",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 31,
+             "image":"/Fruits/Pear.jpeg",
+             "name": "Pear",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 32,
+             "image":"/Fruits/Fig.png",
+             "name": "Fig",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 33,
+             "image":"/Fruits/lemon.jpeg",
+             "name": "lemon",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 34,
+             "image":"/Fruits/Papaya.jpeg",
+             "name": "Papaya",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 35,
+             "image":"/Fruits/Pomegranate.jpeg",
+             "name": "Pomegranate",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 36,
+             "image":"/Fruits/Plum.png",
+             "name": "Plum",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 37,
+             "image":"/Fruits/passionfruit.png",
+             "name": "passion fruit",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             },
+            {
+                "id": 38,
+             "image":"/Fruits/Jackfruit.png",
+             "name": "Jackfruit",
+             "description":"Fresh Fruits",
+             "weight" : "500g",
+             "cost" : 10,
+             "rating" : 4.8
+             }
+        ]
+      }
+}

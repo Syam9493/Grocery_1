@@ -1,0 +1,443 @@
+{
+    "Products" :  {
+      "vegetables":[
+            {
+            "image":"/V_Images/Cauliflower.jpeg",
+            "category": "vegetables",
+            "name":"Fresh Cauliflower",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 50,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/pea.png",
+            "category": "vegetables",
+            "name":"Fresh Pea",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 50,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Tomato.png",
+            "category": " vegetables",
+            "name":"Fresh Tomato",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 40,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Spinach.png",
+            "category": " vegetables",
+            "name":"Fresh Spinach",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 60,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/BitterGround.png",
+            "category": "vegetables",
+            "name":"Fresh BitterGround",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 30,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Pumpkin.jpeg",
+            "category": "vegetables",
+            "name":"Fresh Pumpkin",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 70,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Onion.png",
+            "category": "vegetables",
+            "name":"Fresh Onion",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 80,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Mint.png",
+            "category": " vegetables",
+            "name":"Fresh Mint",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 20,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Lettuce.jpeg",
+            "category": "vegetables",
+            "name":"Fresh Lettuce",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 30,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/cabbage.png",
+            "category": "vegetables",
+            "name":"Fresh Cabbage",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 20,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Broccoli.png",
+            "category": "vegetables",
+            "name":"Fresh Broccoli",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 40,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/eggplant.png",
+            "category": "vegetables",
+            "name":"Fresh EggPlant",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 50,
+            "quantity": 1,
+            "rating" : 4.8
+            },
+            {
+            "image":"/V_Images/Radish.png",
+            "category": "vegetables",
+            "name":"Fresh Radish ",
+            "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+            "weight" : "500g",
+            "price" : 60,
+            "quantity": 1,
+            "rating" : 4.8
+            }
+         ],
+         "Fruits":[   
+            {
+             "image":"/Fruits/Orange.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Orange ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 100,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/Apple.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Apple ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 110,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Avacado.png",
+             "category": "Fruits ",
+             "name":"Fresh Avacado ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 80,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Mango.png",
+             "category": "Fruits",
+             "name":"Fresh Mango ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 100,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Peach.png",
+             "category": "Fruits",
+             "name":"Fresh Peach",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 100,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Cherry.jpeg",
+             "category": " ",
+             "name":"Fresh Cherry ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 90,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Grape.png",
+             "category": " Fruits",
+             "name":"Fresh Grape ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 110,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Banana.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Banana ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 50,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Watermelon.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Watermelon ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 70,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Blueberry.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Blueberry",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 210,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/Guava.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Guava ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 40,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Raspberry.png",
+             "category": "Fruits",
+             "name":"Fresh Raspberry ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 90,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/Kiwi.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Kiwi ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 160,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Apricot.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Apricot ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 120,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Pear.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Pear",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 130,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/Fig.png",
+             "category": "Fruits",
+             "name":"Fresh Fig ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 70,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/lemon.jpeg",
+             "category": "Fruits",
+             "name":"Fresh lemon",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 10,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/Papaya.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Papaya ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 80,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+                
+             "image":"/Fruits/Pomegranate.jpeg",
+             "category": "Fruits",
+             "name":"Fresh Pomegranate",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 140,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+            
+             "image":"/Fruits/Plum.png",
+             "category": "Fruits",
+             "name":"Fresh Plum ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 110,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+              
+             "image":"/Fruits/passionfruit.png",
+             "category": "Fruits",
+             "name":"Fresh passion fruit ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+             "weight" : "500g",
+             "price" : 100,
+             "quantity": 1,
+             "rating" : 4.8
+             },
+            {
+               
+             "image":"/Fruits/Jackfruit.png",
+             "category": "Fruits",
+             "name":"Fresh Jackfruit ",
+             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",  
+             "weight" : "500g",
+             "price" : 120,
+             "quantity": 1,
+             "rating" : 4.8
+             }
+        ],
+        "Beverages":[
+         {
+
+         "image":"/Beverages/ThumsUp.jpg",
+         "category": "Beverages",
+         "name":"Thum-sUp",
+         "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+         "weight" : "1-Liter",
+         "price" : 110,
+         "quantity": 1,
+         "rating" : 4.8
+         },
+         {
+
+         "image":"/Beverages/Sprite.jpg",
+         "category": "Beverages",
+         "name":"Sprite",
+         "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+         "weight" : "1-Liter",
+         "price" : 100,
+         "quantity": 1,
+         "rating" : 4.8
+         },
+         {
+         "image":"/Beverages/PulpyOrange.jpg",
+         "category": "Beverages",
+         "name":"PulpyOrange",
+         "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+         "weight" : "1-Liter",
+         "price" : 70,
+         "quantity": 1,
+         "rating" : 4.8
+         },
+         {
+         "image":"/Beverages/fanta.jpeg",
+         "category": "Beverages",
+         "name":"Fanta",
+         "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+         "weight" : "1-Liter",
+         "price" : 90,
+         "quantity": 1,
+         "rating" : 4.8
+         },
+         {
+         "image":"/Beverages/fanta1.jpg",
+         "category": "Beverages",
+         "name":"Fanta",
+         "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+         "weight" : "1-Liter",
+         "price" : 110,
+         "quantity": 1,
+         "rating" : 4.8
+         },
+         {
+         "image":"/Beverages/Fuze.jpeg",
+         "category": "Beverages",
+         "name":"Fuze",
+         "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
+         "weight" : "1-Liter",
+         "price" : 70,
+         "quantity": 1,
+         "rating" : 4.8
+         }
+        ]
+      }
+}
