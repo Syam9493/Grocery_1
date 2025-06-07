@@ -1,31 +1,43 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = localStorage.getItem("whishList") ? JSON.parse(localStorage.getItem("whishList")) : {whishListItme: []}
-
-const updateWhichList = (state) => {
-    localStorage.setItem("whishList", JSON.stringify(state));
-}
+const initialState = localStorage.getItem("wishList")
+  ? JSON.parse(localStorage.getItem("wishList"))
+  : { wishListItems: [] };
 
 
-export const whishListSlice = createSlice({
-    name: "whishList",
-    initialState,
-    reducers: {
-        addToWhichList: (state, action) => {
-                const item = action.payload;
-                const existItem = state.whishList.find((w) => w._id === item);
 
-                if(existItem) {
-                    state.whishList = state.whishList.map((items) => items._id === existItem._id ? item : items)
-                } else{
-                    state.whishList = [...state.whishList, item]
-                }
-                return updateWhichList(state);
-        }
-    }
+  const updateWhishList = (state) => {
+  localStorage.setItem("wishList", JSON.stringify(state));
+  return state;
+};
 
+export const wishListSlice = createSlice({
+  name: "wishList",
+  initialState,
+  reducers: {
+    addToWishList: (state, action) => {
+      const item = action.payload;
+      const existItem = state.wishListItems.find((w) => w._id === item._id);
+
+      if (existItem) {
+        state.wishListItems = state.wishListItems.map((w) =>
+          w._id === existItem._id ? item : w
+        );
+      } else {
+        state.wishListItems.push(item);
+      }
+
+      // Sync to localStorage (synchronously)
+      //localStorage.setItem("wishList", JSON.stringify(state));
+      return updateWhishList(state);
+    },
+    deletefromWhishList: (state, action) => {
+          state.wishListItems = state.wishListItems.filter((x) => x._id !== action.payload);
+          return updateWhishList(state);
+        },
+  },
 });
 
-export const {addToWhichList} = whishListSlice.actions;
+export const { addToWishList, deletefromWhishList } = wishListSlice.actions;
 
-export default whishListSlice.reducer;
+export default wishListSlice.reducer;

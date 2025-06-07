@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async(req,res) => {
     try {
        const details = await Product.findById(req.params.id);
-        console.log(details);
+       //console.log(details);
         res.json({
             success: true,
             data: details

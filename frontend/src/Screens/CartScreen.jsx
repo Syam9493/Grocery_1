@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import Cart from "../Components/Cart";
 
 const CartScreen = () => {
-  const [product, setProduct] = useState([]);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      for (let i = 0; i < localStorage.length; i++) {
-        const response = localStorage.getItem(localStorage.key(i));
-        const cart = JSON.parse(response);
-        setProduct(cart.cartItems);
-      }
-    };
-    fetchProduct();
-  }, []);
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   return (
     <>
-      <table className="m-14 w-2xl table-auto text-left">
+      <table className="table-auto text-left">
         <thead>
           <tr className="border-2 rounded-2xl bg-yellow-500 text-white">
             <th className="p-4">Product</th>
@@ -27,7 +18,7 @@ const CartScreen = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          <Cart product={product} />
+          <Cart product={cartItems} />
         </tbody>
       </table>
     </>

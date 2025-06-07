@@ -1,10 +1,16 @@
 import React from 'react';
 import WhishList from '../Components/WhishList';
+import { useSelector } from 'react-redux';
 
 const WhishListScreen = () => {
+
+const whishLists = useSelector((state) => state.whishList);
+
+const {wishListItems} = whishLists
+
   return (
     <>
-      <table className='mt-4 w-6xl table-auto text-left'>
+      <table className='table-auto text-left'>
         <thead >
           <tr className='border-2 bg-yellow-500 text-white'>
           <td className='p-4'>Product</td>
@@ -13,10 +19,12 @@ const WhishListScreen = () => {
           <td className='p-4'>Stock Staus</td>
         </tr>
         </thead>
-        
+        <tbody>
+          <WhishList wishListItems={wishListItems}/>
+        </tbody>
       </table>
     </>
   )
 }
 
-export default WhishListScreen
+export default WhishListScreen;
