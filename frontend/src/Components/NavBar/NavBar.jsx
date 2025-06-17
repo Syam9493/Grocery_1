@@ -8,8 +8,9 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import { GiFruitBowl } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { GiFruitBowl } from "react-icons/gi";
+import Location from "../Location";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -65,8 +66,12 @@ const Navbar = () => {
             {/* Location - Only visible on desktop */}
             <div className="hidden absolute left-1/4 md:flex flex-col items-center gap-1 text-white">
               {/* <FaMapMarkerAlt className="text-sm" /> */}
-              <span className="text-sm">Location</span>
-              <span className="text-sm">Chennai</span>
+              <span className="font-sans font-semibold text-[1.1rem]">
+                Location
+              </span>
+              <span className="text-sm">
+                <Location />
+              </span>
             </div>
 
             {/* Icons - Always visible */}
@@ -94,7 +99,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full py-2 px-4 pr-10 border rounded-full outline-2 -outline-offset-2 outline-yellow-400 focus:outline-3 focus:-outline-offset-3 focus:outline-yellow-300 text-sm text-white"
+                className="w-full font-sans font-semibold text-[1rem] py-2 px-4 pr-10 border rounded-full outline-2 -outline-offset-2 outline-yellow-400 focus:outline-3 focus:-outline-offset-3 focus:outline-yellow-300 text-sm text-white"
               />
               <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
                 <FaSearch className="text-sm" />
@@ -107,7 +112,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="text-white w-full py-2 px-4 pr-10 border rounded-full outline-1 -outline-offset-1 outline-yellow-400 focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-300 shadow-md text-sm"
+                className="text-white font-sans font-semibold text-[1rem] w-full py-2 px-4 pr-10 border rounded-full outline-1 -outline-offset-1 outline-yellow-400 focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-300 shadow-md text-sm"
               />
               <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
                 <FaSearch className="text-sm" />
@@ -127,7 +132,7 @@ const Navbar = () => {
             {NavigationMenuList.map(({ name, to }) => (
               <div key={name} className="p-2">
                 <ul className="flex items-center gap-9 text-white">
-                  <li>
+                  <li className="font-sans font-semibold text-[1.1rem]">
                     <Link to={to}>{name}</Link>
                   </li>
                 </ul>
@@ -158,7 +163,11 @@ const Navbar = () => {
         <div className="p-4">
           <ul className="space-y-3 text-white">
             {NavigationMenuList.map((item) => (
-              <li key={item.name}>
+              <li
+                className="font-sans font-semibold text-[1.1rem]"
+                key={item.name}
+                onClick={() => setIsSidebarOpen(false)}
+              >
                 <Link
                   to={item.to}
                   key={item.name}

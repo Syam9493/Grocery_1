@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import {ToastContainer} from 'react-toastify'
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
 //import HeroSection from "./Components/HeroSection/HeroSection";
@@ -15,6 +16,7 @@ function App() {
         <Outlet />
       </main>
       <Footer />
+      <ToastContainer/>
     </>
   );
 }

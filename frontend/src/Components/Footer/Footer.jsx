@@ -1,5 +1,5 @@
 import React from "react";
-import  {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { GiFruitBowl } from "react-icons/gi";
 
 const Footer = () => {
@@ -20,39 +20,41 @@ const Footer = () => {
                 Grocery<span className="text-yellow-300">.</span>
               </span>
             </div>
-            <p className="leading-8">
+            <p className="font-sans font-semibold text-md leading-8">
               Perspiciatis, dicta iste inventore, laudantium quam eaque neque
               amet fugiat iusto saepe deleniti harum expedita veritatis fuga.
             </p>
           </div>
           <ul className="leading-8">
-            <h2 className="text-xl">Company</h2>
-            <li>About Us</li>
-            <li>Blog</li>
-            <li>Contact Us</li>
-            <li>Career</li>
+            <h2 className="font-sans font-bold text-xl">Company</h2>
+            <li className="font-sans font-semibold text-md">About Us</li>
+            <li className="font-sans font-semibold text-md">Blog</li>
+            <li className="font-sans font-semibold text-md">Contact Us</li>
+            <li className="font-sans font-semibold text-md">Career</li>
           </ul>
 
           <ul className="leading-8">
-            <li className="text-xl">Customer-Services</li>
-            <li>My Account</li>
-            <li>Trak Your Order</li>
-            <li>Return</li>
-            <li>FAQ</li>
+            <li className="font-sans font-bold text-xl">Customer-Services</li>
+            <li className="font-sans font-semibold text-md">My Account</li>
+            <li className="font-sans font-semibold text-md">Trak Your Order</li>
+            <li className="font-sans font-semibold text-md">Return</li>
+            <li className="font-sans font-semibold text-md">FAQ</li>
           </ul>
           <ul className="leading-8">
-            <h2 className="text-xl">Our-Information</h2>
-            <li>Privacy</li>
-            <li>Terms&Conditions</li>
-            <li>Return Policy</li>
-            <li>Security</li>
+            <h2 className="font-sans font-bold text-xl">Our-Information</h2>
+            <li className="font-sans font-semibold text-md">Privacy</li>
+            <li className="font-sans font-semibold text-md">
+              Terms&Conditions
+            </li>
+            <li className="font-sans font-semibold text-md">Return Policy</li>
+            <li className="font-sans font-semibold text-md">Security</li>
           </ul>
           <ul className="leading-8">
-            <h2 className="text-xl">Contact</h2>
-            <li>+919493900569</li>
-            <li>SyamD@gmail.com</li>
-            <li>7-10,ilavaram,</li>
-            <li>Andhra Pradesh</li>
+            <h2 className="font-sans font-bold text-xl">Contact</h2>
+            <li className="font-sans font-semibold text-md">+919493900569</li>
+            <li className="font-sans font-semibold text-md">SyamD@gmail.com</li>
+            <li className="font-sans font-semibold text-md">7-10,ilavaram,</li>
+            <li className="font-sans font-semibold text-md">Andhra Pradesh</li>
           </ul>
         </div>
         <div className="border-b-1 border-gray-500 py-4"></div>

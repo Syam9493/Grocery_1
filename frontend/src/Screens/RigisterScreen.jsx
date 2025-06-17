@@ -12,14 +12,20 @@ const RigisterScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (password === confirmpassword) {
+      alert("passwords matched!");
+    } else {
+      alert("pleae enter the correct password");
+    }
+
     console.log({
       firstName: Fname,
       lastName: Lname,
       email: email,
       password: password,
       confirmpassword: confirmpassword,
-      mobileNumber: mobileNumber
-    })
+      mobileNumber: mobileNumber,
+    });
   };
   return (
     <RigisterForm>
@@ -83,9 +89,7 @@ const RigisterScreen = () => {
             </div>
           </div>
           <div>
-            <label
-              className="block text-md/1 font-medium text-gray-900"
-            >
+            <label className="block text-md/1 font-medium text-gray-900">
               Enter Confirm Password
             </label>
             <div className="mt-2">
@@ -119,8 +123,13 @@ const RigisterScreen = () => {
             </button>
           </div>
           <div className="mt-2">
-            Do you have already account? 
-            <Link to="/login" className="text-xl/1 font-semibold text-green-600 hover:text-green-500 ml-2">Login</Link>
+            Do you have already account?
+            <Link
+              to="/login"
+              className="text-xl/1 font-semibold text-green-600 hover:text-green-500 ml-2"
+            >
+              Login
+            </Link>
           </div>
         </form>
       </div>

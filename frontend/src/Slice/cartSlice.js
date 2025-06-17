@@ -7,9 +7,9 @@ export const initialState = localStorage.getItem("carts")
 
 
 
-const updateCart = (state) => {
-  localStorage.setItem("carts", JSON.stringify(state));
-  return state;
+const updateCart = (cartItems) => {
+  localStorage.setItem("carts", JSON.stringify(cartItems));
+  return cartItems;
 };
 
 export const cartSlice = createSlice({
@@ -21,14 +21,17 @@ export const cartSlice = createSlice({
       const existItem = state.cartItems.find((p) => p._id === item._id);
 
       if (existItem) {
-        state.cartItems = state.cartItems.map((items) =>
+        state.cartItems = state.cartItems.map((items) =>{
           items._id === existItem._id ? item : items
-        );
+        } )
       } else {
         state.cartItems = [...state.cartItems, item];
       }
       return updateCart(state);
     },
+
+
+
 
     deletefromCart: (state, action) => {
       state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);

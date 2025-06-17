@@ -8,7 +8,7 @@ const CartScreen = () => {
 
   return (
     <>
-      <table className="table-auto text-left">
+      <table className="table-auto text-left mt-5 mb-5 mx-auto">
         <thead>
           <tr className="border-2 rounded-2xl bg-yellow-500 text-white">
             <th className="p-4">Product</th>
