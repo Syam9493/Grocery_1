@@ -8,6 +8,7 @@ const VegetableScreen = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [VisibleProducts, setVisibleProducts] = useState(6);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,6 +28,16 @@ const VegetableScreen = () => {
     fetchProducts();
   }, []);
 
+  const loadMoreProductshandler = () => {
+    setVisibleProducts((prevCount) => prevCount + 6);
+  };
+
+  const decresMoreProductshandler = () => {
+    setVisibleProducts(6);
+  };
+
+  const visibeProducts = products.slice(0, VisibleProducts);
+
   if (loading)
     return (
       <div className="flex justify-center m-20">
@@ -37,11 +48,30 @@ const VegetableScreen = () => {
   if (!products.length) return <div>No products found</div>;
 
   return (
-    <div className="grid grid-cols-1 place-items-center  md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 gap-4 p-6">
-      {products.map((product) => (
-        <Vegetables key={product._id} product={product} />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 place-items-center  md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 gap-4 p-6">
+        {visibeProducts.map((product) => (
+          <Vegetables key={product._id} product={product} />
+        ))}
+      </div>
+      <div className="m-7 flex items-center justify-center">
+        {VisibleProducts < products.length ? (
+          <button
+            className=" w-60  bg-green-700 rounded-2xl font-sans font-semibold text-[1rem] text-white px-4 py-3"
+            onClick={loadMoreProductshandler}
+          >
+            Load Products
+          </button>
+        ) : (
+          <button
+            className=" w-60  bg-green-700 rounded-2xl font-sans font-semibold text-[1rem] text-white px-4 py-3"
+            onClick={decresMoreProductshandler}
+          >
+            Remove Products
+          </button>
+        )}
+      </div>
+    </>
   );
 };
 

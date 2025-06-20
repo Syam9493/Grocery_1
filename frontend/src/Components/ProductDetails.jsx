@@ -5,16 +5,27 @@ import { toast, ToastContainer } from "react-toastify";
 //import 'react-toastify/dist/ReactToastify.css';
 import { addingToCart } from "../Slice/cartSlice";
 import { addToWishList } from "../Slice/WhishListSlice";
-import { increaseQty, decreaseQty } from "../Slice/cartSlice";
-//import {showSuccessMessage} from './TostNotifications/successNotification'
+//import { increaseQty, decreaseQty } from "../Slice/cartSlice";
+//import {showSuccessMessage} from './TostNotifications/successNotification';
+//import Quantity from "./Quantity";
 
 const ProductDetails = ({ product }) => {
+  // const cart = useSelector((state) => state.cart);
+  // const { cartItems } = cart;
+
+  // const finalCount = cartItems.filter((p) => p._id === product._id);
+
+  //console.log(finalCount);
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
+  //const [qty, setQty] = useState(1);
 
   //console.log(product._id);
 
-  const addToCartHandler = () => {
+  const addToCartHandler = (product) => {
     dispatch(addingToCart(product));
     toast.success("Product added to cart!", {
       autoClose: 500, // half a second
@@ -38,13 +49,17 @@ const ProductDetails = ({ product }) => {
     }, 2000);
   };
 
-  const increaseQtyHandler = (id) => {
-    dispatch(increaseQty(id));
-  };
+  // const increaseQtyHandler = (id) => {
+  //   dispatch(increaseQty(id));
+  // };
 
-  const decreaseQtyHandler = (id) => {
-    dispatch(decreaseQty(id));
-  };
+  // const increaseQtyHandler = (id) => {
+  //   dispatch(increaseQty(id));
+  // };
+
+  // const decreaseQtyHandler = (id) => {
+  //   dispatch(decreaseQty(id));
+  // };
 
   return (
     <>
@@ -89,32 +104,74 @@ const ProductDetails = ({ product }) => {
             </div>
           </div>
           <div className="flex flex-row gap-3">
-            <div className="flex items-center justify-center border rounded-3xl p-1">
+            {/* {finalCount.map((item) => (
+              <div
+                key={item._id}
+                className="flex items-center justify-center border rounded-3xl p-1"
+              >
+                <button
+                  className="px-2 border-r-2 border-gray-400 h-10"
+                  onClick={() => decreaseQtyHandler(item._id)}
+                >
+                  -
+                </button>
+
+                <span className="px-3 divider lg:divider-horizontal">
+                  {item.quantity}
+                </span>
+
+                <button
+                  className="px-2 border-l-2 border-gray-400 h-10"
+                  // onClick={() => increaseQtyHandler(product._id)}
+                  onClick={() => {
+                    increaseQtyHandler(item._id);
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            ))} */}
+            {/* <Quantity /> */}
+
+            {/* <div
+              key={finalCount._id}
+              className="flex items-center justify-center border rounded-3xl p-1"
+            >
               <button
                 className="px-2 border-r-2 border-gray-400 h-10"
-                onClick={() => decreaseQtyHandler(product._id)}
+                onClick={() => decreaseQtyHandler(finalCount._id)}
               >
                 -
               </button>
+
               <span className="px-3 divider lg:divider-horizontal">
-                {product.quantity}
+                {finalCount.quantity}
               </span>
+
               <button
                 className="px-2 border-l-2 border-gray-400 h-10"
-                onClick={() => increaseQtyHandler(product._id)}
+                // onClick={() => increaseQtyHandler(product._id)}
+                onClick={() => {
+                  increaseQtyHandler(finalCount._id);
+                }}
               >
                 +
               </button>
-            </div>
+            </div> */}
+
             <button
               className="flex items-center justify-center bg-green-700 text-white border-gray-50 rounded-4xl px-4 py-2"
-              onClick={addToCartHandler}
+              onClick={() => {
+                addToCartHandler(product);
+              }}
             >
               Add To Cart
             </button>
-            <button className="flex items-center justify-center bg-yellow-300 text-black border-gray-50 rounded-4xl px-4 py-2">
-              Buy Now
-            </button>
+
+            <div className="flex items-center justify-center bg-yellow-300 text-black border-gray-50 rounded-4xl px-4 py-2">
+              <button>BuyNow"</button>
+            </div>
+
             <button
               className="flex items-center justify-center bg-gray-100 text-white border-gray-50 rounded-full px-4 py-2"
               onClick={addToWhishList}

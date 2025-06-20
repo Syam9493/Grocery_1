@@ -16,7 +16,7 @@ const ProductFilter = () => {
   ];
 
   const dispatch = useDispatch();
-  // const checkItems = useSelector((state) => state.checkItems); // Redux state
+  //const checkItems = useSelector((state) => state.checkItems); // Redux state
 
   const [checkedItems, setCheckedItems] = useState([]); // Local state for controlled checkboxes
 
@@ -27,8 +27,8 @@ const ProductFilter = () => {
     } else {
       updatedItems = checkedItems.filter((item) => item !== value);
     }
-    setCheckedItems(updatedItems); // Update local state
     dispatch(setCheckItems(updatedItems)); // Dispatch to Redux
+    setCheckedItems(updatedItems || []); // Update local state
   };
 
   return (

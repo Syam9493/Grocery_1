@@ -15,7 +15,7 @@ const Shop = ({ product }) => {
     <>
       <div
         key={product._id}
-        className="w-64 h-5xl bg-white rounded-xl shadow-xl p-3"
+        className="w-80 md:w-56 lg:w-60 h-5xl bg-white rounded-xl shadow-xl p-3"
       >
         <div className="flex flex-row justify-between">
           <p className="bg-green-700 px-3 py-1.5 font-semibold text-md/1 text-white text-center rounded-r-full">

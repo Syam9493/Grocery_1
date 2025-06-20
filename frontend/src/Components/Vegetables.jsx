@@ -12,7 +12,7 @@ const Vegetables = ({ product }) => {
 
   return (
     <>
-      <div className="w-64 h-5xl bg-white rounded-xl shadow-xl p-3">
+      <div className="w-80 md:w-64 h-5xl bg-white rounded-xl shadow-xl p-3">
         <div className="flex flex-row justify-between">
           <p className="bg-green-700 px-3 py-1.5 font-semibold text-md/1 text-white text-center rounded-r-full">
             25% off

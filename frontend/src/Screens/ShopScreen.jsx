@@ -82,18 +82,21 @@ import Brand from "../Components/Brand";
 import ProductType from "../Components/ProductType";
 import ProductAvailability from "../Components/ProductAvailability";
 import API from "../server/api";
-import { useSelector } from "react-redux";
+import { removeCheckItem, clearCheckItems } from "../Slice/ProdutApi";
+import { useDispatch, useSelector } from "react-redux";
 //import axios from 'axios';
 
 const ShopScreen = () => {
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(12);
+  const dispatch = useDispatch();
   const checkItems = useSelector((state) => state.checkItems);
   //const [filteredProducts, setFilteredProducts] = useState([]);
   // const ProductData = JSON.stringify(checkItems, null, 2);
 
-  console.log(checkItems);
+  //console.log(checkItems);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -102,8 +105,8 @@ const ShopScreen = () => {
         const all = response.data.data;
         const allProductsFlat = Object.values(all); // ensure it's an array
 
-        console.log("All products:", allProductsFlat);
-        console.log("Selected categories:", checkItems);
+        //console.log("All products:", allProductsFlat);
+        //console.log("Selected categories:", checkItems);
 
         const selectedCategories = checkItems.checkItems || [];
 
@@ -156,6 +159,29 @@ const ShopScreen = () => {
   //   fetchProducts();
   // }, [checkItems]);
 
+  const clearFilteredItmeHandler = (value) => {
+    //let count = Math.floor(Math.random() * value.length);
+    //console.log(count);
+    console.log(value);
+    dispatch(removeCheckItem(value));
+    //window.location.reload();
+    console.log("checkItems are cleared!");
+  };
+  const clearAllFilteredItmesHandler = () => {
+    dispatch(clearCheckItems([]));
+    //window.location.reload();
+  };
+
+  const loadMoreProductshandler = () => {
+    setVisibleCount((prevCount) => prevCount + 12);
+  };
+
+  const decresMoreProductshandler = () => {
+    setVisibleCount((prevCount) => prevCount - 12);
+  };
+
+  const visibleProducts = products.slice(0, visibleCount);
+
   if (loading)
     return (
       <div className="flex justify-center m-20">
@@ -167,7 +193,7 @@ const ShopScreen = () => {
 
   return (
     <>
-      <div className=" grid grid-flow-col bg-white mt-4 mb-4 p-5">
+      <div className="grid grid-flow-col bg-white mt-4 mb-4 p-7">
         <div className="hidden md:grid md:grid-cols-1 md:p-7">
           <div className="flex flex-col">
             <h2 className="font-sans text-[25px] font-bold">Filter Option</h2>
@@ -186,11 +212,58 @@ const ShopScreen = () => {
           </div>
           <div></div>
         </div>
-        <div className="grid grid-cols-1 place-items-center md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {products &&
-            products.map((product) => (
+        <div className="m-7 flex flex-col justify-center">
+          <div className="hidden md:flex md:flex-row md:items-center">
+            <p className="m-5 font-sans font-bold text-xl"> Active Filteres:</p>
+            {checkItems.checkItems &&
+              checkItems.checkItems.map((items, i) => (
+                <button
+                  key={i}
+                  className=" mr-3 flex items-center justify-center gap-3 bg-yellow-300 text-black border-gray-50 rounded-4xl px-4 py-2"
+                  onClick={() => clearFilteredItmeHandler(i)}
+                >
+                  {items}
+                  <span>x</span>
+                </button>
+              ))}
+            <button
+              className="font-sans font-semibold text-md text-green-700 border-b-2"
+              onClick={clearAllFilteredItmesHandler}
+            >
+              Clear All
+            </button>
+          </div>
+          <div className="grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {/* {products &&
+              products.map((product) => (
+                <Shop key={product._id} product={product} />
+              ))} */}
+
+            {visibleProducts.map((product) => (
               <Shop key={product._id} product={product} />
             ))}
+
+            {/* <button
+              className="h-md/1 w-md/4 bg-green-700 rounded-2xl font-sans font-semibold text-[1rem] text-white px-4 py-3"
+              onClick={loadMoreProductshandler}
+            > */}
+          </div>
+          <div className="m-7 flex items-center justify-center gap-4">
+            {visibleCount < products.length && (
+              <button
+                className=" w-40  bg-green-700 rounded-2xl font-sans font-semibold text-[1rem] text-white px-4 py-3"
+                onClick={loadMoreProductshandler}
+              >
+                Load Products
+              </button>
+            )}
+            <button
+              className="w-40  bg-green-700 rounded-2xl font-sans font-semibold text-[1rem] text-white px-4 py-3"
+              onClick={decresMoreProductshandler}
+            >
+              Remove Products
+            </button>
+          </div>
         </div>
       </div>
     </>

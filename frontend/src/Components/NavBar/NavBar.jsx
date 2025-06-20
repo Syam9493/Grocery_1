@@ -66,7 +66,7 @@ const Navbar = () => {
             {/* Location - Only visible on desktop */}
             <div className="hidden absolute left-1/4 md:flex flex-col items-center gap-1 text-white">
               {/* <FaMapMarkerAlt className="text-sm" /> */}
-              <span className="font-sans font-semibold text-[1.1rem]">
+              <span className="font-sans font-bold text-[1.1rem]">
                 Location
               </span>
               <span className="text-sm">

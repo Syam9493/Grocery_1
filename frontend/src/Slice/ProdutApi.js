@@ -1,9 +1,13 @@
 // features/checkItems/checkItemsSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  checkItems: [],
+const initialState = localStorage.getItem('checkItems') ? JSON.parse(localStorage.getItem('checkItems')) : {
+  checkItems: []
 };
+
+const updateCheckItems = (items) => {
+  localStorage.setItem('checkItems', JSON.stringify(items))
+}
 
 const checkItemsSlice = createSlice({
   name: 'checkItems',
@@ -11,15 +15,19 @@ const checkItemsSlice = createSlice({
   reducers: {
     setCheckItems(state, action) {
   state.checkItems = action.payload;
+  return updateCheckItems(state);
 },
     addCheckItem: (state, action) => {
       state.push(action.payload); // adds one item
     },
     removeCheckItem: (state, action) => {
-      return state.filter(item => item.id !== action.payload); // assumes each item has an id
+      console.log(action.payload);
+      state.checkItems = state.checkItems.filter((_,index)=> index !== action.payload); // assumes each item has an id
+       return updateCheckItems(state);
     },
-    clearCheckItems: () => {
-      return [];
+    clearCheckItems: (state) => {
+       state.checkItems = [];
+      return updateCheckItems(state);
     }
   }
 });

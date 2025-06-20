@@ -3,6 +3,7 @@ import { ClipLoader } from "react-spinners";
 import ProductDetails from "../Components/ProductDetails";
 import API from "../server/api.js";
 import { useParams } from "react-router-dom";
+//import { useSelector} from 'react-redux'
 
 const ProductDetailsScreen = () => {
   const params = useParams();

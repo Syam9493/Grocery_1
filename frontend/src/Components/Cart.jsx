@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
+import { Link } from "react-router";
 //import {useNavigate} from 'react-router-dom';
 // import {toast} from 'react-toastify';
 //import {deletefromCart, increaseQty, decreaseQty} from '../Slice/cartSlice';
-import { increaseQty, decreaseQty } from "../Slice/cartSlice";
+//import { increaseQty, decreaseQty } from "../Slice/cartSlice";
 // import {addToWishList} from '../Slice/WhishListSlice';
 import CartAlert from "./CartAlert";
+import Quantity from "./Quantity";
 
 const Cart = ({ product }) => {
   const [open, setOpen] = useState(false);
   const [id, setid] = useState("");
+  //const [qty, setQty] = useState(1);
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   //const  navigate = useNavigate();
 
   //  const deleteItmehandler = async (id) => {
@@ -28,13 +31,13 @@ const Cart = ({ product }) => {
   //        },2000)
   //      }
 
-  const increaseQtyHandler = (id) => {
-    dispatch(increaseQty(id));
-  };
+  // const increaseQtyHandler = (id) => {
+  //   dispatch(increaseQty(id));
+  // };
 
-  const decreaseQtyHandler = (id) => {
-    dispatch(decreaseQty(id));
-  };
+  // const decreaseQtyHandler = (id) => {
+  //   dispatch(decreaseQty(id));
+  // };
 
   return (
     <>
@@ -56,14 +59,16 @@ const Cart = ({ product }) => {
               className="size-14 object-contain rounded"
             />
             <div>
-              <p className="font-medium">{item.name}</p>
+              <Link to={`/productDetailsPage/${item._id}`}>
+                <p className="font-medium">{item.name}</p>
+              </Link>
               <p className="text-sm text-gray-400">{item.weight}</p>
             </div>
           </td>
           <td className="p-4">₹{item.price}</td>
           <td className="p-4">
             <div className="flex items-center justify-center border rounded-3xl p-1">
-              <button
+              {/*  <button
                 className="px-2 border-r-2 border-gray-400 h-10"
                 onClick={() => decreaseQtyHandler(item._id)}
               >
@@ -74,10 +79,14 @@ const Cart = ({ product }) => {
               </span>
               <button
                 className="px-2 border-l-2 border-gray-400 h-10"
-                onClick={() => increaseQtyHandler(item._id)}
+                onClick={async () => {
+                  await increaseQtyHandler(item._id);
+                }}
               >
                 +
               </button>
+               */}
+              <Quantity product={item._id} />
             </div>
           </td>
           <td className="p-4">₹{item.price * item.quantity}</td>
