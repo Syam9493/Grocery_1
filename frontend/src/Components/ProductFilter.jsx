@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setCheckItems } from "../Slice/ProdutApi"; // Make sure path is correct
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCheckItems, removeCheckItem } from "../Slice/ProdutApi"; // Make sure path is correct
 
 const ProductFilter = () => {
   const productNames = [
@@ -16,19 +16,17 @@ const ProductFilter = () => {
   ];
 
   const dispatch = useDispatch();
-  //const checkItems = useSelector((state) => state.checkItems); // Redux state
-
-  const [checkedItems, setCheckedItems] = useState([]); // Local state for controlled checkboxes
+  const checkedItemss = useSelector((state) => state.checkItems); // Redux state
+  const { checkItems } = checkedItemss;
 
   const ProductFileterHandler = (value, checked) => {
-    let updatedItems;
     if (checked) {
-      updatedItems = [...checkedItems, value];
+      const updatedItems = value;
+      dispatch(setCheckItems(updatedItems)); // Dispatch to Redux
     } else {
-      updatedItems = checkedItems.filter((item) => item !== value);
+      //const updatedItems = checkItems.filter((_, index) => index !== value);
+      dispatch(removeCheckItem(checked));
     }
-    dispatch(setCheckItems(updatedItems)); // Dispatch to Redux
-    setCheckedItems(updatedItems || []); // Update local state
   };
 
   return (
@@ -36,12 +34,16 @@ const ProductFilter = () => {
       <h1 className="font-sans text-[20px] font-bold">Category</h1>
       <form className="h-60 m-4 flex flex-col items-start gap-4 overflow-auto">
         {productNames.map((item, i) => (
-          <label key={i} className="inline-flex items-center gap-2">
+          <label
+            key={i}
+            className="inline-flex items-center gap-2"
+            hidden={checkItems.includes(item)}
+          >
             <input
               type="checkbox"
               className="accent-green-700 size-4"
               value={item}
-              checked={checkedItems.includes(item)}
+              checked={checkItems.includes(item)}
               onChange={(e) => ProductFileterHandler(item, e.target.checked)}
             />
             <p className="font-sans text-base font-semibold">{item}</p>

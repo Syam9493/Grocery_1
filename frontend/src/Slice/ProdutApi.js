@@ -7,6 +7,7 @@ const initialState = localStorage.getItem('checkItems') ? JSON.parse(localStorag
 
 const updateCheckItems = (items) => {
   localStorage.setItem('checkItems', JSON.stringify(items))
+  return items;
 }
 
 const checkItemsSlice = createSlice({
@@ -14,7 +15,13 @@ const checkItemsSlice = createSlice({
   initialState,
   reducers: {
     setCheckItems(state, action) {
-  state.checkItems = action.payload;
+      const item = action.payload;
+      const existItem = state.checkItems.find((items) => items === item)
+      if(existItem){
+          state.checkItems = state.checkItems.map(items => items === existItem ? item : items );
+      } else {
+        state.checkItems = [...state.checkItems, item];
+      }
   return updateCheckItems(state);
 },
     addCheckItem: (state, action) => {
@@ -22,7 +29,7 @@ const checkItemsSlice = createSlice({
     },
     removeCheckItem: (state, action) => {
       console.log(action.payload);
-      state.checkItems = state.checkItems.filter((_,index)=> index !== action.payload); // assumes each item has an id
+      state.checkItems = state.checkItems.filter((acc, index)=> index !== action.payload); // assumes each item has an id
        return updateCheckItems(state);
     },
     clearCheckItems: (state) => {

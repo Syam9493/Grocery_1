@@ -160,16 +160,10 @@ const ShopScreen = () => {
   // }, [checkItems]);
 
   const clearFilteredItmeHandler = (value) => {
-    //let count = Math.floor(Math.random() * value.length);
-    //console.log(count);
-    console.log(value);
     dispatch(removeCheckItem(value));
-    //window.location.reload();
-    console.log("checkItems are cleared!");
   };
   const clearAllFilteredItmesHandler = () => {
     dispatch(clearCheckItems([]));
-    //window.location.reload();
   };
 
   const loadMoreProductshandler = () => {
