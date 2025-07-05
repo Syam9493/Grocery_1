@@ -5,6 +5,7 @@ import Cart from "../Components/Cart";
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  
 
   return (
     <>

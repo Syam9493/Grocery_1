@@ -22,9 +22,9 @@ const Navbar = () => {
   const NavigationMenuList = [
     { name: "Home", to: "/" },
     { name: "Shop", to: "/shop" },
-    { name: "Fruits", to: "/fruits" },
+    { name: "Fruits", to: "/Fruits" },
     { name: "Vegetables", to: "/vegetables" },
-    { name: "Beverages", to: "/beverages" },
+    { name: "Beverages", to: "/Beverages" },
     { name: "Abouts Us", to: "/aboutUs" },
     { name: "Blog", to: "/blog" },
   ];
@@ -33,7 +33,7 @@ const Navbar = () => {
     <>
       {/* Navbar */}
       <nav className="bg-green-700 shadow-md sticky top-0 z-50 rounded-t-xl">
-        <div className="max-w-7xl mx-auto px-2">
+        <div className="max-w-full mx-auto px-16">
           {/* Top Row - Always visible (logo + icons) */}
           <div className="flex items-center justify-between py-3 mb-4">
             {/* Left side - Logo and Mobile Menu */}

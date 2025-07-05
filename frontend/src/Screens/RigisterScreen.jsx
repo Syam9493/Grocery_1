@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import RigisterForm from "../Components/RigisterForm";
 import { Link } from "react-router-dom";
+import API from "../server/api.js";
 
 const RigisterScreen = () => {
   const [Fname, setFname] = useState("");
@@ -10,22 +11,22 @@ const RigisterScreen = () => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (password === confirmpassword) {
-      alert("passwords matched!");
+      await API.post("/api/user", {
+        FirstName: Fname,
+        LastName: Lname,
+        email: email,
+        password: password,
+        confPassword: confirmpassword,
+        cellNumber: mobileNumber,
+      });
     } else {
       alert("pleae enter the correct password");
     }
 
-    console.log({
-      firstName: Fname,
-      lastName: Lname,
-      email: email,
-      password: password,
-      confirmpassword: confirmpassword,
-      mobileNumber: mobileNumber,
-    });
+    console.log("user details send!");
   };
   return (
     <RigisterForm>

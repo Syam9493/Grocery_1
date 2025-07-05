@@ -43,14 +43,14 @@ const Categories = () => {
       img: "/Icons/vegetables.png",
       name: "Vegetables",
       Quantity: "52 Products",
-      to: "/Vegetables",
+      to: "/vegetables",
     },
     {
       _id: 2,
       img: "/Icons/gift.png",
       name: "Fresh Fruits",
       Quantity: "2 Products",
-      to: "/fruits",
+      to: "/Fruits",
     },
     {
       _id: 3,
@@ -78,14 +78,14 @@ const Categories = () => {
       img: "/Icons/almonds.png",
       name: "Dry Fruits",
       Quantity: "33 Products",
-      to: "/fruits",
+      to: "/Fruits",
     },
     {
       _id: 7,
       img: "/Icons/cocktail.png",
       name: "Cool Drinks",
       Quantity: "20 Products",
-      to: "/beverages",
+      to: "/Beverages",
     },
     {
       _id: 8,

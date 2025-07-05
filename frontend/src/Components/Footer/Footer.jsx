@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-green-700 shadow-md rounded-b-xl">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-full mx-auto px-16 py-8">
         <div className="grid grid-cols-2  justify-items-start sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 text-white">
           <div>
             {/* <div className="flex items-center gap-2"> */}
@@ -20,7 +20,7 @@ const Footer = () => {
                 Grocery<span className="text-yellow-300">.</span>
               </span>
             </div>
-            <p className="font-sans font-semibold text-md leading-8">
+            <p className="font-sans font-semibold text-md leading-8 mr-7">
               Perspiciatis, dicta iste inventore, laudantium quam eaque neque
               amet fugiat iusto saepe deleniti harum expedita veritatis fuga.
             </p>

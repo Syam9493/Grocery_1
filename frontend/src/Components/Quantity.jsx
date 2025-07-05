@@ -19,7 +19,7 @@ const Quantity = ({ product }) => {
   return (
     <>
       {finalCount.map((item) => (
-        <div>
+        <div key={item}>
           <button
             className="px-2 border-r-2 border-gray-400 h-10"
             onClick={() => decreaseQtyHandler(item._id)}

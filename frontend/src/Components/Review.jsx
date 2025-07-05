@@ -28,6 +28,7 @@ const ratingData = [
   },
 ];
 
+
 const Review = () => {
   return (
     <div className="flex flex-col items-start">

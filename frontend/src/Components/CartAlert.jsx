@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { addToWishList } from "../Slice/WhishListSlice";
 import { deletefromCart } from "../Slice/cartSlice";
 
+
 const CartAlert = ({ open, setOpen, id }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();

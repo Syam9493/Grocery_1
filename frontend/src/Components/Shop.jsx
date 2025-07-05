@@ -10,6 +10,7 @@ const Shop = ({ product }) => {
   const addToCart = () => {
     navigate(`/productDetailsPage/${product._id}`);
   };
+  
 
   return (
     <>

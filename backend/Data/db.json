@@ -73,7 +73,7 @@
             },
             {
             "image":"/V_Images/Mint.png",
-            "category": " vegetables",
+            "category": "vegetables",
             "name":"Fresh Mint",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
             "weight" : "500g",
@@ -157,7 +157,7 @@
             {
                 
              "image":"/Fruits/Avacado.png",
-             "category": "Fruits ",
+             "category": "Fruits",
              "name":"Fresh Avacado ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
@@ -190,7 +190,7 @@
             {
                 
              "image":"/Fruits/Cherry.jpeg",
-             "category": " ",
+             "category": "Fruits",
              "name":"Fresh Cherry ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
@@ -201,7 +201,7 @@
             {
                 
              "image":"/Fruits/Grape.png",
-             "category": " Fruits",
+             "category": "Fruits",
              "name":"Fresh Grape ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",

@@ -8,6 +8,7 @@ const Beverages = ({ product }) => {
   const addToCartHandler = () => {
     navigate(`/productDetailsPage/${product._id}`);
   };
+  
 
   // const CartHandler = () =>{
   //     setItems();

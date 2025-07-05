@@ -29,7 +29,7 @@ const checkItemsSlice = createSlice({
     },
     removeCheckItem: (state, action) => {
       console.log(action.payload);
-      state.checkItems = state.checkItems.filter((acc, index)=> index !== action.payload); // assumes each item has an id
+      state.checkItems = state.checkItems.filter((acc)=> acc !== action.payload); // assumes each item has an id
        return updateCheckItems(state);
     },
     clearCheckItems: (state) => {

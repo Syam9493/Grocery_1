@@ -6,6 +6,7 @@ const ProductPrice = () => {
   const ProductPriceRange = (e) => {
     setPriceRange(Number(e.target.value));
   };
+  
 
   return (
     <div>

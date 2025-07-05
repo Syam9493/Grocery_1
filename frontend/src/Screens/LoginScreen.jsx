@@ -10,6 +10,7 @@ const LoginScreen = () => {
     e.preventDefault(); 
     console.log({ email, password }); 
   };
+  
 
   return (
     <LoginForm>

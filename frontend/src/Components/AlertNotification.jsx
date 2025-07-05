@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deletefromWhishList } from "../Slice/WhishListSlice";
 
+
 const AlertNotification = ({ open, setOpen, id }) => {
   const [loading, setLoading] = useState(false);
 

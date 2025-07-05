@@ -91,18 +91,20 @@ const UserSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: false
+    default: false,
+    required: true
   }
 }, { timestamps: true });
 
 // Hash password before saving
 UserSchema.pre('save', async function(next){
-    if(!this.isModified('password')){
+    if(!this.isModified('password', 'confPassword')){
         next();
     }
 
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
+    this.confPassword = await bcrypt.hash(this.confPassword, salt);
 })
 
   const users =  mongoose.model("User", UserSchema);

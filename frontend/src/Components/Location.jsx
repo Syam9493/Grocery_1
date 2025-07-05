@@ -1,73 +1,84 @@
-import React from "react";
-import { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from "react";
+import UserLoacation from "./UserLocation/UserLoacation";
+
 
 const Location = () => {
-  //const [location, setLocation] = useState({ lat: null, lng: null });
-  const [address, setAddress] = useState("");
-  //console.log(address);
+  const [locationData, setLocationData] = useState(null);
+  const [error, setError] = useState("");
+  
+  
+  const apiKey = "122f927c1da14d06a9ee6050187e212d"; // Replace this with your key
 
-  // const getUserLocation = () => {
-  //   if (!navigator.geolocation) {
-  //     setError("Geolocation is not supported by your browser");
-  //     return;
-  //   }
-
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       setLocation({
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude,
-  //       });
-  //     },
-  //     (err) => {
-  //       setError(err.message);
-  //     },
-  //     {
-  //       enableHighAccuracy: true, // Use GPS if available
-  //       timeout: 10000,
-  //       maximumAge: 0,
-  //     }
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   getUserLocation();
-  // }, []);
-
+  // Automatically detect GPS location on mount
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
+      async (pos) => {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
-        //setLocation({ lat, lng });
 
-        // Send to OpenCage
-        // for pull data into github
-        //fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=YOUR_API_KEY`)
-        fetch(
-          `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=122f927c1da14d06a9ee6050187e212d`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            //console.log(data);
-            setAddress(data.results[0].components);
-            // if (data.results.length > 0) {
-            //   setAddress(data.results[0].formatted);
-            // }
-          });
+        try {
+          const res = await fetch(
+            `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`
+          );
+          const data = await res.json();
+         
+
+          if (data.results.length > 0) {
+            const result = data.results[0];
+            console.log(result);
+            const countryCode = result.components.country_code?.toUpperCase();
+             
+               const locationName =
+               result.components.county??
+  result.components.city ??
+  result.components.town ??
+  result.components.village ??
+  "";
+
+            if (countryCode === "IN") {
+              setLocationData({
+                source: "gps",
+                formatted: result.formatted,
+                city: locationName,
+                state: result.components.state,
+                country: result.components.country,
+              });
+            } else {
+              setError("GPS location is not in India.");
+            }
+          }
+        } catch (err) {
+          setError(`Error getting location from GPS:${err}`);
+        }
       },
       (err) => {
-        console.error("Location error:", err);
+        setError(`Permission denied or unavailable:${err}`);
       }
     );
   }, []);
+
   return (
-    <div className="flex items-center gap-1.5">
-      <p className="size-5">📌</p>
-      <p className="font-sans font-semibold text-[1rem]">{address.village},</p>
-      <p className="font-sans font-semibold text-[1rem]">{address.country}</p>
+    <div className="flex flex-row items-center gap-1.5 text-ellipsis mr-3">
+      <p className="text-lg">📍</p>
+      <div>
+        {locationData ? (
+          <>
+  <p className="flex font-medium text-white truncate w-40">
+    {!locationData.city ? locationData.town: locationData.city}
+   
+    ,{locationData.state}
+  </p>
+
+          </>
+        ) : (
+          <p className="text-sm text-white">{error || "Detecting location..."}</p>
+        )}
+      </div>
+      <UserLoacation onLocationChange={setLocationData}/>
     </div>
   );
 };
 
 export default Location;
+

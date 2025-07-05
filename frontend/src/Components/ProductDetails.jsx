@@ -9,6 +9,7 @@ import { addToWishList } from "../Slice/WhishListSlice";
 //import {showSuccessMessage} from './TostNotifications/successNotification';
 //import Quantity from "./Quantity";
 
+
 const ProductDetails = ({ product }) => {
   // const cart = useSelector((state) => state.cart);
   // const { cartItems } = cart;

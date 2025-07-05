@@ -4,8 +4,10 @@ import cors from 'cors';
 dotenv.config();
 //import { promises as fs } from 'fs';
 import connectDB from './Config/db.js';
-import ProductRoutes from './Router/ProductRouter.js';
+import productsRoutes from './Router/ProductRouter.js';
 import CartRouter from './Router/cartRouter.js';
+import userRouter from './Router/userRouter.js';
+import filteredProductsRoutes from './Router/filteredProducts.js'
 //import Product from './Router/Product.js';
 //import ProductDetails  from './Router/ProductDetails.js';
 // import path from 'path';
@@ -17,7 +19,8 @@ import CartRouter from './Router/cartRouter.js';
 
 
 const app = express();
-const PORT = 5000;
+const PORT = 5000; 
+
 
 connectDB(); //connect to mongodb
 app.use(express.json());
@@ -62,8 +65,10 @@ app.use(cors());
 //     }
 // });
 
-app.use('/api/products', ProductRoutes);
+app.use('/api', productsRoutes);
+app.use('/api/category', filteredProductsRoutes);
 app.use('/api/cart', CartRouter);
+app.use('/api/user', userRouter);
 
 //app.use('/api/products/fruits', Product)
 

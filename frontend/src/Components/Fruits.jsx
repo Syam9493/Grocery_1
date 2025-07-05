@@ -6,6 +6,7 @@ const Fruits = ({ product }) => {
   // const params = useParams();
   // const  id = params._id;
   const navigate = useNavigate();
+  
 
   const addToCartHandler = () => {
     navigate(`/productDetailsPage/${product._id}`);

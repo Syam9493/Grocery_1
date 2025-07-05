@@ -9,6 +9,7 @@ const whishLists = useSelector((state) => state.whishList);
 
 const {wishListItems} = whishLists
 
+
   return (
     <>
       <table className='table-auto text-left mt-5 mb-5 mx-auto'>

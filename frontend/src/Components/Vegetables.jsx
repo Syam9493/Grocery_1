@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Vegetables = ({ product }) => {
   const navigate = useNavigate();
 
-  const addToCartHandler = () => {
-    navigate(`/productDetailsPage/${product._id}`);
+  const addToCartHandler = (id) => {
+    navigate(`/productDetailsPage/${id}`);
   };
 
   return (
@@ -58,7 +58,7 @@ const Vegetables = ({ product }) => {
           </h3>
           <button
             className="bg-green-200 rounded-2xl font-semibold text-md/1 text-green-700 px-2 py-1"
-            onClick={addToCartHandler}
+            onClick={() => addToCartHandler(product._id)}
           >
             <span className="mr-1">👜</span>Add
           </button>

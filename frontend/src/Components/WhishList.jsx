@@ -15,10 +15,12 @@ const WhishList = ({ wishListItems }) => {
   const date = new Date();
   const getFullYear = date.getFullYear();
   const month = date.getMonth();
-  console.log(getFullYear + " " + month);
+  const day = date.getDay();
+  const fullday = day + "-" + month + "-" + getFullYear;
 
-  const addToCartHandler = (id) => {
+  const addToCartHandler = (id, Product_id) => {
     dispatch(addingToCart(id));
+    dispatch(deletefromWhishList(Product_id));
     toast.success("Product add to Cart!", {
       position: "top-right",
       autoClose: 1000,
@@ -63,13 +65,13 @@ const WhishList = ({ wishListItems }) => {
               </div>
             </td>
             <td className="p-4">₹{item.price}</td>
-            <td className="p-4">{item.updatedAt}</td>
+            <td className="p-4">{fullday}</td>
             <td>
               <button
                 className="flex items-center justify-center bg-green-700 text-white border-gray-50 rounded-4xl px-4 py-2"
-                onClick={() => addToCartHandler(item)}
+                onClick={() => addToCartHandler(item, item._id)}
               >
-                Add To Cart
+                Move To Cart
               </button>
             </td>
           </tr>

@@ -64,3 +64,4 @@ export const { addingToCart, deletefromCart, increaseQty, decreaseQty } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
+

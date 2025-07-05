@@ -11,6 +11,7 @@ const AvailablilityData = [
   },
 ];
 
+
 const ProductAvailability = () => {
   return (
     <form className="flex flex-col items-start gap-4 overflow-auto">

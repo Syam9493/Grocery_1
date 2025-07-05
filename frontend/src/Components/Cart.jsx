@@ -102,3 +102,4 @@ const Cart = ({ product }) => {
 };
 
 export default Cart;
+
