@@ -25,6 +25,8 @@ const Brand = () => {
   ];
 
   return (
+    <>
+   
     <form className="flex flex-col items-start gap-4 overflow-auto">
       <h1 className="font-sans text-[20px] font-bold">Brand</h1>
 
@@ -35,6 +37,8 @@ const Brand = () => {
         </label>
       ))}
     </form>
+    <div className="mt-7 border-b border-gray-400"></div>
+     </>
   );
 };
 

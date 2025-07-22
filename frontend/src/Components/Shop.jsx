@@ -1,10 +1,13 @@
-import React from "react";
+//import {useState} from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+//import { IoMdHeartEmpty } from "react-icons/io";
+import { BsSuitHeartFill } from "react-icons/bs";
 
-import API from "../server/api";
 
 const Shop = ({ product }) => {
+  
+
   const navigate = useNavigate();
 
   const addToCart = () => {
@@ -22,16 +25,16 @@ const Shop = ({ product }) => {
           <p className="bg-green-700 px-3 py-1.5 font-semibold text-md/1 text-white text-center rounded-r-full">
             25% off
           </p>
-          <div className="bg-gray-100 p-2 shadow-2xl rounded-full">
-            <button className="size-6" onClick={addToCart}>
-              ❤️
+          <div className="bg-gray-100  p-2 shadow-2xl rounded-full">
+            <button className="size-6 flex items-center justify-center text-gray-400 hover:text-red-500" onClick={addToCart}>
+              <BsSuitHeartFill/>
             </button>
           </div>
         </div>
         <Link to={`/productDetailsPage` + "/" + product._id}>
           <div className="w-full h-48 flex items-center justify-center p-2">
             <img
-              src={product.image || "/Fruits/Apple.jpeg"}
+              src={product.image[0] || "/Fruits/Apple.jpeg"}
               alt={product.name}
               className="w-full h-full object-contain"
             />

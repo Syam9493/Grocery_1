@@ -1,49 +1,61 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { increaseQty, decreaseQty } from "../Slice/cartSlice";
 
-const Quantity = ({ product }) => {
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+import {useUpdateQuantityMutation} from '../ApiSlice/cartApi.js'
 
-  const finalCount = cartItems.filter((p) => p._id === product);
+const Quantity = ({ product, refetch }) => {
 
-  const increaseQtyHandler = (id) => {
-    dispatch(increaseQty(id));
+  ///console.log(product);
+
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userID = userInfo?._id;
+
+
+  const [updateQuantity] = useUpdateQuantityMutation();
+  
+
+  const increaseQtyHandler = async (id, quantity) => {
+    const productID = String(id);
+    await updateQuantity({userID, productID, quantity});
+   await refetch();
   };
 
-  const decreaseQtyHandler = (id) => {
-    dispatch(decreaseQty(id));
+  const decreaseQtyHandler = async(id,quantity) => {
+    const productID = String(id);
+    await updateQuantity({userID, productID, quantity});
+    await refetch();
   };
+
+
+
   return (
     <>
-      {finalCount.map((item) => (
-        <div key={item}>
-          <button
-            className="px-2 border-r-2 border-gray-400 h-10"
-            onClick={() => decreaseQtyHandler(item._id)}
-          >
-            -
-          </button>
+      <div key={product._id} className="inline-flex items-center border border-black rounded-full overflow-hidden">
+      <button
+         className="px-3 py-1 border-r border-gray-400 text-sm"
+        onClick={() => decreaseQtyHandler(product._id, product.quantity - 1)}
+        disabled={product.quantity===1}
+      >
+        -
+      </button>
 
-          <span className="px-3 divider lg:divider-horizontal">
-            {item.quantity}
-          </span>
+      <span className="px-4 text-sm">
+        {product.quantity}
+      </span>
 
-          <button
-            className="px-2 border-l-2 border-gray-400 h-10"
-            // onClick={() => increaseQtyHandler(product._id)}
-            onClick={() => {
-              increaseQtyHandler(item._id);
-            }}
-          >
-            +
-          </button>
-        </div>
-      ))}
+      <button
+       className="px-3 py-1 border-l border-gray-400 text-sm"
+        onClick={() => increaseQtyHandler(product._id, product.quantity + 1)}
+      >
+        +
+      </button>
+    </div>
     </>
   );
 };
 
 export default Quantity;
+
+
+
+
+
+

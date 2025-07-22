@@ -96,6 +96,10 @@ const UserSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+UserSchema.methods.matchPassword = async function (enteredPassword){
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
 // Hash password before saving
 UserSchema.pre('save', async function(next){
     if(!this.isModified('password', 'confPassword')){

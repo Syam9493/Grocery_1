@@ -1,24 +1,12 @@
 import express from 'express';
-import Cart from '../Models/cartModel.js';
+
+
+//import Cart from '../Models/cartModel.js';
+import {getCart,updateCart,updateQuantityExistItem, deletItemFromCart} from '../Controllers/cartController.js';
 
 const router = express.Router();
 
 
-router.get('/', async(req,res) => {
-    try {
-        const cartinfo = Cart.find({});
-        res.status(200).json({
-            success: true,
-            data: cartinfo
-        })
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Cart items are empty'
-        });
-    }
-});
-
-
+router.route('/:userID').get(getCart).post(updateCart).put(updateQuantityExistItem).delete(deletItemFromCart);
 
 export default router;

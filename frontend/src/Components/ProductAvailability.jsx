@@ -14,6 +14,7 @@ const AvailablilityData = [
 
 const ProductAvailability = () => {
   return (
+    <>
     <form className="flex flex-col items-start gap-4 overflow-auto">
       <h1 className="font-sans text-[20px] font-bold">Availability</h1>
       {AvailablilityData.map((items) => (
@@ -23,6 +24,8 @@ const ProductAvailability = () => {
         </label>
       ))}
     </form>
+    <div className="mt-7 border-b border-gray-400"></div>
+      </>
   );
 };
 

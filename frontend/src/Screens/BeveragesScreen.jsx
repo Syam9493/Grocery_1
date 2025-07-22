@@ -6,13 +6,13 @@
 // import Beverages from "../Components/Beverages";
 // import API from "../server/api";
 
-
+import {useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import { ClipLoader } from "react-spinners";
 
 
  import Beverages from "../Components/Beverages";
-import { useGetFilteredProductsQuery } from '../Slice/ProductApiSlice';
+import { useGetFilteredProductsQuery } from '../ApiSlice/ProductApiSlice';
 
 const BeveragesScreen = () => {
 
@@ -20,6 +20,10 @@ const BeveragesScreen = () => {
   
     const ProductData = location.pathname.substring(1); 
     console.log(ProductData);
+
+     useEffect(() => {
+                window.scrollTo(0, 0);
+            }, [location]);
   
     const { data: response, isLoading, isError, error } = useGetFilteredProductsQuery( ProductData);
   

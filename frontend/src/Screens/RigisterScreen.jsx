@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import RigisterForm from "../Components/RigisterForm";
 import { Link } from "react-router-dom";
 import API from "../server/api.js";
+import { useNavigate } from "react-router-dom";
 
 const RigisterScreen = () => {
   const [Fname, setFname] = useState("");
@@ -10,6 +11,7 @@ const RigisterScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const navigate=useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -22,6 +24,17 @@ const RigisterScreen = () => {
         confPassword: confirmpassword,
         cellNumber: mobileNumber,
       });
+
+      setFname('');
+      setLname('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setMobileNumber('');
+      
+      setTimeout(() => {
+        navigate('/')
+      },1000)
     } else {
       alert("pleae enter the correct password");
     }

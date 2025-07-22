@@ -17,6 +17,8 @@ const ProductType = () => {
   ];
 
   return (
+    <>
+   
     <form className="flex flex-col justify-center items-start gap-4 overflow-auto">
       <h1 className="font-sans text-[20px] font-bold">Product Type</h1>
       {ProductType.map((items) => (
@@ -26,6 +28,8 @@ const ProductType = () => {
         </label>
       ))}
     </form>
+      <div className="mt-7 border-b border-gray-400"></div>
+     </>
   );
 };
 

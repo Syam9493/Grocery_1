@@ -26,7 +26,7 @@ const Location = () => {
 
           if (data.results.length > 0) {
             const result = data.results[0];
-            console.log(result);
+            //console.log(result);
             const countryCode = result.components.country_code?.toUpperCase();
              
                const locationName =
@@ -59,24 +59,24 @@ const Location = () => {
   }, []);
 
   return (
-    <div className="flex flex-row items-center gap-1.5 text-ellipsis mr-3">
-      <p className="text-lg">📍</p>
-      <div>
-        {locationData ? (
-          <>
-  <p className="flex font-medium text-white truncate w-40">
-    {!locationData.city ? locationData.town: locationData.city}
-   
-    ,{locationData.state}
-  </p>
+    <div className="flex items-center gap-1.5 mr-3 max-w-full flex-wrap sm:flex-nowrap">
+  <p className="text-lg">📍</p>
 
-          </>
-        ) : (
-          <p className="text-sm text-white">{error || "Detecting location..."}</p>
-        )}
-      </div>
-      <UserLoacation onLocationChange={setLocationData}/>
-    </div>
+  <div className="flex-1 min-w-0">
+    {locationData ? (
+      <p className="font-medium text-white truncate w-32 sm:w-40">
+        {!locationData.city ? locationData.town : locationData.city}, {locationData.state}
+      </p>
+    ) : (
+      <p className="text-sm text-white truncate w-32 sm:w-40">
+        {error || "Detecting location..."}
+      </p>
+    )}
+  </div>
+
+  <UserLoacation onLocationChange={setLocationData} />
+</div>
+
   );
 };
 

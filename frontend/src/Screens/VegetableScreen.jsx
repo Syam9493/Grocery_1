@@ -1,19 +1,26 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ClipLoader } from "react-spinners";
 
 import Vegetables from "../Components/Vegetables";
-import { useGetFilteredProductsQuery } from '../Slice/ProductApiSlice';
+import { useGetFilteredProductsQuery } from '../ApiSlice/ProductApiSlice';
+///import {useGetProductsQuery} from '../ApiSlice/ProductApiSlice';
 
 const VegetableScreen = () => {
   const location = useLocation();
   const ProductData = location.pathname.substring(1);
 
-  const { data: response, isLoading, isError, error } = useGetFilteredProductsQuery(ProductData);
+  const { data: response, isLoading, isError } = useGetFilteredProductsQuery(ProductData);
+  
+   useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
+  
 
  if (isLoading) return( <div className="flex justify-center m-20">
         <ClipLoader size={100} />
       </div>);
-  if (isError) return <p>Error: {error?.error || 'Something went wrong'}</p>;
+  if (isError) return <p>Error: {isError?.error || 'Something went wrong'}</p>;
 
   // Get the actual products array
   const products = response?.data || [];

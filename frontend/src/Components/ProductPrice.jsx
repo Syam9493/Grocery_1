@@ -10,7 +10,7 @@ const ProductPrice = () => {
 
   return (
     <div>
-      <h1 className="font-sans text-[20px] font-bold">Price</h1>
+      <h1 className="font-sans text-[20px] font-bold border-b-4 border-gray-400">Price</h1>
       <p>₹{PriceRange}</p>
       <input
         type="range"

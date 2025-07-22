@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 const Beverages = ({ product }) => {
   const navigate = useNavigate();
@@ -67,15 +68,15 @@ const Beverages = ({ product }) => {
             25% off
           </p>
           <div className="bg-gray-100 p-2 shadow-2xl rounded-full">
-            <button className="size-6" onClick={addToCartHandler}>
-              ❤️
+            <button className="flex items-center justify-center size-6" onClick={addToCartHandler}>
+              <IoMdHeartEmpty/>
             </button>
           </div>
         </div>
         <Link to={`/productDetailsPage` + "/" + product._id}>
           <div className="w-full h-48 flex items-center justify-center p-2">
             <img
-              src={product.image || "/Fruits/Apple.jpeg"}
+              src={product.image[0] || "/Fruits/Apple.jpeg"}
               alt={product.name}
               className="w-full h-full object-contain"
             />

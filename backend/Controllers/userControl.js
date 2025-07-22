@@ -1,6 +1,7 @@
 //import express from 'express';
 import User from '../Models/userModel.js';
 
+
 //const router = express.Router();
 
  // new user details are updated into mongodb
@@ -41,13 +42,43 @@ import User from '../Models/userModel.js';
       }
   }
 
+  const getAllUsers = async (req, res) => {
+    const allUsers = await User.find()
+   return  res.status(200).json(allUsers)
+  }
+
 
   // Get user details from database
 
 
   const getUser = async (req, res) => {
-        const users = await User.find({});
-       const  AllUsers= res.status(200).json(users);
-  }
+  try {
+    const { email, password } = req.body;
+    console.log(req.body);
 
-  export {registerUser, getUser};
+    const user = await User.findOne({ email });
+    
+
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+
+   if(user && (await user.matchPassword(password))){
+     res.status(200).json({
+      _id: user._id,
+      name: user.FirstName +' '+ user.LastName,
+      email: user.email,
+      // optionally add a token here
+    });
+   }  else{
+    res.status(400);
+    throw new Error("Invalid email or password")
+   }
+  } catch (error) {
+  console.error('Login Error:', error);
+  res.status(500).json({ message: 'Email or password wrong' });
+}
+};
+
+
+  export {registerUser,getAllUsers, getUser};

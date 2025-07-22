@@ -4,19 +4,23 @@
 // import API from "../server/api";
 // //import {useLocation} from 'react-router-dom';
 // import { useState, useEffect } from "react";
-
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ClipLoader } from "react-spinners";
 
 
 import Fruits from "../Components/Fruits";
-import { useGetFilteredProductsQuery } from '../Slice/ProductApiSlice';
+import { useGetFilteredProductsQuery } from '../ApiSlice/ProductApiSlice';
 
 const FruitScreen = () => {
    const location = useLocation();
   
     const ProductData = location.pathname.substring(1); 
-    console.log(ProductData);
+   /// console.log(ProductData);
+
+     useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [location]);
   
     const { data: response, isLoading, isError, error } = useGetFilteredProductsQuery(ProductData );
   

@@ -1,15 +1,9 @@
 import mongoose from "mongoose";
 
 
-
-const cartSchema = new mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User"
-    },
-    orderItems: [{
-        product:{
+const ProductSchema = new mongoose.Schema(
+    {
+        productID:{
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: "Product"
@@ -18,10 +12,7 @@ const cartSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        required: true
-    },
+    image: [String],
     weight: {
         type: String,
         required: true
@@ -38,29 +29,36 @@ const cartSchema = new mongoose.Schema({
         type: Number,
         required: true
     }    
-}],
+}
+)
+
+
+const cartSchema = new mongoose.Schema({
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+        unique: true,
+    },
+    cartItems: [ProductSchema],
 totalItems:{
     type: Number,
-    required: true
 },
 subtotal: {
     type: Number,
-    required: true
 },   
 shippingcost:{
     type: Number,
-    required: true
 },
 taxes: {
     type: Number,
-    required: true
 },
 couponDiscount: {
     type: String,
+    default: null
 },
 total:{
     type: Number,
-    required: true
 }
 },{timestamps: true});
 

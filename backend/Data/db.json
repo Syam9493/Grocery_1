@@ -2,7 +2,7 @@
     "Products" :  {
       "vegetables":[
             {
-            "image":"/V_Images/Cauliflower.jpeg",
+            "image":["/V_Images/Cauliflower.jpeg","/V_Images/Cauliflower1.jpeg","/V_Images/Cauliflower2.jpeg","/V_Images/Cauliflower3.jpeg"],
             "category": "vegetables",
             "name":"Fresh Cauliflower",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -12,7 +12,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/pea.png",
+            "image":["/V_Images/pea.png","/V_Images/pea1.png","/V_Images/pea2.png","/V_Images/pea3.png"],
             "category": "vegetables",
             "name":"Fresh Pea",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -22,8 +22,8 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Tomato.png",
-            "category": " vegetables",
+            "image":["/V_Images/Tomato.png","/V_Images/Tomato1.png","/V_Images/Tomato2.png","/V_Images/Tomato3.png"],
+            "category": "vegetables",
             "name":"Fresh Tomato",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
             "weight" : "500g",
@@ -32,8 +32,8 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Spinach.png",
-            "category": " vegetables",
+            "image":["/V_Images/Spinach.png","/V_Images/Spinach1.png","/V_Images/Spinach2.png","/V_Images/Spinach3.png"],
+            "category": "vegetables",
             "name":"Fresh Spinach",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
             "weight" : "500g",
@@ -42,7 +42,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/BitterGround.png",
+            "image":["/V_Images/BitterGround.png","/V_Images/BitterGround1.png","/V_Images/BitterGround2.png","/V_Images/BitterGround3.png"],
             "category": "vegetables",
             "name":"Fresh BitterGround",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -52,7 +52,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Pumpkin.jpeg",
+            "image":["/V_Images/Pumpkin.jpeg","/V_Images/Pumpkin1.jpeg","/V_Images/Pumpkin2.jpeg","/V_Images/Pumpkin3.jpeg"],
             "category": "vegetables",
             "name":"Fresh Pumpkin",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -62,7 +62,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Onion.png",
+            "image":["/V_Images/Onion.png","/V_Images/Onion1.png","/V_Images/Onion2.png","/V_Images/Onion3.png"],
             "category": "vegetables",
             "name":"Fresh Onion",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -72,7 +72,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Mint.png",
+            "image":["/V_Images/Mint.png","/V_Images/Mint1.png","/V_Images/Mint2.png","/V_Images/Mint3.png"],
             "category": "vegetables",
             "name":"Fresh Mint",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -82,7 +82,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Lettuce.jpeg",
+            "image":["/V_Images/Lettuce.jpeg","/V_Images/Lettuce1.jpeg","/V_Images/Lettuce2.jpeg","/V_Images/Lettuce3.jpeg"],
             "category": "vegetables",
             "name":"Fresh Lettuce",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -92,7 +92,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/cabbage.png",
+            "image":["/V_Images/cabbage.png","/V_Images/cabbage1.png","/V_Images/cabbage2.png","/V_Images/cabbage3.png"],
             "category": "vegetables",
             "name":"Fresh Cabbage",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -102,7 +102,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Broccoli.png",
+            "image":["/V_Images/Broccoli.png","/V_Images/Broccoli1.png","/V_Images/Broccoli2.png","/V_Images/Broccoli3.png"],
             "category": "vegetables",
             "name":"Fresh Broccoli",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -112,7 +112,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/eggplant.png",
+            "image":["/V_Images/eggplant.png","/V_Images/eggplant1.png","/V_Images/eggplant2.png","/V_Images/eggplant3.png"],
             "category": "vegetables",
             "name":"Fresh EggPlant",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -122,7 +122,7 @@
             "rating" : 4.8
             },
             {
-            "image":"/V_Images/Radish.png",
+            "image":["/V_Images/Radish.png","/V_Images/Radish1.png","/V_Images/Radish2.png","/V_Images/Radish3.png"],
             "category": "vegetables",
             "name":"Fresh Radish ",
             "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -134,7 +134,7 @@
          ],
          "Fruits":[   
             {
-             "image":"/Fruits/Orange.jpeg",
+             "image":["/Fruits/Orange.jpeg","/Fruits/Orange1.jpeg","/Fruits/Orange2.jpeg","/Fruits/Orange3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Orange ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -145,7 +145,7 @@
              },
             {
                
-             "image":"/Fruits/Apple.jpeg",
+             "image":["/Fruits/Apple.jpeg","/Fruits/Apple1.jpeg","/Fruits/Apple2.jpeg","/Fruits/Apple3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Apple ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -156,7 +156,7 @@
              },
             {
                 
-             "image":"/Fruits/Avacado.png",
+             "image":["/Fruits/Avacado.png","/Fruits/Avacado1.png","/Fruits/Avacado2.png","/Fruits/Avacado3.png"],
              "category": "Fruits",
              "name":"Fresh Avacado ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -167,7 +167,7 @@
              },
             {
                 
-             "image":"/Fruits/Mango.png",
+             "image":["/Fruits/Mango.png","/Fruits/Mango1.png","/Fruits/Mango2.png","/Fruits/Mango3.png"],
              "category": "Fruits",
              "name":"Fresh Mango ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -178,7 +178,7 @@
              },
             {
                 
-             "image":"/Fruits/Peach.png",
+             "image":["/Fruits/Peach.png","/Fruits/Peach1.png","/Fruits/Peach2.png","/Fruits/Peach3.png"],
              "category": "Fruits",
              "name":"Fresh Peach",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -189,7 +189,7 @@
              },
             {
                 
-             "image":"/Fruits/Cherry.jpeg",
+             "image":["/Fruits/Cherry.jpeg","/Fruits/Cherry1.jpeg","/Fruits/Cherry2.jpeg","/Fruits/Cherry3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Cherry ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -200,7 +200,7 @@
              },
             {
                 
-             "image":"/Fruits/Grape.png",
+             "image":["/Fruits/Grape.png","/Fruits/Grape1.png","/Fruits/Grape2.png","/Fruits/Grape3.png"],
              "category": "Fruits",
              "name":"Fresh Grape ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -211,9 +211,9 @@
              },
             {
                 
-             "image":"/Fruits/Banana.jpeg",
+             "image":["/Fruits/Banana.jpeg","/Fruits/Banana1.jpeg","/Fruits/Banana2.jpeg","/Fruits/Banana3.jpeg"],
              "category": "Fruits",
-             "name":"Fresh Banana ",
+             "name":"Fresh Banana",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 50,
@@ -222,9 +222,9 @@
              },
             {
                 
-             "image":"/Fruits/Watermelon.jpeg",
+             "image":["/Fruits/Watermelon.jpeg","/Fruits/Watermelon1.jpeg","/Fruits/Watermelon2.jpeg","/Fruits/Watermelon3.jpeg"],
              "category": "Fruits",
-             "name":"Fresh Watermelon ",
+             "name":"Fresh Watermelon",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 70,
@@ -233,7 +233,7 @@
              },
             {
                 
-             "image":"/Fruits/Blueberry.jpeg",
+             "image":["/Fruits/Blueberry.jpeg","/Fruits/Blueberry1.jpeg","/Fruits/Blueberry2.jpeg","/Fruits/Blueberry3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Blueberry",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -244,9 +244,9 @@
              },
             {
                
-             "image":"/Fruits/Guava.jpeg",
+             "image":["/Fruits/Guava.jpeg","/Fruits/Guava1.jpeg","/Fruits/Guava2.jpeg","/Fruits/Guava3.jpeg"],
              "category": "Fruits",
-             "name":"Fresh Guava ",
+             "name":"Fresh Guava",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 40,
@@ -255,9 +255,9 @@
              },
             {
                 
-             "image":"/Fruits/Raspberry.png",
+             "image":["/Fruits/Raspberry.png","/Fruits/Raspberry1.png","/Fruits/Raspberry2.png","/Fruits/Raspberry3.png"],
              "category": "Fruits",
-             "name":"Fresh Raspberry ",
+             "name":"Fresh Raspberry",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 90,
@@ -266,9 +266,9 @@
              },
             {
                
-             "image":"/Fruits/Kiwi.jpeg",
+             "image":["/Fruits/Kiwi.jpeg","/Fruits/Kiwi1.jpeg","/Fruits/Kiwi2.jpeg","/Fruits/Kiwi3.jpeg"],
              "category": "Fruits",
-             "name":"Fresh Kiwi ",
+             "name":"Fresh Kiwi",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 160,
@@ -277,9 +277,9 @@
              },
             {
                 
-             "image":"/Fruits/Apricot.jpeg",
+             "image":["/Fruits/Apricot.jpeg","/Fruits/Apricot1.jpeg","/Fruits/Apricot2.jpeg","/Fruits/Apricot3.jpeg"],
              "category": "Fruits",
-             "name":"Fresh Apricot ",
+             "name":"Fresh Apricot",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 120,
@@ -288,7 +288,7 @@
              },
             {
                 
-             "image":"/Fruits/Pear.jpeg",
+             "image":["/Fruits/Pear.jpeg","/Fruits/Pear1.jpeg","/Fruits/Pear2.jpeg","/Fruits/Pear3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Pear",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -299,7 +299,7 @@
              },
             {
                
-             "image":"/Fruits/Fig.png",
+             "image":["/Fruits/Fig.png","/Fruits/Fig1.png","/Fruits/Fig2.png","/Fruits/Fig3.png"],
              "category": "Fruits",
              "name":"Fresh Fig ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -310,7 +310,7 @@
              },
             {
                
-             "image":"/Fruits/lemon.jpeg",
+             "image":["/Fruits/lemon.jpeg","/Fruits/lemon1.jpeg","/Fruits/lemon2.jpeg","/Fruits/lemon3.jpeg"],
              "category": "Fruits",
              "name":"Fresh lemon",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -321,7 +321,7 @@
              },
             {
                
-             "image":"/Fruits/Papaya.jpeg",
+             "image":["/Fruits/Papaya.jpeg","/Fruits/Papaya1.jpeg","/Fruits/Papaya2.jpeg","/Fruits/Papaya3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Papaya ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -332,7 +332,7 @@
              },
             {
                 
-             "image":"/Fruits/Pomegranate.jpeg",
+             "image":["/Fruits/Pomegranate.jpeg","/Fruits/Pomegranate1.jpeg","/Fruits/Pomegranate2.jpeg","/Fruits/Pomegranate3.jpeg"],
              "category": "Fruits",
              "name":"Fresh Pomegranate",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -343,9 +343,9 @@
              },
             {
             
-             "image":"/Fruits/Plum.png",
+             "image":["/Fruits/Plum.png","/Fruits/Plum1.png","/Fruits/Plum2.png","/Fruits/Plum3.png"],
              "category": "Fruits",
-             "name":"Fresh Plum ",
+             "name":"Fresh Plum",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
              "weight" : "500g",
              "price" : 110,
@@ -354,7 +354,7 @@
              },
             {
               
-             "image":"/Fruits/passionfruit.png",
+             "image":["/Fruits/passionfruit.png","/Fruits/passionfruit1.png","/Fruits/passionfruit2.png","/Fruits/passionfruit3.png"],
              "category": "Fruits",
              "name":"Fresh passion fruit ",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -365,9 +365,9 @@
              },
             {
                
-             "image":"/Fruits/Jackfruit.png",
+             "image":["/Fruits/Jackfruit.png","/Fruits/Jackfruit1.png","/Fruits/Jackfruit2.png","/Fruits/Jackfruit3.png"],
              "category": "Fruits",
-             "name":"Fresh Jackfruit ",
+             "name":"Fresh Jackfruit",
              "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",  
              "weight" : "500g",
              "price" : 120,
@@ -378,7 +378,7 @@
         "Beverages":[
          {
 
-         "image":"/Beverages/ThumsUp.jpg",
+         "image":["/Beverages/ThumsUp.jpg","/Beverages/ThumsUp1.jpg","/Beverages/ThumsUp2.jpg","/Beverages/ThumsUp3.jpg"],
          "category": "Beverages",
          "name":"Thum-sUp",
          "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -389,7 +389,7 @@
          },
          {
 
-         "image":"/Beverages/Sprite.jpg",
+         "image":["/Beverages/Sprite.jpg","/Beverages/Sprite1.jpg","/Beverages/Sprite2.jpg","/Beverages/Sprite3.jpg"],
          "category": "Beverages",
          "name":"Sprite",
          "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -399,7 +399,7 @@
          "rating" : 4.8
          },
          {
-         "image":"/Beverages/PulpyOrange.jpg",
+         "image":["/Beverages/PulpyOrange.jpg","/Beverages/PulpyOrange1.jpg","/Beverages/PulpyOrange2.jpg","/Beverages/PulpyOrange3.jpg"],
          "category": "Beverages",
          "name":"PulpyOrange",
          "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -409,7 +409,7 @@
          "rating" : 4.8
          },
          {
-         "image":"/Beverages/fanta.jpeg",
+         "image":["/Beverages/fanta.jpeg","/Beverages/fanta1.jpeg","/Beverages/fanta2.jpeg","/Beverages/fanta3.jpeg"],
          "category": "Beverages",
          "name":"Fanta",
          "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -419,7 +419,7 @@
          "rating" : 4.8
          },
          {
-         "image":"/Beverages/fanta1.jpg",
+         "image":["/Beverages/fanta1.jpg","/Beverages/fanta2.jpg","/Beverages/fanta3.jpg","/Beverages/fanta4.jpg"],
          "category": "Beverages",
          "name":"Fanta",
          "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
@@ -429,7 +429,7 @@
          "rating" : 4.8
          },
          {
-         "image":"/Beverages/Fuze.jpeg",
+         "image":["/Beverages/Fuze.jpeg","/Beverages/Fuze1.jpeg","/Beverages/Fuze2.jpeg","/Beverages/Fuze3.jpeg"],
          "category": "Beverages",
          "name":"Fuze",
          "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae deserunt rerum doloribus quam magnam ut inventore.",
