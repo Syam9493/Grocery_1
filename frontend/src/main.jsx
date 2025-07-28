@@ -11,6 +11,7 @@ import { store } from "./store.js";
 //import "/src/index.css";
 import "react-toastify/dist/ReactToastify.css";
 import React, { Suspense, lazy } from 'react';
+import { ClipLoader } from "react-spinners";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
@@ -76,7 +77,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <SearchProvider>
-        <Suspense fallback={<div className="text-center p-10 text-xl">Loading...</div>}>
+        <Suspense fallback={<div className="text-center p-10 text-xl"><ClipLoader size={100} /></div>}>
          <RouterProvider router={router} />
         </Suspense>
       </SearchProvider>
