@@ -1,5 +1,7 @@
 //import express from 'express';
 import User from '../Models/userModel.js';
+import generateToken from '../utils/genarateToken.js';
+import tokenModel from '../Models/tokenModel.js';
 
 
 //const router = express.Router();
@@ -20,21 +22,21 @@ import User from '../Models/userModel.js';
           res.status(400);
           throw new Error('User already Exist')
       }
-  
+
+      
       const user = await User.create({
-          FirstName, LastName,email,password, confPassword, cellNumber
+        FirstName, LastName,email,password, confPassword, cellNumber
       });
-  
+
+    
+
       if(user) {
-          res.status(200).json({
-              _id: User._id,
-              FirstName: User.FirstName,
-              LastName: User.LastName,
-              email: User.email,
-              password: User.password,
-              confPassword: User.confPassword,
-              cellNumber: User.cellNumber,
-              isAdmin: User.isAdmin
+        await generateToken(res, user._id);
+        await res.status(201).json({
+            _id: user._id,
+            name: `${user.FirstName} ${user.LastName}`,
+            email: user.email,
+            isAdmin: user.isAdmin,
           })
       } else {
           res.status(400);
@@ -54,25 +56,32 @@ import User from '../Models/userModel.js';
   const getUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
+    //console.log(req.body);
 
     const user = await User.findOne({ email });
-    
 
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
 
-   if(user && (await user.matchPassword(password))){
-     res.status(200).json({
-      _id: user._id,
-      name: user.FirstName +' '+ user.LastName,
-      email: user.email,
+
+
+
+   if(user && (await user.matchPassword(password)) ){
+      
+      const userToken = tokenModel.findOne({userId: user._id})
       // optionally add a token here
-    });
+      if(userToken){
+        await generateToken(res, user._id)
+        res.status(200).json({
+              _id: user._id,
+              name: `${user.FirstName} ${user.LastName}`,
+              email: user.email,
+              isAdmin: user.isAdmin
+          })
+      }
    }  else{
-    res.status(400);
-    throw new Error("Invalid email or password")
+    res.status(400).json({message: "Invalid email or password"})
    }
   } catch (error) {
   console.error('Login Error:', error);

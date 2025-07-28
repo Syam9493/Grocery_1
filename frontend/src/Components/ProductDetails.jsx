@@ -145,8 +145,9 @@ const addToCartHandler = async (product) => {
   <div className="relative w-full md:h-[400px] aspect-square overflow-hidden rounded-xl">
     
     <button
-      className="absolute left-2 top-1/2 -translate-y-1/2 bg-yellow-500 text-white hover:bg-white hover:text-yellow-500 rounded-full p-2 z-10"
+      className={`absolute left-2 top-1/2 -translate-y-1/2 ${icount === 0 ? "bg-gray-200" : "bg-yellow-500"} text-white hover:bg-white hover:text-yellow-500 rounded-full p-2 z-10`}
       onClick={handlePrev}
+      disabled={icount === 0}
     >
       <FaAngleLeft />
     </button>
@@ -159,8 +160,9 @@ const addToCartHandler = async (product) => {
       </div>
 
     <button
-      className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-full p-2 z-10"
+      className={`absolute right-2 top-1/2 -translate-y-1/2 ${icount === product.data.image.length - 1 ? 'bg-gray-200' : 'bg-green-700'} text-white hover:bg-white hover:text-green-700 rounded-full p-2 z-10`}
       onClick={handleNext}
+      disabled={ product.data.image.length === 1}
     >
       <FaAngleRight />
     </button>

@@ -37,7 +37,7 @@ const ShopScreen = () => {
   };
  
 
-     useEffect(() => {
+   useEffect(() => {
       window.scrollTo(0, 0);
     }, [location]);
 
@@ -54,13 +54,16 @@ const ShopScreen = () => {
 
 
 
-     const handlePageChange = () => {
-    const newQuery = new URLSearchParams();
+  const handlePageChange = (newPage) => {
+  const newQuery = new URLSearchParams();
 
-    if (keyword) newQuery.set('keyword', keyword);
-    //newQuery.set('page', newPage);
-    navigate(`/shop?${newQuery.toString()}`);
-  };
+  if (keyword) newQuery.set('keyword', keyword);
+  if (categories.length > 0) {
+    categories.forEach((cat) => newQuery.append('categories', cat));
+  }
+  newQuery.set('page', newPage);
+  navigate(`/shop?${newQuery.toString()}`);
+};
 
   return(
       <>

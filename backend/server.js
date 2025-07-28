@@ -8,6 +8,7 @@ import connectDB from './Config/db.js';
 import productsRoutes from './Router/ProductRouter.js';
 import cartRouter from './Router/cartRouter.js';
 import userRouter from './Router/userRouter.js';
+import checkOutRouter from './Router/checkOutOrder.js';
 import filteredProductsRoutes from './Router/filteredProducts.js'
 //import Product from './Router/Product.js';
 //import ProductDetails  from './Router/ProductDetails.js';
@@ -33,7 +34,8 @@ app.use(bodyParser.json());
 app.use(cors({
   origin: ['http://localhost:5173'], // Your Vite frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type'],
+  credentials: true,
 }));
 
 // Enable CORS for all routes
@@ -71,6 +73,7 @@ app.use('/api', productsRoutes);
 app.use('/api/category', filteredProductsRoutes);
 app.use('/api/cart', cartRouter);
 app.use('/api/user', userRouter);
+app.use('/api/order', checkOutRouter)
 
 //app.use('/api/products/fruits', Product)
 

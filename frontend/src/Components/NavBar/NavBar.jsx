@@ -323,7 +323,7 @@ import { GiFruitBowl } from "react-icons/gi";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { PencilIcon, UserMinusIcon, UserIcon } from "@heroicons/react/16/solid";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../Slice/authSlice";
 import Location from "../Location";
 import { useSearch } from "../../Slice/SearchContext";
@@ -333,8 +333,9 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const userName = userInfo?.name;
+  const {userInfo} = useSelector(state => state.userInfo)
+
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -378,7 +379,7 @@ const Navbar = () => {
       params.delete("keyword");
       navigate(`${location.pathname}`, { replace: true });
     }
-  }, [searchTerm]);
+  }, [searchTerm,navigate, location]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -507,7 +508,7 @@ const Navbar = () => {
                         <MenuItem>
                           <button className="flex w-full items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
                             <UserIcon className="size-4 fill-green-700" />
-                            {userName}
+                            {userInfo.name || 'Gesut User'}
                           </button>
                         </MenuItem>
                         <MenuItem>

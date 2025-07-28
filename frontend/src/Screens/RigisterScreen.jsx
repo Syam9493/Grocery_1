@@ -1,46 +1,55 @@
 import React, { useState } from "react";
 import RigisterForm from "../Components/RigisterForm";
-import { Link } from "react-router-dom";
-import API from "../server/api.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+//import API from "../server/api.js";
+
+import { useRegissterUserMutation } from "../ApiSlice/userSlice";
+import { authCredentials } from "../Slice/authSlice";
+//import { toast } from "react-toastify";
 
 const RigisterScreen = () => {
-  const [Fname, setFname] = useState("");
-  const [Lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const navigate=useNavigate();
+  const [formData, setFormData] = useState({
+    FirstName: "",
+    LastName: "",
+    email: "",
+    password: "",
+    confPassword: "",
+    cellNumber: "",
+  });
+  // const [Lname, setLname] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmpassword, setConfirmPassword] = useState("");
+  // const [mobileNumber, setMobileNumber] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [regissterUser] = useRegissterUserMutation();
+
+  const { FirstName, LastName, email, password, confPassword, cellNumber } =
+    formData;
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (password === confirmpassword) {
-      await API.post("/api/user", {
-        FirstName: Fname,
-        LastName: Lname,
-        email: email,
-        password: password,
-        confPassword: confirmpassword,
-        cellNumber: mobileNumber,
-      });
-
-      setFname('');
-      setLname('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      setMobileNumber('');
-      
-      setTimeout(() => {
-        navigate('/')
-      },1000)
+    if (formData.password === formData.confPassword) {
+      const result = await regissterUser({
+        FirstName,
+        LastName,
+        email,
+        password,
+        confPassword,
+        cellNumber,
+      }).unwrap();
+      console.log(result);
+      dispatch(authCredentials(result));
+      setFormData("");
+      navigate("/");
     } else {
       alert("pleae enter the correct password");
     }
-
-    console.log("user details send!");
   };
+
   return (
     <RigisterForm>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -57,9 +66,11 @@ const RigisterScreen = () => {
             <div className="mt-2">
               <input
                 type="text"
-                value={Fname}
+                value={formData.FirstName}
                 className="block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-green-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6"
-                onChange={(e) => setFname(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, FirstName: e.target.value })
+                }
               />
             </div>
           </div>
@@ -70,9 +81,11 @@ const RigisterScreen = () => {
             <div className="mt-2">
               <input
                 type="text"
-                value={Lname}
+                value={formData.LastName}
                 className="block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-green-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6"
-                onChange={(e) => setLname(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, LastName: e.target.value })
+                }
               />
             </div>
           </div>
@@ -83,9 +96,11 @@ const RigisterScreen = () => {
             <div className="mt-2">
               <input
                 type="email"
-                value={email}
+                value={formData.email}
                 className="block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-green-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
               />
             </div>
           </div>
@@ -96,9 +111,11 @@ const RigisterScreen = () => {
             <div className="mt-2">
               <input
                 type="password"
-                value={password}
+                value={formData.password}
                 className="block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-green-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
               />
             </div>
           </div>
@@ -109,9 +126,11 @@ const RigisterScreen = () => {
             <div className="mt-2">
               <input
                 type="password"
-                value={confirmpassword}
+                value={formData.confPassword}
                 className="block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-green-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6"
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, confPassword: e.target.value })
+                }
               />
             </div>
           </div>
@@ -122,9 +141,11 @@ const RigisterScreen = () => {
             <div className="mt-2">
               <input
                 type="number"
-                value={mobileNumber}
+                value={formData.cellNumber}
                 className="block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-green-500 focus:outline-2 focus:-outline-offset-2 focus:outline-green-700 sm:text-sm/6"
-                onChange={(e) => setMobileNumber(e.target.value)}
+                onChange={(e) =>
+                  setFormData({ ...formData, cellNumber: e.target.value })
+                }
               />
             </div>
           </div>

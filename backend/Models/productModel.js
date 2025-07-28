@@ -73,6 +73,18 @@ const ProductScheema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    barnd:{
+       type: String,
+      required: true
+    },
+      productType: {
+      type: String,
+      required: true
+     } ,
+    Availablility: {
+      type: String,
+      required: true
+    },
     rating: {
         type: Number,
         required: true,

@@ -21,14 +21,12 @@ const Cart = ({ product, refetch }) => {
             >
               x
             </button>
-            <div className="border-gray-50 bg-white/55 shadow-sm rounded-md p-3">
             <img
               src={item.image[0]}
               alt={item.name}
-              className="size-14 object-contain rounded"
+              className="size-16 border border-gray-200 shadow-gray-200 object-contain rounded p-1.5"
             />
-            </div>
-            <div className="px-6">
+            <div className="px-7">
               <Link to={`/productDetailsPage/${item._id}`}>
                 <p className="font-medium">{item.name}</p>
               </Link>

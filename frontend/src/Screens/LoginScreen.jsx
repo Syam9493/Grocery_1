@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Link, useNavigate } from "react-router-dom";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { toast } from "react-toastify";
 
 
@@ -22,10 +22,13 @@ const LoginScreen = () => {
 
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
 
   
  const [loginUser, { isLoading, error }] = useLoginUserMutation();
+  
+
   
   const handleChange = (event) => {
     const newEmail = event.target.value;
@@ -84,13 +87,21 @@ const LoginScreen = () => {
 
   }
 
+ const userInfo =   useSelector(state => state.auth)
+
+    useEffect(()=>{
+      if(userInfo){
+        navigate('/')
+      } else{
+        navigate('/login')
+      }
+    },[userInfo, navigate])
+
 
    const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const result = await loginUser({ email, password }).unwrap();
-      console.log('Login Success:', result);
-
        dispatch(authCredentials(result));
        toast.success('Login Success', {
         position: "top-right",
@@ -100,8 +111,8 @@ const LoginScreen = () => {
       setTimeout(() => {navigate('/')}, 1000)
       
     } catch (err) {
-      console.error('Login Failed:', err);
-      toast.error('Login failed', {
+      console.error('Login Failed:', err.data.message);
+      toast.error( err.data.message, {
         position: "top-right",
       theme: "colored",
       });

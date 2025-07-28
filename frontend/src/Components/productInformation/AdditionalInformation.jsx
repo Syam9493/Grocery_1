@@ -16,7 +16,7 @@ const AdditionalInformation = () => {
    return(
     <>
     {loading? <ClipLoader/> :
-    <div className="overflow-x-auto rounded-lg shadow-md sm:m-6">
+    <div className="overflow-x-auto rounded-lg shadow-md m-4 sm:m-6">
   <table className="min-w-full table-auto border-collapse text-left text-sm sm:text-base">
     <thead>
       <tr className="bg-yellow-400">

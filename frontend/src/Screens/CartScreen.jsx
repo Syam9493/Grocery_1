@@ -1,15 +1,18 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+
 
 import Cart from "../Components/Cart";
 import { useGetUserCartQuery } from "../ApiSlice/cartApi.js";
 import { addingToCart } from "../Slice/cartSlice.js";
+import OrderSummary from "../Components/OrderSummary.jsx";
+
 
 const CartScreen = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  // const cart = useSelector((state) => state.cart);
+  // const { cartItems } = cart;
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const userID = userInfo?._id;
@@ -18,11 +21,14 @@ const CartScreen = () => {
     skip: !userID, // prevent query if no userID
   }); // Destructure properly
 
+  const cartItems = data?.data?.cartItems
+
   useEffect(() => {
   if (isSuccess && data) {
     dispatch(addingToCart(data));
   }
 }, [isSuccess, data, dispatch]);
+
 
 
   return (
@@ -44,50 +50,9 @@ const CartScreen = () => {
       </tbody>
     </table>
   </div>
-     
-  {/* Order Summary Section */}
-  <div className="w-full lg:w-1/5">
-    {data?.data && (
-      <div className="w-full bg-white rounded-lg shadow-md p-5 space-y-4">
-        <h2 className="text-lg font-semibold border-b pb-2">Order Summary</h2>
-        <div className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span>Items</span>
-            <span className="font-medium">{data?.data?.totalItems || 0}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Sub Total</span>
-            <span className="font-medium">₹{data?.data?.subtotal?.toFixed(2) || "0.00"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Shipping</span>
-            <span className="font-medium">₹{data?.data?.shippingcost?.toFixed(2) || "0.00"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Taxes</span>
-            <span className="font-medium">₹{data?.data?.taxes?.toFixed(2) || "0.00"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Coupon Discount</span>
-            <span className="text-red-600 font-medium">
-              - ₹{data?.data?.couponDiscount?.toFixed(2) || "0.00"}
-            </span>
-          </div>
-        </div>
 
-        <div className="border-t pt-2 flex justify-between text-base font-semibold">
-          <span>Total</span>
-          <span>₹{data?.data?.total?.toFixed(2) || "0.00"}</span>
-        </div>
+  <OrderSummary/>
 
-        <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-full transition duration-200">
-          Proceed to Checkout
-        </button>
-      </div>
-    )}
-  </div>
-
- 
 </div>
     </>
   );

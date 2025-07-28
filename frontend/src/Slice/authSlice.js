@@ -6,18 +6,14 @@ const initialState = {
     : null,
 };
 
-const updateAuth = (authUser) => {
-  localStorage.setItem('userInfo', JSON.stringify(authUser));
-  return authUser;
-};
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     authCredentials: (state, action) => {
-      const user = action.payload;
-      state.userInfo = updateAuth(user);
+      state.userInfo = action.payload;
+       localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
     },
     logOut: (state) => {
       state.userInfo = null;
