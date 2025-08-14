@@ -326,7 +326,7 @@ const LoginScreen = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.post(
-         'http://localhost:5000/login',
+         'https://grocery-52wy.onrender.com/login',
          {
     email: email.trim(),
     password: password
