@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PrivateRoute = () => {
   const [loading, setLoading] = useState(true);       // add loading flag
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const auth = useSelector((state) => state.userInfo);
+
   useEffect(() => {
-    const auth = localStorage.getItem("userInfo");
+    
 
     if (auth) {
       try {
         const user = JSON.parse(auth);
-        if (user && user._id) {
+        if (user && user.id) {
           setIsLoggedIn(true);
         }
       } catch (err) {
@@ -20,9 +23,9 @@ const PrivateRoute = () => {
     }
 
     setLoading(false); // stop loading after check
-  }, []);
+  }, [auth]);
 
-  if (loading) return null; // or show loader
+  if (loading) return <div>Loading...</div>; // or show loader
 
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" replace />;
 };

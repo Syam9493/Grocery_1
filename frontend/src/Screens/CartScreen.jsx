@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 
@@ -14,8 +14,24 @@ const CartScreen = () => {
   // const cart = useSelector((state) => state.cart);
   // const { cartItems } = cart;
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const userID = userInfo?._id;
+   const reduxUser = useSelector((state) => state.userInfo?.user);
+        const localUser = (() => {
+          try {
+            const persistedRoot = localStorage.getItem("persist:root");
+            if (persistedRoot) {
+              const parsedRoot = JSON.parse(persistedRoot);
+              if (parsedRoot.userInfo) {
+                return JSON.parse(parsedRoot.userInfo).user;
+              }
+            }
+            return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
+          } catch {
+            return null;
+          }
+        })();
+      
+        const user = reduxUser || localUser;
+        const userID = user?.id;
 
   const { data, isSuccess, refetch } = useGetUserCartQuery(userID, {
     skip: !userID, // prevent query if no userID
@@ -48,7 +64,7 @@ const CartScreen = () => {
       <tbody className="bg-white divide-y divide-gray-200">
         {Array.isArray(cartItems) && <Cart product={cartItems} refetch={refetch} />}
       </tbody>
-    </table>
+    </table> 
   </div>
 
   <OrderSummary/>

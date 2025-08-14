@@ -2,7 +2,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import ProductDetails from "../Components/ProductDetails";
-import API from "../server/api.js";
 import { useParams, useLocation } from "react-router-dom";
 //import { useSelector} from 'react-redux'
 
@@ -75,7 +74,7 @@ const ProductDetailsScreen = () => {
     
     {/* Left Column - Product Details */}
     <div>
-      <ProductDetails product={product} />
+      <ProductDetails/>
     </div>
 
     {/* Right Column - Tabs Section */}

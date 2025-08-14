@@ -1,193 +1,159 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import  bodyParser from 'body-parser';
-dotenv.config();
-//import { promises as fs } from 'fs';
-import connectDB from './Config/db.js';
-import productsRoutes from './Router/ProductRouter.js';
-import cartRouter from './Router/cartRouter.js';
-import userRouter from './Router/userRouter.js';
-import checkOutRouter from './Router/checkOutOrder.js';
-import filteredProductsRoutes from './Router/filteredProducts.js'
-//import Product from './Router/Product.js';
-//import ProductDetails  from './Router/ProductDetails.js';
+// import express from 'express';
+// import dotenv from 'dotenv';
+// dotenv.config({ path: './.env' });
+// import connectDB from './Config/db.js';
+// import cors from 'cors';
+// import bodyParser from 'body-parser';
 // import path from 'path';
 // import { fileURLToPath } from 'url';
 
-// // Get __dirname equivalent in ES Modules
+// // Routes
+// import productsRoutes from './Router/ProductRouter.js';
+// import cartRouter from './Router/cartRouter.js';
+// import userRouter, {rootLoginRouter} from './Router/userRouter.js';
+// import checkOutRouter from './Router/checkOutOrder.js';
+// import filteredProductsRoutes from './Router/filteredProducts.js';
+
+// // __dirname for ES Modules
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
+// const app = express();
+// const PORT = process.env.PORT || 5000;
 
-const app = express();
-const PORT = 5000; 
+// // Connect to MongoDB
+// connectDB();
+
+// app.use(express.urlencoded({ extended: true }));
+
+// // Middlewares
+// app.use(express.json());
+// app.use(bodyParser.json());
+// app.use(cors({
+//   origin: ['http://localhost:5173'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type'],
+//   credentials: true,
+// }));
 
 
-connectDB(); //connect to mongodb
-app.use(express.json());
-app.use(bodyParser.json());
+// // ✅ Mount login & register directly
+// app.post("/login", (req, res, next) => {
+//   // forward to your login controller
+//   import("./Controllers/userControl.js").then(({ getUser }) => getUser(req, res, next));
+// });
 
+// app.post("/register", (req, res, next) => {
+//   import("./Controllers/userControl.js").then(({ registerUser }) => registerUser(req, res, next));
+// });
 
+// app.use(rootLoginRouter);
 
-// Or configure specific origins
-app.use(cors({
-  origin: ['http://localhost:5173'], // Your Vite frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true,
-}));
+// // Route registration (all relative paths)
+// app.use('/api/products', productsRoutes);
+// app.use('/api/category', filteredProductsRoutes);
+// app.use('/api/cart', cartRouter);
+// app.use('/api/user', userRouter);
+// app.use('/api/order', checkOutRouter);
 
-// Enable CORS for all routes
-app.use(cors());
+// // Test route
+// app.get('/test', (req, res) => res.send('API Test works'));
 
-// Helper function to load products
-// async function loadProducts() {
-//     try {
-//         const filePath = path.join(__dirname, './Data/db.json');
-//         const data = await fs.readFile(filePath, 'utf8');
-//         return JSON.parse(data);
-//     } catch (error) {
-//         console.error('Error loading products:', error);
-//         throw error;
-//     }
+// // Serve frontend in production
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
+//   app.get('/{*any}', (req, res) =>
+//     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"))
+//   );
 // }
 
-// API endpoint to get all products
-// app.get('/api/products', async (req, res) => {
-//     try {
-//         const products = await loadProducts();
-//         res.status(200).json({
-//             success: true,
-//             data: products.Products // Note the capitalization of "Products"
-//         });
-//     } catch (error) {
-//         res.status(500).json({
-//             success: false,
-//             message: 'Failed to load products'
-//         });
-//     }
+// // Start server
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
 // });
 
-app.use('/api', productsRoutes);
+
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import connectDB from './Config/db.js';
+
+// Routes
+import productsRoutes from './Router/ProductRouter.js';
+import cartRouter from './Router/cartRouter.js';
+//import userRouter, { rootLoginRouter } from './Router/userRouter.js';
+import checkOutRouter from './Router/checkOutOrder.js';
+import filteredProductsRoutes from './Router/filteredProducts.js';
+import { loginUser } from './Controllers/userControl.js'; 
+//import authRoutes from './Router/authRoute.js';
+
+// Load env variables
+dotenv.config({ path: './.env' });
+
+// __dirname equivalent for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDB();
+
+// ===== Middlewares =====
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'http://localhost:5000' // Your production frontend URL
+    : 'http://localhost:5173', // Your development frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
+}));
+
+// Parse incoming JSON and URL-encoded form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// // ===== Auth Routes (Direct Import for Login & Register) =====
+// import("./Controllers/userControl.js").then(({ getUser, registerUser }) => {
+//   app.post("/login", getUser);
+//   app.post("/register", registerUser);
+// });
+
+// Root login router (if needed)
+//app.use(rootLoginRouter);
+
+// Login route - MUST be before any catch-all routes
+// app.post('/login', (req, res) => {
+//   console.log('Login request received:', req.body);
+//   res.json({ message: 'Login endpoint reached!' });
+// });
+
+// ===== API Routes =====
+app.use('/api/products', productsRoutes);
 app.use('/api/category', filteredProductsRoutes);
 app.use('/api/cart', cartRouter);
-app.use('/api/user', userRouter);
-app.use('/api/order', checkOutRouter)
+//app.use('/api/user', userRouter);
+app.use('/api/order', checkOutRouter);
+app.post('/login', loginUser);
 
-//app.use('/api/products/fruits', Product)
 
+// Test route
+app.get('/test', (req, res) => res.send('API Test works'));
 
-// // API endpoint to get specific category
-// app.get('/api/:category', async (req, res) => {
-//     try {
-//         const category = req.params.category.toLowerCase();
-//         const products = await loadProducts();
-        
-//         // Handle case sensitivity in your JSON (Fruits vs fruits)
-//         const categoryKey = Object.keys(products.Products).find(
-//             key => key.toLowerCase() === category
-//         );
+// ===== Serve frontend in production =====
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  // Handle SPA routing - MUST come last
+  app.get(/^(?!\/?api).*/, (req, res) => {  // Exclude /api routes
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
+}
 
-//         if (!categoryKey) {
-//             const available = Object.keys(products.Products).join(', ');
-//             return res.status(404).json({
-//                 success: false,
-//                 message: `Category '${category}' not found. Available: ${available}`
-//             });
-//         }
-        
-//         res.json({
-//             success: true,
-//             data: products.Products[categoryKey]
-//         });
-        
-//     } catch (error) {
-//         res.status(500).json({
-//             success: false,
-//             message: 'Server error',
-//             error: error.message
-//         });
-//     }
-// });
-
-// app.get('/api/productDetailsPage/:id', async(req,res) => {
-//         try {
-//             const id = req.params.id;
-//             const productId = parseInt(id);
-//             const products = await loadProducts();
-//             let foundProduct = null;
-//             for (const category in products.Products) {
-//                 const product = products.Products[category].find(p => p.id === productId);
-//                 if (product) {
-//                   foundProduct = { ...product, category };
-//                   break;
-//                 }
-//                 if (foundProduct) {
-//                     res.json(foundProduct);
-//                   } else {
-//                     res.status(404).json({ error: 'Product not found' });
-//                   }
-//               }
-//             // const productID = Object.values(products.Products.vegetables).filter((Iid) => Iid === MainID )
-//             // console.log(productID);
-//         //    res.json({
-//         //           success: true,
-//         //           data: products.Products[productID]
-//         //       })
-//         } catch (error) {
-//             res.status(500).json({
-//                 success: false,
-//                 message: 'Server error',
-//                 error: error.message
-//             });
-//         }
-
-    
-// })
-
-// app.get('/api/productDetailsPage/:_id', async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         const productId = parseInt(id);
-        
-//         // Make sure you have this function defined
-//         const products = await loadProducts();
-        
-//         let foundProduct = null;
-        
-//         // Search through all categories
-//         for (const category in products.Products) {
-//             const product = products.Products[category].find(p => p.id === productId);
-//             if (product) {
-//                 foundProduct = { ...product, category };
-//                 break; // Exit loop once found
-//             }
-//         }
-        
-//         // Check after all categories have been searched
-//         if (foundProduct) {
-//             res.json({
-//                 success: true,
-//                 data: foundProduct
-//             });
-//         } else {
-//             res.status(404).json({ 
-//                 success: false,
-//                 error: 'Product not found' 
-//             });
-//         }
-        
-//     } catch (error) {
-//         console.error('Error:', error);
-//         res.status(500).json({
-//             success: false,
-//             message: 'Server error',
-//             error: error.message
-//         });
-//     }
-// });
-
+// ===== Start server =====
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });

@@ -1,7 +1,7 @@
 import {apiSlice} from './apiSlice';
 import {CHECKOUT_URL} from '../server/allAPI';
 
-export const orderSlice = apiSlice.injectEndpoints({
+export const checkoutApi = apiSlice.injectEndpoints({
    endpoints: (builder) => ({
     createOrder: builder.mutation({
       query: (payload) => ({
@@ -14,4 +14,4 @@ export const orderSlice = apiSlice.injectEndpoints({
 })
 
 
-export const {useCreateOrderMutation} = orderSlice;
+export const {useCreateOrderMutation} = checkoutApi;

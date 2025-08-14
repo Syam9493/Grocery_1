@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 
 import { useGetUserCartQuery } from "../ApiSlice/cartApi.js";
@@ -10,11 +11,29 @@ import {useCreateOrderMutation} from '../ApiSlice/checkOutApi.js'
 const OrderSummary = ({orderForm}) => {
     const buttonLabels = ["Proceed to Checkout", "Proceed to Payment", "Confirm Payment"];
     const [buttonIndex, setButtonIndex] = useState(0);
+    const [orderRes, setOrderRes] = useState(null);
      
-  const [CreateOrder] = useCreateOrderMutation();
+  const [CreateOrder ] = useCreateOrderMutation();
+  console.log(orderRes);
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const userID = userInfo?._id;
+  const reduxUser = useSelector((state) => state.userInfo?.user);
+       const localUser = (() => {
+         try {
+           const persistedRoot = localStorage.getItem("persist:root");
+           if (persistedRoot) {
+             const parsedRoot = JSON.parse(persistedRoot);
+             if (parsedRoot.userInfo) {
+               return JSON.parse(parsedRoot.userInfo).user;
+             }
+           }
+           return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
+         } catch {
+           return null;
+         }
+       })();
+     
+       const user = reduxUser || localUser;
+       const userID = user?.id;
 
   const { data } = useGetUserCartQuery(userID, {
       skip: !userID, // prevent query if no userID
@@ -23,12 +42,10 @@ const OrderSummary = ({orderForm}) => {
 //      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 //   const userID = userInfo?._id;
 
- console.log(data?.data)
 
   
 
   const cartItems = data?.data?.cartItems
-  console.log(cartItems);
 
   const payload = {
   user: userID,
@@ -36,7 +53,7 @@ const OrderSummary = ({orderForm}) => {
   orderItems: cartItems, // ✅ match what backend expects,
   couponDiscount: data?.data.couponDiscount,
   subtotal: data?.data.subtotal,
-  shippingcost: data?.data.subtotal,
+  shippingcost: data?.data.shippingcost, // <-- Fix here
   taxes: data?.data.taxes,
   total: data?.data.total,
   totalItems: data?.data.totalItems
@@ -68,8 +85,8 @@ const OrderSummary = ({orderForm}) => {
     if (buttonIndex === 0) {
       navigate("/checkout");
     } else if (buttonIndex === 1) {
-        console.log(orderForm, data?.data);
-        await CreateOrder(payload).unwrap();
+     const res =  await CreateOrder(payload).unwrap();
+       setOrderRes(res._id);
         navigate("/payment");
     } else if (buttonIndex === 2) {
      await navigate("/order-completed");
@@ -139,4 +156,3 @@ export default OrderSummary
 
 
 
- 

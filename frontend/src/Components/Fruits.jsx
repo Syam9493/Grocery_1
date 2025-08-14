@@ -32,7 +32,7 @@ const Fruits = ({ product }) => {
         <Link to={`/productDetailsPage` + "/" + product._id}>
           <div className="w-full h-48 flex items-center justify-center p-2">
             <img
-              src={product.image[0] || "/Fruits/Apple.jpeg"}
+              src={product.image?.[0] || "/Fruits/Apple.jpeg"}
               alt={product.name}
               className="w-full h-full object-contain"
             />

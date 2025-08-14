@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react";
 import { ClipLoader } from "react-spinners";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { addToWishList } from "../Slice/WhishListSlice";
@@ -16,8 +16,28 @@ import { useDeleteFromCartMutation } from "../ApiSlice/cartApi.js";
 
 const CartAlert = ({ open, setOpen, id, refetch }) => {
   //const [loading, setLoading] = useState(false);
+  
   const dispatch = useDispatch();
   const [DeleteFromCart] = useDeleteFromCartMutation();
+
+  const reduxUser = useSelector((state) => state.userInfo?.user);
+      const localUser = (() => {
+        try {
+          const persistedRoot = localStorage.getItem("persist:root");
+          if (persistedRoot) {
+            const parsedRoot = JSON.parse(persistedRoot);
+            if (parsedRoot.userInfo) {
+              return JSON.parse(parsedRoot.userInfo).user;
+            }
+          }
+          return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
+        } catch {
+          return null;
+        }
+      })();
+    
+      const user = reduxUser || localUser;
+      const userID = user?.id;
 
   const addToWishListHandler = async () => {
     try {
@@ -64,20 +84,21 @@ const CartAlert = ({ open, setOpen, id, refetch }) => {
   // };
 
   const deleteItemHandler = async () => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      const userID = userInfo?._id;
+    
+  
 
-     const  itemID = id;
+    const itemID = id;
 
-  try {
-    await DeleteFromCart({ userID, itemID }).unwrap();  // Ensure you pass object
-    await setOpen(false);
-    await refetch(); // manually re-fetch latest cart
-    toast.success("Item removed");
-  } catch (err) {
-    console.error("DELETE FAILED:", err);
-  }
-};
+    try {
+      await DeleteFromCart({ userID, itemID }).unwrap();
+      toast.success("Item removed", { autoClose: 1000, theme: "colored" }); // Show toast first
+      setOpen(false); // Then close dialog
+      await refetch();
+    } catch (err) {
+      console.error("DELETE FAILED:", err);
+      toast.error("Error deleting product!", { autoClose: 1000, theme: "colored" });
+    }
+  };
 
   // if (loading) {
   //   return (
@@ -88,6 +109,7 @@ const CartAlert = ({ open, setOpen, id, refetch }) => {
   // }
 
   return (
+    <>
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop className="fixed inset-0 bg-black/50" />
 
@@ -141,7 +163,8 @@ const CartAlert = ({ open, setOpen, id, refetch }) => {
           </DialogPanel>
         </div>
       </div>
-    </Dialog>
+    </Dialog> 
+    </>
   );
 };
 

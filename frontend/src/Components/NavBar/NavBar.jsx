@@ -333,8 +333,24 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const {userInfo} = useSelector(state => state.userInfo)
-
+  const reduxUser = useSelector((state) => state.userInfo?.user);
+    const localUser = (() => {
+      try {
+        const persistedRoot = localStorage.getItem("persist:root");
+        if (persistedRoot) {
+          const parsedRoot = JSON.parse(persistedRoot);
+          if (parsedRoot.userInfo) {
+            return JSON.parse(parsedRoot.userInfo).user;
+          }
+        }
+        return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
+      } catch {
+        return null;
+      }
+    })();
+  
+    const user = reduxUser || localUser;
+    const Name = user?.name;
 
 
   const dispatch = useDispatch();
@@ -399,17 +415,18 @@ const Navbar = () => {
   // }, [keyword, navigate, currentPath]);
 
   useEffect(() => {
-    const auth = localStorage.getItem("userInfo");
-    if (auth) {
+    const checkAuth = () => {
       try {
-        const user = JSON.parse(auth);
-        if (user && user._id) setIsLoggedIn(true);
+        setIsLoggedIn(!!user);
+        setLoading(false);
       } catch (err) {
-        console.error("Invalid user data in localStorage", err.message);
+        console.error("Error checking auth status:", err);
+        setLoading(false);
       }
-    }
-    setLoading(false);
-  }, []);
+    };
+
+    checkAuth();
+  }, [user]);
 
   if (loading)
     return <div className="text-center py-4 text-white">Loading...</div>;
@@ -508,7 +525,7 @@ const Navbar = () => {
                         <MenuItem>
                           <button className="flex w-full items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
                             <UserIcon className="size-4 fill-green-700" />
-                            {userInfo.name || 'Gesut User'}
+                            {Name || 'Guest User'}
                           </button>
                         </MenuItem>
                         <MenuItem>

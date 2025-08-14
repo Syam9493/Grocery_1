@@ -16,6 +16,7 @@ import ProductFilter from "../Components/ProductFilter";
 import { removeCheckItem, clearCheckItems } from "../Slice/ProdutSlice";
 import {useGetProductsQuery} from '../ApiSlice/ProductApiSlice';
 
+
 //import axios from 'axios';
 
  const useQuery = () => new URLSearchParams(useLocation().search);

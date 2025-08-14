@@ -12,22 +12,23 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deletefromWhishList } from "../Slice/WhishListSlice";
 
-
 const AlertNotification = ({ open, setOpen, id }) => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const deleteItmehandler = async (id) => {
+  const deleteItemHandler = async (id) => {
     dispatch(deletefromWhishList(id));
-    toast.info("Product delete from wishList!", {
+    toast.info("Product deleted from wishList!", {
       autoClose: 500,
       theme: "colored",
     });
+    setOpen(false);
     setLoading(true);
     setTimeout(() => {
-      navigate("/cart");
+      navigate("/whishList"); // Change to wishlist if that's the intent
+      setLoading(false); // Optionally reset loading
     }, 2000);
   };
 
@@ -79,7 +80,7 @@ const AlertNotification = ({ open, setOpen, id }) => {
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="button"
-                  onClick={() => deleteItmehandler(id)}
+                  onClick={() => deleteItemHandler(id)}
                   className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
                 >
                   Remove

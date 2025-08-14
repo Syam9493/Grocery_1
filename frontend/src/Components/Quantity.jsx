@@ -1,12 +1,28 @@
-
-import {useUpdateQuantityMutation} from '../ApiSlice/cartApi.js'
+import {useUpdateQuantityMutation} from '../ApiSlice/cartApi.js';
+import {useSelector} from 'react-redux'
 
 const Quantity = ({ product, refetch }) => {
 
   ///console.log(product);
 
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const userID = userInfo?._id;
+  const reduxUser = useSelector((state) => state.userInfo?.user);
+       const localUser = (() => {
+         try {
+           const persistedRoot = localStorage.getItem("persist:root");
+           if (persistedRoot) {
+             const parsedRoot = JSON.parse(persistedRoot);
+             if (parsedRoot.userInfo) {
+               return JSON.parse(parsedRoot.userInfo).user;
+             }
+           }
+           return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
+         } catch {
+           return null;
+         }
+       })();
+     
+       const user = reduxUser || localUser;
+       const userID = user?.id;
 
 
   const [updateQuantity] = useUpdateQuantityMutation();
@@ -14,14 +30,24 @@ const Quantity = ({ product, refetch }) => {
 
   const increaseQtyHandler = async (id, quantity) => {
     const productID = String(id);
-    await updateQuantity({userID, productID, quantity});
-   await refetch();
+    try {
+      await updateQuantity({ userID, productID, quantity });
+      await refetch();
+    } catch (err) {
+      console.error("Failed to increase quantity:", err);
+      // Optionally show a toast or error message
+    }
   };
 
   const decreaseQtyHandler = async(id,quantity) => {
     const productID = String(id);
-    await updateQuantity({userID, productID, quantity});
-    await refetch();
+    try {
+      await updateQuantity({ userID, productID, quantity });
+      await refetch();
+    } catch (err) {
+      console.error("Failed to decrease quantity:", err);
+      // Optionally show a toast or error message
+    }
   };
 
 
@@ -37,9 +63,9 @@ const Quantity = ({ product, refetch }) => {
         -
       </button>
 
-      <span className="px-4 text-sm">
+      <h1 className="px-4 text-sm">
         {product.quantity}
-      </span>
+      </h1>
 
       <button
        className="px-3 py-1 border-l border-gray-400 text-sm"

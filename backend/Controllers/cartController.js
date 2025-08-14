@@ -48,7 +48,7 @@ const getCart = async (req, res) => {
 
 
 
-console.log(cartItem);
+//console.log(cartItem);
 
     if (!user || !cartItem  || cartItem .length === 0) {
       return res.status(400).json({ message: 'Missing required cart data' });
@@ -73,7 +73,7 @@ if (!existingCart) {
 
   if (existingItem) {
     existingItem.quantity += cartItem.quantity;
-    existingItem.subtotal += cartItem.subtotal;
+    existingItem.subtotal = Math.round((existingItem.subtotal + cartItem.subtotal) * 100) / 100;;
   } else {
     existingCart.cartItems.push(cartItem);
   }

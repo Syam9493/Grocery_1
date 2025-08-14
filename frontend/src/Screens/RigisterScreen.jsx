@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 //import API from "../server/api.js";
 
-import { useRegissterUserMutation } from "../ApiSlice/userSlice";
+import { useRegisterUserMutation } from "../ApiSlice/userSlice";
 import { authCredentials } from "../Slice/authSlice";
 //import { toast } from "react-toastify";
 
@@ -25,7 +25,7 @@ const RigisterScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [regissterUser] = useRegissterUserMutation();
+  const [registerUser] = useRegisterUserMutation();
 
   const { FirstName, LastName, email, password, confPassword, cellNumber } =
     formData;
@@ -33,7 +33,7 @@ const RigisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (formData.password === formData.confPassword) {
-      const result = await regissterUser({
+      const result = await registerUser({
         FirstName,
         LastName,
         email,

@@ -52,24 +52,23 @@ const PaymentScreen = lazy(() => import("./Screens/PaymentScreen.jsx"));
 const router = createBrowserRouter( 
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/login" element={<LoginScreen />} />
-      <Route path="/signUp" element={<RigisterScreen />} />
-      <Route path="" element={<PrivateRoute/>}>
-      <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/shop" element={<ShopScreen />} />
-      <Route path="/Fruits" element={<FruitScreen />} />
-      <Route path="/vegetables" element={<VegetableScreen />} />
-      <Route path="/Beverages" element={<BeveragesScreen />} />
-      <Route path="/whishList" element={<WhishList />} />
-      <Route
-        path="/productDetailsPage/:id"
-        element={<ProductDetailsScreen />}
-      />
-      <Route path="/cart" element={<CartScreen />} />
-      <Route path="/checkOut" element={<CheckOutScreen/>}/>
-      <Route path="/payment" element={<PaymentScreen/>}/>
-      </Route>
-    </Route>
+    <Route path="login" element={<LoginScreen />} />
+    <Route path="signUp" element={<RigisterScreen />} />
+    <Route index element={<HomeScreen />} />
+    <Route path="shop" element={<ShopScreen />} />
+    <Route path="Fruits" element={<FruitScreen />} />
+    <Route path="vegetables" element={<VegetableScreen />} />
+    <Route path="Beverages" element={<BeveragesScreen />} />
+    <Route path="whishList" element={<WhishList />} />
+    <Route path="productDetailsPage/:id" element={<ProductDetailsScreen />} />
+    <Route path="cart" element={<CartScreen />} />
+
+  <Route element={<PrivateRoute />}>
+    <Route path="checkOut" element={<CheckOutScreen />} />
+    <Route path="payment" element={<PaymentScreen />} />
+  </Route>
+</Route>
+
   )
 );
 

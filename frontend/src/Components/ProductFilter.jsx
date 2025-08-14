@@ -23,7 +23,7 @@ const ProductFilter = () => {
   const checkedItemss = useSelector((state) => state.checkItems); // Redux state
   const { checkItems } = checkedItemss;
 
-const ProductFileterHandler = ( value) => {
+const ProductFileterHandler = (value) => {
   if (checkItems.includes(value)) {
     dispatch(removeCheckItem(value));
   } else {

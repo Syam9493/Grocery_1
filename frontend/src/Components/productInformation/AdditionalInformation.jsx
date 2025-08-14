@@ -3,15 +3,15 @@ import { ClipLoader } from "react-spinners";
 import { ProductContext } from '../../Screens/ProductDetailsScreen';
 
 const AdditionalInformation = () => {
-  const {product, loading} = useContext(ProductContext)
-   const details = {
-    'Name': product.data.name,
-    'Category': product.data.category,
-    'Weight': product.data.weight,
-    'Price': `₹${product.data.price}`,
-    'Rating': product.data.rating,
-    'Quantity': product.data.quantity,
-  };
+  const { product, loading } = useContext(ProductContext);
+const details = {
+  Name: product?.data?.name || "-",
+  Category: product?.data?.category || "-",
+  Weight: product?.data?.weight || "-",
+  Price: product?.data?.price ? `₹${product.data.price}` : "-",
+  Rating: product?.data?.rating || "-",
+  Quantity: product?.data?.quantity || "-",
+};
    
    return(
     <>

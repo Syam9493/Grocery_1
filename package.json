@@ -21,7 +21,8 @@
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\" ",
     "data:import": "node backend/dataSender.js",
-    "data:delete": "node backend/dataSender.js -d"
+    "data:delete": "node backend/dataSender.js -d",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Dokupathi Syam",
   "license": "MIT",

@@ -2,6 +2,7 @@
 import User from '../Models/userModel.js';
 import generateToken from '../utils/genarateToken.js';
 import tokenModel from '../Models/tokenModel.js';
+import bcrypt from 'bcryptjs';
 
 
 //const router = express.Router();
@@ -53,41 +54,87 @@ import tokenModel from '../Models/tokenModel.js';
   // Get user details from database
 
 
-  const getUser = async (req, res) => {
+//   const getUser = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     console.log(req.body);
+
+//     const user = await User.findOne({ email });
+
+//     if (!user) {
+//       return res.status(401).json({ message: 'User not found' });
+//     }
+
+
+
+
+//    if(user && (await user.matchPassword(password)) ){
+      
+//       const userToken = tokenModel.findOne({userId: user._id})
+//       // optionally add a token here
+//       if(userToken){
+//         await generateToken(res, user._id)
+//         res.status(200).json({
+//               _id: user._id,
+//               name: `${user.FirstName} ${user.LastName}`,
+//               email: user.email,
+//               isAdmin: user.isAdmin
+//           })
+//       }
+//    }  else{
+//     res.status(400).json({message: "Invalid email or password"})
+//    }
+//   } catch (error) {
+//   console.error('Login Error:', error);
+//   res.status(500).json({ message: 'Email or password wrong' });
+// }
+// };
+
+// authController.js
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  // 1. Validate input
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Please provide email and password' });
+  }
+
   try {
-    const { email, password } = req.body;
-    //console.log(req.body);
-
+    // 2. Check if user exists
     const user = await User.findOne({ email });
-
     if (!user) {
-      return res.status(401).json({ message: 'User not found' });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // 3. Verify password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
+    // 4. Generate JWT token
+    // const token = jwt.sign(
+    //   { userId: user._id },
+    //   process.env.JWT_SECRET,
+    //   { expiresIn: '1h' }
+    // );
 
-
-   if(user && (await user.matchPassword(password)) ){
-      
-      const userToken = tokenModel.findOne({userId: user._id})
-      // optionally add a token here
-      if(userToken){
-        await generateToken(res, user._id)
-        res.status(200).json({
-              _id: user._id,
-              name: `${user.FirstName} ${user.LastName}`,
-              email: user.email,
-              isAdmin: user.isAdmin
-          })
+    // 5. Send response
+    res.status(200).json({
+      // token,
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.FirstName + ' ' + user.LastName
       }
-   }  else{
-    res.status(400).json({message: "Invalid email or password"})
-   }
+    });
+
   } catch (error) {
-  console.error('Login Error:', error);
-  res.status(500).json({ message: 'Email or password wrong' });
-}
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 
 
-  export {registerUser,getAllUsers, getUser};
+
+  export {registerUser,getAllUsers, loginUser};

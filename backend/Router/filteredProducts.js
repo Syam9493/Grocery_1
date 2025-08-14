@@ -1,19 +1,13 @@
+
+
 import express from 'express';
-const router = express.Router()
-import Product from '../Models/productModel.js'
+const router = express.Router();
+import { getProductsByCategory } from '../Controllers/filteredProductsControl.js';
 
-
-router.get('/:category', async (req, res) => {
-  const category = req.params.category.trim();
-  console.log(`✅ hit the filtered products api:${category}`);
-  try {
-    const products = await Product.find({ category });
-    res.json({ success: true, data: products });
-  } catch (err) {
-    console.error('DB error:', err);
-    res.status(500).json({ success: false, message: 'DB error' });
-  }
-});
-
+// Get products for a given category
+router.get('/:category', getProductsByCategory);
 
 export default router;
+
+
+
