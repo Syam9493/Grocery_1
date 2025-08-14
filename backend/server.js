@@ -105,7 +105,7 @@ connectDB();
 // ===== Middlewares =====
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? 'http://localhost:5000' // Your production frontend URL
+    ? 'https://grocery-52wy.onrender.com' // Your production frontend URL
     : 'http://localhost:5173', // Your development frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
