@@ -53,9 +53,9 @@ import wishList from "../Models/wishListModel.js";
 const getUserWishList = async (req, res) => {
   const { userID } = req.params;
 
-  if (!userID) {
-    return res.status(400).json({ message: 'Missing required userID' });
-  }
+  if (!mongoose.Types.ObjectId.isValid(userID || req.params.userID)) {
+  return res.status(400).json({ message: "Invalid user ID" });
+}
 
   try {
     const wishListItem = await wishList.findOne({ userID });

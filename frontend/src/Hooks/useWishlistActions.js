@@ -11,7 +11,10 @@ const useWishlistActions = () => {
   
 
   const handleAddToWishlist = async (product) => {
-    if (!userID) return;
+    if (!userID || userID === "null" || userID === null) {
+    toast.error("You must be logged in to add to wishlist");
+    return;
+  }
     try {
      const res =  await addToWishList({ userID, product }).unwrap();
       toast.success(res.message || "Product added to wish list!");
@@ -21,7 +24,10 @@ const useWishlistActions = () => {
   };
 
   const handleRemoveFromWishlist = async (productID) => {
-    if (!userID) return;
+    if (!userID || userID === "null" || userID === null) {
+    toast.error("You must be logged in to add to wishlist");
+    return;
+  }
     try {
      const res =  await deleteFromWishList({ userID, productID }).unwrap();
         toast.info(res.message || "Product removed from wish list!");
