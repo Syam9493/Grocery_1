@@ -4,12 +4,12 @@ import CartAlert from "./CartAlert";
 import Quantity from "./Quantity";
 
 const Cart = ({ product, refetch }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); 
   const [id, setId] = useState("");
 
   const handleRemoveClick = (itemId) => {
     setId(itemId);
-    setOpen(true);
+    setOpen(true); // Open the alert dialog
   };
 
   return (

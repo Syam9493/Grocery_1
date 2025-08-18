@@ -245,43 +245,33 @@
 // export default ProductDetails;
 
 import React, { useState, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { BsSuitHeartFill } from "react-icons/bs";
 import { addingToCart } from "../Slice/cartSlice";
-import { addToWishList } from "../Slice/WhishListSlice";
 import { ProductContext } from '../Screens/ProductDetailsScreen';
 import { useUpdateUserCartMutation } from '../ApiSlice/cartApi.js';
+import useAuthUser from "../Hooks/useAuthUser.js";
+import useWishlistActions from "../Hooks/useWishlistActions.js";
 
-const ProductDetails = () => {
+const ProductDetails = ({wishListItems}) => {
   const { product } = useContext(ProductContext);
   const [icount, setIcount] = useState(0);
-  
+  const { userID } = useAuthUser(); 
+  const { handleAddToWishlist, handleRemoveFromWishlist } = useWishlistActions();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateUserCart] = useUpdateUserCartMutation();
 
-  // ✅ Get user from Redux OR from localStorage as fallback
-  const reduxUser = useSelector((state) => state.userInfo?.user);
-  const localUser = (() => {
-    try {
-      const persistedRoot = localStorage.getItem("persist:root");
-      if (persistedRoot) {
-        const parsedRoot = JSON.parse(persistedRoot);
-        if (parsedRoot.userInfo) {
-          return JSON.parse(parsedRoot.userInfo).user;
-        }
-      }
-      return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
-    } catch {
-      return null;
-    }
-  })();
+  
+  const items = wishListItems?.wishList?.products || [];
+   const isInWishlist = items.some(
+    (item) => item.productID === product.data._id
+  );
 
-  const user = reduxUser || localUser;
-  const userID = user?.id;
 
   if (!product) {
     return <div className="p-4 text-center">Loading product details...</div>;
@@ -318,19 +308,14 @@ const ProductDetails = () => {
     }
   };
 
-  const addToWhishList = () => {
-    if (!product.data) {
-      toast.error("Invalid product data");
-      return;
+  
+
+  const addToWhishList = async (product) => {
+   if (isInWishlist) {
+      handleRemoveFromWishlist(product._id);
+    } else {
+      handleAddToWishlist(product);
     }
-    
-    dispatch(addToWishList(product.data));
-    toast.success("Product added to wishlist!", {
-      position: "top-right",
-      autoClose: 1000,
-      theme: "colored",
-    });
-    setTimeout(() => navigate("/whishList"), 2000);
   };
 
   const handleNext = () => {
@@ -351,7 +336,7 @@ const ProductDetails = () => {
   const rating = product.data?.rating || 0;
   const price = product.data?.price || 0;
   const description = product.data?.description || '';
-  const availability = product.data?.Availablility || 'Out of Stock';
+  const availability = product.data?.Availability || 'Out of Stock';
   const weight = product.data?.weight || '';
 
   return (
@@ -436,10 +421,10 @@ const ProductDetails = () => {
               Buy Now
             </button>
             <button
-              className="bg-gray-100 text-gray-700 p-3 rounded-full hover:bg-red-100"
-              onClick={addToWhishList}
+             className={`flex items-center justify-center size-6 ${isInWishlist ? 'text-red-500' : "text-gray-400 hover:text-red-500"}`}
+              onClick={() =>addToWhishList(product.data)}
             >
-              <IoMdHeartEmpty />
+               <BsSuitHeartFill />
             </button>
           </div>
         </div>

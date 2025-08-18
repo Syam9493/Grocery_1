@@ -9,7 +9,9 @@ import { useParams, useLocation } from "react-router-dom";
 import ProductDescription from "../Components/productInformation/ProductDescription.jsx";
 import AdditionalInformation from "../Components/productInformation/AdditionalInformation.jsx";
 import Rating from "../Components/productInformation/Rating.jsx";
-import {useGetProductByIDQuery} from '../ApiSlice/ProductApiSlice.js'
+import {useGetProductByIDQuery} from '../ApiSlice/ProductApiSlice.js';
+import {useGetUserWishListQuery} from "../ApiSlice/whishListSlice.js";
+import useAuthUser from "../Hooks/useAuthUser.js";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ProductContext = createContext();
@@ -23,12 +25,14 @@ const ProductDetailsScreen = () => {
   //const [product, setProduct] = useState([]);
   // const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('description')
+  const [activeTab, setActiveTab] = useState('description');
+  const {userID} = useAuthUser()
 
   const {data: product, isLoading, isError} = useGetProductByIDQuery(id);
-  console.log(product);
-  console.log(isLoading);
-  console.log(isError);
+  const {data: wishListItems} = useGetUserWishListQuery(userID);
+  // console.log(product);
+  // console.log(isLoading);
+  // console.log(isError);
 
   // useEffect(() => {
   //   const fetchProducts = async () => {
@@ -74,7 +78,7 @@ const ProductDetailsScreen = () => {
     
     {/* Left Column - Product Details */}
     <div>
-      <ProductDetails/>
+      <ProductDetails wishListItems={wishListItems}/>
     </div>
 
     {/* Right Column - Tabs Section */}

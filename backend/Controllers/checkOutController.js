@@ -1,5 +1,9 @@
 import checkOutModel from '../Models/checkOutModel.js';
 
+// Checkout a user's cart
+// api/checkout/
+// post request
+
 const checkOut = async (req, res) => {
   try {
     const { shippingAddress, orderItems, subtotal, shippingcost, taxes, total, paymentMethod, paymentResult, paidAt, deliveredAt, user } = req.body;
@@ -13,7 +17,7 @@ const checkOut = async (req, res) => {
  const order = await checkOutModel.create({
       user,
       shippingAddress,
-      orderItems, // ✅ store your array here
+      orderItems, //  store your array here
       subtotal,
       shippingcost,
       taxes,
@@ -26,7 +30,7 @@ const checkOut = async (req, res) => {
       deliveredAt,
     });
 
-    res.status(201).json(order);
+    res.status(200).json(order);
 
 
   } catch (error) {

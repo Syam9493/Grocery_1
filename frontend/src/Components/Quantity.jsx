@@ -1,28 +1,12 @@
 import {useUpdateQuantityMutation} from '../ApiSlice/cartApi.js';
-import {useSelector} from 'react-redux'
+
+import useAuthUser from '../Hooks/useAuthUser.js';
 
 const Quantity = ({ product, refetch }) => {
 
   ///console.log(product);
 
-  const reduxUser = useSelector((state) => state.userInfo?.user);
-       const localUser = (() => {
-         try {
-           const persistedRoot = localStorage.getItem("persist:root");
-           if (persistedRoot) {
-             const parsedRoot = JSON.parse(persistedRoot);
-             if (parsedRoot.userInfo) {
-               return JSON.parse(parsedRoot.userInfo).user;
-             }
-           }
-           return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
-         } catch {
-           return null;
-         }
-       })();
-     
-       const user = reduxUser || localUser;
-       const userID = user?.id;
+  const { userID } = useAuthUser(); // get userID from custom hook
 
 
   const [updateQuantity] = useUpdateQuantityMutation();

@@ -18,7 +18,7 @@ import { ClipLoader } from "react-spinners";
 
 
 import App from "./App.jsx";
-import {SearchProvider} from './Slice/SearchContext'
+import {SearchProvider} from './Contexts/SearchContext.jsx'
 // import HomeScreen from "./Screens/HomeScreen.jsx";
 // import LoginScreen from "./Screens/LoginScreen.jsx";
 // import RigisterScreen from "./Screens/RigisterScreen.jsx";
@@ -43,6 +43,12 @@ const VegetableScreen = lazy(() => import("./Screens/VegetableScreen.jsx"));
 const BeveragesScreen = lazy(() => import("./Screens/BeveragesScreen.jsx"));
 const ProductDetailsScreen = lazy(() => import("./Screens/ProductDetailsScreen.jsx"));
 const CartScreen = lazy(() => import("./Screens/CartScreen.jsx"));
+const BakeryItemsScreen = lazy(() => import("./Screens/BakeryItemsScreen.jsx"));
+const CleaningItemsScreen = lazy(() => import("./Screens/CleaningItemsScreen.jsx"));
+const MilkAndEggsScreen = lazy(() => import("./Screens/MilkAndEggsScreen.jsx"));
+const RiceItemsScreen = lazy(() => import("./Screens/RiceItemsScreen.jsx"));
+const DryFruitsScreen = lazy(() => import("./Screens/DryFruitsScreen.jsx"));
+const OilItemsScreen = lazy(() => import("./Screens/OilItemsScreen.jsx"));
 const WhishList = lazy(() => import("./Screens/WhishListScreen.jsx"));
 const PrivateRoute = lazy(() => import("./Components/PrivateRoute.jsx"));
 const CheckOutScreen = lazy(() => import("./Screens/CheckOutScreen.jsx"));
@@ -60,11 +66,17 @@ const router = createBrowserRouter(
     <Route path="vegetables" element={<VegetableScreen />} />
     <Route path="Beverages" element={<BeveragesScreen />} />
     <Route path="whishList" element={<WhishList />} />
+    <Route path="bakeryItems" element={<BakeryItemsScreen />} />
+    <Route path="cleaningItems" element={<CleaningItemsScreen />} />
+    <Route path="milkAndEggs" element={<MilkAndEggsScreen />} />
+    <Route path="riceItems" element={<RiceItemsScreen />} />
+    <Route path="dryFruits" element={<DryFruitsScreen />} />
+    <Route path="oilItems" element={<OilItemsScreen />} />
     <Route path="productDetailsPage/:id" element={<ProductDetailsScreen />} />
     <Route path="cart" element={<CartScreen />} />
 
   <Route element={<PrivateRoute />}>
-    <Route path="checkOut" element={<CheckOutScreen />} />
+    <Route path="checkout" element={<CheckOutScreen />} />
     <Route path="payment" element={<PaymentScreen />} />
   </Route>
 </Route>

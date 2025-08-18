@@ -7,7 +7,7 @@ getProducts: builder.query({
   query: ({ keyword = '', categories = [], page = 1, limit = 12 } = {}) => {
     const query = [
       keyword && `keyword=${encodeURIComponent(keyword)}`,
-      Array.isArray(categories) && categories.length && `categories=${categories.join(',')}`,
+      categories.length > 0 && `categories=${encodeURIComponent(JSON.stringify(categories))}`,
       `page=${page}`,
       `limit=${limit}`
     ]

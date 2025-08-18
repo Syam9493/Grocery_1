@@ -6,9 +6,9 @@ const initialState = localStorage.getItem("wishList")
 
 
 
-  const updateWhishList = (state) => {
-  localStorage.setItem("wishList", JSON.stringify(state));
-  return state;
+  const updateWhishList = (wishListItems) => {
+  localStorage.setItem("wishList", JSON.stringify(wishListItems));
+  return wishListItems; 
 };
 
 export const wishListSlice = createSlice({

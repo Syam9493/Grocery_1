@@ -1,15 +1,18 @@
-/* .slider-container {
-  background-color: yellow;
-  padding: 1px;
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  position: absolute;
+  top: 33%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: white;
+  border-radius: 9999px;
+  padding: 12px 12px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
-.slick-slide > div {
-  margin: 0 10px;
-}
-
-.slick-arrow {
-  z-index: 1;
-  width: 40px;
-  height: 40px;
-  color: aqua;
-} */
+/* position them left/right */
+.swiper-button-prev-custom { left: 1px; }
+.swiper-button-next-custom { right: 1px; }

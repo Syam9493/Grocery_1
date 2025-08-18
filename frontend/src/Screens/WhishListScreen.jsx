@@ -1,13 +1,28 @@
-import React from 'react';
+import { useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+
+
 import WhishList from '../Components/WhishList';
-import { useSelector } from 'react-redux';
+import {addToWishList} from '../Slice/WhishListSlice.js';
+import {useGetUserWishListQuery} from '../ApiSlice/whishListSlice.js';
+import useAuthUser from '../Hooks/useAuthUser.js';
 
 
 const WhishListScreen = () => {
+const dispatch = useDispatch();
+const {userID} = useAuthUser();
+const {data: wishListItems, isLoading, error} = useGetUserWishListQuery(userID);
+console.log("Fetched Wishlist Items:", wishListItems);
 
-const whishLists = useSelector((state) => state.whishList);
+useEffect(() => {
+  if (wishListItems) {
+    dispatch(addToWishList(wishListItems.wishList || []));
+  }
+}, [dispatch, wishListItems]);
 
-const {wishListItems} = whishLists
+if (isLoading) return <div>Loading...</div>;
+if (error) return <div>Error fetching wishlist</div>;
+
 
 
   return (
@@ -22,7 +37,7 @@ const {wishListItems} = whishLists
         </tr>
         </thead>
         <tbody>
-          <WhishList wishListItems={wishListItems}/>
+          <WhishList wishListItems={wishListItems} isLoading={isLoading} isError={error} />
         </tbody>
       </table>
     </>

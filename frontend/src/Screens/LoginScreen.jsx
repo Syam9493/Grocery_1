@@ -228,15 +228,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
-import axios from "axios";
+//import axios from "axios";
+
+
 import LoginForm from "../Components/LoginForm";
+import {useLoginUserMutation} from '../ApiSlice/userSlice';
 import { authCredentials } from '../Slice/authSlice';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   
   const MIN_LENGTH = 8;
@@ -254,8 +256,27 @@ const LoginScreen = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {  name } = useSelector((state) => state.userInfo || {});
-  console.log(name);
+  const reduxUser = useSelector((state) => state.userInfo?.userInfo);
+    // Get user from Redux or localStorage
+          const localUser = (() => {
+            try {
+              const persistedRoot = localStorage.getItem("persist:root");
+              if (persistedRoot) {
+                const parsedRoot = JSON.parse(persistedRoot);
+                if (parsedRoot.userInfo) {
+                  return JSON.parse(parsedRoot.userInfo);
+                }
+              }
+              return JSON.parse(localStorage.getItem("userInfo")) || null;
+            } catch {
+              return null;
+            }
+          })();
+        
+          const user = reduxUser || localUser;
+          //console.log(user);
+          const name = user?.name;
+          console.log(name);
 
   useEffect(() => {
     if (name) {
@@ -265,7 +286,7 @@ const LoginScreen = () => {
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
-    console.log(newEmail);
+    ///console.log(newEmail);
     setEmail(newEmail);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailError(!emailRegex.test(newEmail) ? 'Invalid email format' : '');
@@ -297,55 +318,36 @@ const LoginScreen = () => {
     setFeedback(validatePassword(newPassword));
   };
 
-//  const submitHandler = async (e) => {
-//   e.preventDefault();
-  
-//   try {
-//     const response = await axios.post(
-//       'http://localhost:5000/login',
-//       JSON.stringify({ email: email.trim(), password: password.trim() }),
-//       {
-//         headers: {
-//           'Content-Type': 'application/json', // Force JSON content type
-//         },
-//         withCredentials: true
-//       }
-//     );
-//     dispatch(authCredentials(response.data));
-//     setIsLoading(false);
-//     // Handle success
-//   } catch (err) {
-//     console.error('Login error:', err.response?.data);
-//   }
-// };
+
+  // Submit handler login function
+
+  const [loginUser, { isLoading }] = useLoginUserMutation();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!feedback.isValid) return;
-    console.log('Sending:', { email, password });
-    setIsLoading(true);
+    //console.log('Sending:', { email, password });
     try {
-      const { data } = await axios.post(
-         'https://grocery-52wy.onrender.com/login',
-         {
-    email: email.trim(),
-    password: password
-  },
-        { headers: { "Content-Type": "application/json" } }
-      );
-      
-      dispatch(authCredentials(data));
+      const res = await loginUser({ 
+  email: email.trim(), 
+  password: password
+}).unwrap();
+
+ //console.log('Full response:', res);
+
+      dispatch(authCredentials(res));
       toast.success('Login Success', { position: "top-right", theme: "colored" });
       navigate('/');
     } catch (err) {
       const errorMsg = err.response?.data?.message || 'Login failed';
       toast.error(errorMsg, { position: "top-right", theme: "colored" });
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
+    <>
+    {
+     isLoading ? <div>Loading...</div> :
     <LoginForm>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-8 text-center text-2xl/9 font-bold tracking-tight text-green-700">
@@ -442,6 +444,8 @@ const LoginScreen = () => {
         </div>
       </div>
     </LoginForm>
+    }
+    </>
   );
 };
 

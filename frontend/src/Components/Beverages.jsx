@@ -1,13 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { BsSuitHeartFill } from "react-icons/bs";
 
-const Beverages = ({ product }) => {
-  const navigate = useNavigate();
+//import useWishListItemIDs from "../Hooks/useCartItem.js";
+import useWishlistActions from "../Hooks/useWishlistActions.js";
 
-  const addToCartHandler = () => {
-    navigate(`/productDetailsPage/${product._id}`);
+const Beverages = ({ product, wishListItems }) => {
+  const { handleAddToWishlist, handleRemoveFromWishlist } = useWishlistActions();
+  const items = wishListItems?.wishList?.products || [];
+  const isInWishlist = items.some(
+    (item) => item.productID === product._id
+  );
+
+  const addToCartHandler = (product) => {
+     if (isInWishlist) {
+      handleRemoveFromWishlist(product._id);
+    } else {
+      handleAddToWishlist(product);
+    }
   };
   
 
@@ -68,8 +78,11 @@ const Beverages = ({ product }) => {
             25% off
           </p>
           <div className="bg-gray-100 p-2 shadow-2xl rounded-full">
-            <button className="flex items-center justify-center size-6" onClick={addToCartHandler}>
-              <IoMdHeartEmpty/>
+            <button
+              className={`flex items-center justify-center size-6 ${isInWishlist ? 'text-red-500' : "text-gray-400 hover:text-red-500"}`}
+              onClick={() => addToCartHandler(product)}
+            >
+               <BsSuitHeartFill />
             </button>
           </div>
         </div>

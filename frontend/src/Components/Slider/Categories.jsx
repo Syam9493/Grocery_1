@@ -3,38 +3,13 @@ import {Link} from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./Categories.css";
+
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-//import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
-// const NextArrow = (props) => {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         display: "block",
-//         background: "green",
-//         borderRadius: "1px",
-//       }}
-//       onClick={onClick}
-//     />
-//   );
-// };
-
-// const PrevArrow = (props) => {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{ ...style, display: "block", background: "green" }}
-//       onClick={onClick}
-//     />
-//   );
-// };
 
 const Categories = () => {
   const icons = [
@@ -57,28 +32,28 @@ const Categories = () => {
       img: "/Icons/ingredients.png",
       name: "Milk & Eggs",
       Quantity: "10 Products",
-      to: "/Milk-Eggs",
+      to: "/milkAndEggs",
     },
     {
       _id: 4,
       img: "/Icons/bread.png",
-      name: "Bekary Items",
+      name: "Bakery Items",
       Quantity: "25 Products",
-      to: "/BekaryItems",
+      to: "/bakeryItems",
     },
     {
       _id: 5,
       img: "/Icons/cleaning.png",
       name: "Cleaning Items",
       Quantity: "15 Products",
-      to: "/CleaningItems",
+      to: "/cleaningItems",
     },
     {
       _id: 6,
       img: "/Icons/almonds.png",
       name: "Dry Fruits",
       Quantity: "33 Products",
-      to: "/Fruits",
+      to: "/dryFruits",
     },
     {
       _id: 7,
@@ -92,14 +67,14 @@ const Categories = () => {
       img: "/Icons/rice.png",
       name: "Rice Items",
       Quantity: "20 Products",
-      to: "/RiceItems",
+      to: "/riceItems",
     },
     {
       _id: 9,
       img: "/Icons/sunflower-oil.png",
       name: "Oil",
       Quantity: "20 Products",
-      to: "/sunflower-oil",
+      to: "/oilItems",
     },
   ];
 
@@ -124,58 +99,57 @@ const Categories = () => {
         </h1>
       </div>
 
-      <div className="max-w-7xl mx-auto">
-        <Swiper
-          slidesPerView={2}
-          spaceBetween={11}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          navigation={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
-          }}
-          modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper"
-        >
-          {icons.map((items) => (
-            <SwiperSlide>
-              <div
-                key={items._id}
-                className="flex items-center justify-center "
-              >
-                <Link to={items.to}>
-                <div className="flex flex-col items-center justify-center gap-x-4">
-                  <div className="bg-gray-100 size-40 shadow-md flex items-center justify-center rounded-full gap-4">
-                    <img
-                      className="inline-flex rounded-full"
-                      src={items.img}
-                      alt=""
-                    />
-                  </div>
-                  <h4 className="text-xl font-medium text-black mt-3">
-                    {items.name}
-                  </h4>
-                  <p className="font-semibold font-stretch-50% text-gray-500">
-                    {items.Quantity}
-                  </p>
-                </div>
-                </Link>
+      <div className="relative group">
+  <Swiper
+    slidesPerView={2}
+    spaceBetween={11}
+    autoplay={{ delay: 2500, disableOnInteraction: false }}
+    navigation={{
+      nextEl: ".swiper-button-next-custom",
+      prevEl: ".swiper-button-prev-custom",
+    }}
+    breakpoints={{
+      640: { slidesPerView: 3, spaceBetween: 20 },
+      768: { slidesPerView: 4, spaceBetween: 40 },
+      1024: { slidesPerView: 5, spaceBetween: 50 },
+    }}
+    modules={[Autoplay, Navigation]}
+    className="mySwiper"
+  >
+    {icons.map((items) => (
+      <SwiperSlide key={items._id}>
+        <div className="flex items-center justify-center">
+          <Link to={items.to}>
+            <div className="flex flex-col items-center justify-center gap-x-4">
+              <div className="bg-gray-100 size-40 shadow-md flex items-center justify-center rounded-full gap-4">
+                <img
+                  className="inline-flex rounded-full"
+                  src={items.img}
+                  alt=""
+                />
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+              <h4 className="text-xl font-medium text-black mt-3">
+                {items.name}
+              </h4>
+              <p className="font-semibold text-gray-500">
+                {items.Quantity}
+              </p>
+            </div>
+          </Link>
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+
+  {/* custom arrows */}
+ <button className="swiper-button-prev-custom">
+  <FaChevronLeft />
+</button>
+<button className="swiper-button-next-custom">
+  <FaChevronRight />
+</button>
+
+</div>
     </>
   );
 };

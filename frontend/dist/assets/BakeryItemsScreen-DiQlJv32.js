@@ -1,0 +1,1 @@
+import{j as e}from"./index-DhnlV0K8.js";import"./vendor-DJG_os-6.js";const s=()=>e.jsx("div",{className:"flex items-center justify-center p-20",children:"BakeryItemsScreen is still developing..."});export{s as default};

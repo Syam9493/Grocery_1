@@ -1,75 +1,59 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 
 import Cart from "../Components/Cart";
 import { useGetUserCartQuery } from "../ApiSlice/cartApi.js";
 import { addingToCart } from "../Slice/cartSlice.js";
 import OrderSummary from "../Components/OrderSummary.jsx";
-
+import useAuthUser from "../Hooks/useAuthUser.js";
 
 const CartScreen = () => {
   const dispatch = useDispatch();
-  // const cart = useSelector((state) => state.cart);
-  // const { cartItems } = cart;
-
-   const reduxUser = useSelector((state) => state.userInfo?.user);
-        const localUser = (() => {
-          try {
-            const persistedRoot = localStorage.getItem("persist:root");
-            if (persistedRoot) {
-              const parsedRoot = JSON.parse(persistedRoot);
-              if (parsedRoot.userInfo) {
-                return JSON.parse(parsedRoot.userInfo).user;
-              }
-            }
-            return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
-          } catch {
-            return null;
-          }
-        })();
-      
-        const user = reduxUser || localUser;
-        const userID = user?.id;
+  const { userID } = useAuthUser();
+  const location = useLocation();
 
   const { data, isSuccess, refetch } = useGetUserCartQuery(userID, {
     skip: !userID, // prevent query if no userID
   }); // Destructure properly
 
-  const cartItems = data?.data?.cartItems
+  const cartItems = data?.data?.cartItems;
 
   useEffect(() => {
-  if (isSuccess && data) {
-    dispatch(addingToCart(data));
-  }
-}, [isSuccess, data, dispatch]);
+    window.scrollTo(0, 0);
+  }, [location]);
 
-
+  useEffect(() => {
+    if (isSuccess && data) {
+      dispatch(addingToCart(data));
+    }
+  }, [isSuccess, data, dispatch]);
 
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-center items-start gap-8 p-4 sm:p-6 md:p-10 md:gap-3 lg:px-14 lg:gap-5">
-     {/* Cart Table Section */}
-  <div className="w-full lg:w-2/4 overflow-x-auto">
-    <table className="min-w-full table-auto text-left">
-      <thead>
-        <tr className="bg-yellow-500 text-white">
-          <th className="p-4 text-sm sm:text-base">Product</th>
-          <th className="p-4 text-sm sm:text-base">Price</th>
-          <th className="p-4 text-sm sm:text-base">Quantity</th>
-          <th className="p-4 text-sm sm:text-base">Subtotal</th>
-        </tr>
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
-        {Array.isArray(cartItems) && <Cart product={cartItems} refetch={refetch} />}
-      </tbody>
-    </table> 
-  </div>
+        {/* Cart Table Section */}
+        <div className="w-full lg:w-2/4 overflow-x-auto">
+          <table className="min-w-full table-auto text-left">
+            <thead>
+              <tr className="bg-yellow-500 text-white">
+                <th className="p-4 text-sm sm:text-base">Product</th>
+                <th className="p-4 text-sm sm:text-base">Price</th>
+                <th className="p-4 text-sm sm:text-base">Quantity</th>
+                <th className="p-4 text-sm sm:text-base">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {Array.isArray(cartItems) && (
+                <Cart product={cartItems} refetch={refetch} />
+              )}
+            </tbody>
+          </table>
+        </div>
 
-  <OrderSummary/>
-
-</div>
+        <OrderSummary />
+      </div>
     </>
   );
 };

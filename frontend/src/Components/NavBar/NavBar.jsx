@@ -323,34 +323,21 @@ import { GiFruitBowl } from "react-icons/gi";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { PencilIcon, UserMinusIcon, UserIcon } from "@heroicons/react/16/solid";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logOut } from "../../Slice/authSlice";
 import Location from "../Location";
-import { useSearch } from "../../Slice/SearchContext";
+import { useSearch } from "../../Contexts/SearchContext";
+import useAuthUser from "../../Hooks/useAuthUser";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useAuthUser();
+  const { searchTerm, setSearchTerm } = useSearch();
+  const location = useLocation();
 
-  const reduxUser = useSelector((state) => state.userInfo?.user);
-    const localUser = (() => {
-      try {
-        const persistedRoot = localStorage.getItem("persist:root");
-        if (persistedRoot) {
-          const parsedRoot = JSON.parse(persistedRoot);
-          if (parsedRoot.userInfo) {
-            return JSON.parse(parsedRoot.userInfo).user;
-          }
-        }
-        return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
-      } catch {
-        return null;
-      }
-    })();
-  
-    const user = reduxUser || localUser;
-    const Name = user?.name;
+  const Name = user?.name;
 
 
   const dispatch = useDispatch();
@@ -365,8 +352,8 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const { searchTerm, setSearchTerm } = useSearch();
-  const location = useLocation();
+  
+ 
   // const search = (e) => {
   //   e.preventDefault();
   //   const query = new URLSearchParams();

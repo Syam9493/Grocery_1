@@ -83,10 +83,12 @@ import connectDB from './Config/db.js';
 // Routes
 import productsRoutes from './Router/ProductRouter.js';
 import cartRouter from './Router/cartRouter.js';
-//import userRouter, { rootLoginRouter } from './Router/userRouter.js';
+import userRouter from './Router/userRouter.js';
 import checkOutRouter from './Router/checkOutOrder.js';
 import filteredProductsRoutes from './Router/filteredProducts.js';
-import { loginUser } from './Controllers/userControl.js'; 
+import wishListRouter from './Router/wishListRouter.js'; // Import wishlist router
+
+//import { loginUser, registerUser } from './Controllers/userControl.js'; 
 //import authRoutes from './Router/authRoute.js';
 
 // Load env variables
@@ -102,10 +104,13 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 
+
+
 // ===== Middlewares =====
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
+  origin: process.env.NODE_ENV === 'production'
     ? 'https://grocery-52wy.onrender.com' // Your production frontend URL
+    //? 'http://localhost:5000' // loacal production development
     : 'http://localhost:5173', // Your development frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
@@ -115,7 +120,7 @@ app.use(cors({
 
 // Parse incoming JSON and URL-encoded form data
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); 
 
 // // ===== Auth Routes (Direct Import for Login & Register) =====
 // import("./Controllers/userControl.js").then(({ getUser, registerUser }) => {
@@ -136,9 +141,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productsRoutes);
 app.use('/api/category', filteredProductsRoutes);
 app.use('/api/cart', cartRouter);
-//app.use('/api/user', userRouter);
+app.use('/api/user', userRouter);
 app.use('/api/order', checkOutRouter);
-app.post('/login', loginUser);
+app.use('/api/wishlist', wishListRouter); // Use wishlist router
+// app.post('/api/login', loginUser);
+// app.post('/api/register', registerUser);
 
 
 // Test route

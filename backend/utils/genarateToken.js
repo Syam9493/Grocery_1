@@ -2,7 +2,7 @@ import JWT from 'jsonwebtoken';
 import Token from '../Models/tokenModel.js'
 
 const generateToken = async (res, userID) => {
-  const token = JWT.sign({ userID }, process.env.JWT_SJWT_SECRET_KEY, {
+  const token = JWT.sign({ userID }, process.env.JWT_SECRET_KEY, {
     expiresIn: '1h',
   });
 

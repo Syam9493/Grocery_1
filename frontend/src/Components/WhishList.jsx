@@ -1,38 +1,79 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addingToCart } from "../Slice/cartSlice";
-import { deletefromWhishList } from "../Slice/WhishListSlice";
-import AlertNotification from "../Components/AlertNotification";
 
-const WhishList = ({ wishListItems }) => {
+
+
+//import { deletefromWhishList } from "../Slice/WhishListSlice";
+import {addingToCart} from "../Slice/cartSlice.js";
+import AlertNotification from "../Components/AlertNotification";
+import {useDeleteFromWishListMutation} from "../ApiSlice/whishListSlice.js";
+import {useUpdateUserCartMutation} from "../ApiSlice/cartApi.js"
+import useAuthUser from "../Hooks/useAuthUser.js";
+
+const WhishList = ({ wishListItems, isLoading, isError }) => {
   const [open, setOpen] = useState(false);
   const [id, setid] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [updateUserCart] = useUpdateUserCartMutation();
+  const [deleteFromWishList] = useDeleteFromWishListMutation();
+  const {userID} = useAuthUser();
 
-  const date = new Date();
-  const getFullYear = date.getFullYear();
-  const month = date.getMonth();
-  const day = date.getDay();
-  const fullday = day + "-" + month + "-" + getFullYear;
+  const items = wishListItems?.wishList?.products || [];
+  console.log("Wish List Items:", items);
+ 
 
-  const addToCartHandler = (id, Product_id) => {
-    dispatch(addingToCart(id));
-    dispatch(deletefromWhishList(Product_id));
-    toast.success("Product add to Cart!", {
-      position: "top-right",
-      autoClose: 1000,
-    });
-    setTimeout(() => {
-      navigate("/cart");
-    }, 2000);
+  const addToCartHandler = async (item) => {
+      if (!item) {
+    console.error("No item provided");
+    return;
+  }
+
+  const productID = item.productID || item._id; // Try both possible ID fields
+  if (!productID) {
+    console.error("Item has no ID", item);
+    return;
+  }
+
+     const productData = {
+    _id: productID,  // fallback to _id
+    name: item.name,
+    image: item.image,
+    price: item.price,
+    quantity: item.quantity || 1, // set default 1 if wishlist doesn't store quantity
+    weight: item.weight,
+    subtotal: item.price * (item.quantity || 1)
+    };
+    console.log("Adding to cart:", productData);
+
+    if (!userID) {
+      toast.error("Please log in to add items to your cart.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const result = await updateUserCart({ userID, product: productData }).unwrap();
+      await deleteFromWishList({ userID, productID }).unwrap();
+      console.log("Cart Update Result:", result);
+      dispatch(addingToCart(result));
+      toast.success(result.message, {
+        autoClose: 500,
+        position: "top-right",
+        theme: "colored",
+      });
+    } catch (err) {
+      console.error("Cart Update Failed:", err);
+      toast.error(err.data?.message || "Failed to add product to cart.");
+    }
   };
 
-  const deleteItmehandler = async (id) => {
-    dispatch(deletefromWhishList(id));
-    toast.info("Product delete from wishList!", {
+  const deleteItemHandler = async (productID) => {
+    const res = await deleteFromWishList({ userID, productID });
+    console.log(res);
+    toast.info(res.data?.message, {
       autoClose: 500,
     });
   };
@@ -40,22 +81,25 @@ const WhishList = ({ wishListItems }) => {
   //  console.log(deleteItmehandler);
   return (
     <>
-      {Array.isArray(wishListItems) ? (
-        wishListItems.map((item) => (
+      { isLoading ? (<div>Loading...</div>) : isError ? (
+          <tr>
+            <td>{isError.message}</td>
+          </tr>
+      ) : Array.isArray(items) ? items.map((item) => (
           <tr key={item._id} className="bg-white rounded-lg shadow-sm mt-4">
             <td className="flex items-center gap-4 p-4">
               <button
                 className="text-xl text-gray-500 hover:text-red-500"
                 onClick={() => {
                   setOpen(true);
-                  setid(item._id);
-                  deleteItmehandler(item._id);
+                  setid(item.productID);
+                  deleteItemHandler(item.productID);
                 }}
               >
                 x
               </button>
               <img
-                src={item.image}
+                src={item.image[0]}
                 alt={item.name}
                 className="size-14 object-contain rounded"
               />
@@ -65,29 +109,25 @@ const WhishList = ({ wishListItems }) => {
               </div>
             </td>
             <td className="p-4">₹{item.price}</td>
-            <td className="p-4">{fullday}</td>
-            <td>
-              <button
+            <td className="p-4">{new Date(item.updatedAt).toISOString().split('T')[0]}</td>
+            <td> <button
                 className="flex items-center justify-center bg-green-700 text-white border-gray-50 rounded-4xl px-4 py-2"
-                onClick={() => addToCartHandler(item, item._id)}
+                onClick={() => addToCartHandler(item, item.productID)}
               >
                 Move To Cart
               </button>
             </td>
           </tr>
-        ))
-      ) : (
-        <tr>
-          <td>No items in whishList</td>
-        </tr>
-      )}
+              )) : (
       <tr>
         <td>
           <AlertNotification open={open} setOpen={setOpen} id={id} />
         </td>
       </tr>
-    </>
-  );
+         )
+      }
+  </>
+  )
 };
 
 export default WhishList;

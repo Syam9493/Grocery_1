@@ -1,11 +1,10 @@
 import React from "react";
 
-const CheckOutForm = ({orderForm, setOrderForm }) => {
-  
-     const handleChange = (e) => {
-  const { name, value } = e.target;
-  setOrderForm((prev) => ({ ...prev, [name]: value }));
-};
+const CheckOutForm = ({ orderForm, setOrderForm }) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setOrderForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <>
@@ -28,6 +27,7 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
               name="Firstname"
               value={orderForm.Firstname}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -47,6 +47,7 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
               name="Lastname"
               value={orderForm.Lastname}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -60,9 +61,10 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             type="text"
             placeholder="Company Name"
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
-              name="companyName"
+            name="companyName"
             value={orderForm.companyName}
-              onChange={handleChange}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -73,9 +75,9 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             type="text"
             placeholder="Country"
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
-           name="country"
+            name="country"
             value={orderForm.country}
-              onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -88,9 +90,10 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             type="text"
             placeholder="Street Address"
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
-           name="streetAddress"
+            name="streetAddress"
             value={orderForm.streetAddress}
-              onChange={handleChange}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -101,10 +104,11 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             type="text"
             placeholder="City"
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
-             name="city"
+            name="city"
             value={orderForm.city}
-              onChange={handleChange}
-         />
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label htmlFor="">
@@ -116,7 +120,8 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
             name="state"
             value={orderForm.state}
-             onChange={handleChange}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -129,7 +134,8 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
             name="zipcode"
             value={orderForm.zipcode}
-              onChange={handleChange}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -140,9 +146,10 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             type="text"
             placeholder="Phone Number"
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
-             name="cellNumber"
+            name="cellNumber"
             value={orderForm.cellNumber}
-              onChange={handleChange}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -155,12 +162,16 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             className="w-full rounded-full px-4 py-2 text-base bg-gray-50 border border-green-500 focus:outline-none focus:ring-1 focus:ring-green-700"
             name="email"
             value={orderForm.email}
-              onChange={handleChange}
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="p-2">
           <label>
-          <h2 className="font-semibold font-sans text-lg p-2">  Delivery Address <span className="text-red-500">*</span></h2>
+            <h2 className="font-semibold font-sans text-lg p-2">
+              {" "}
+              Delivery Address <span className="text-red-500">*</span>
+            </h2>
           </label>
 
           <div className="flex flex-col gap-3 space-x-4 md:flex-row">
@@ -174,10 +185,11 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
               <input
                 type="radio"
                 name="deliveryAddress"
-                 value="false"
-                 checked={orderForm.deliveryAddress === 'false'}
-                 onChange={handleChange}
+                value="false"
+                checked={orderForm.deliveryAddress === "false"}
+                onChange={handleChange}
                 className="hidden"
+                required
               />
               <span
                 className={`w-4 h-4 rounded-full border-2 mr-2 mt-0.5 flex items-center justify-center ${
@@ -202,10 +214,11 @@ const CheckOutForm = ({orderForm, setOrderForm }) => {
             >
               <input
                 type="radio"
-                 name="deliveryAddress"
-                 value='true'
-                 checked={orderForm.deliveryAddress === 'true'}
-                 onChange={handleChange}
+                name="deliveryAddress"
+                value="true"
+                checked={orderForm.deliveryAddress === "true"}
+                onChange={handleChange}
+                required
                 className="hidden"
               />
               <span

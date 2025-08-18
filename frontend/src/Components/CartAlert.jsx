@@ -7,12 +7,13 @@ import {
 } from "@headlessui/react";
 import { ClipLoader } from "react-spinners";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 import { addToWishList } from "../Slice/WhishListSlice";
 import { deletefromCart } from "../Slice/cartSlice";
 import { useDeleteFromCartMutation } from "../ApiSlice/cartApi.js";
+import useAuthUser from "../Hooks/useAuthUser.js";
 
 const CartAlert = ({ open, setOpen, id, refetch }) => {
   //const [loading, setLoading] = useState(false);
@@ -20,24 +21,7 @@ const CartAlert = ({ open, setOpen, id, refetch }) => {
   const dispatch = useDispatch();
   const [DeleteFromCart] = useDeleteFromCartMutation();
 
-  const reduxUser = useSelector((state) => state.userInfo?.user);
-      const localUser = (() => {
-        try {
-          const persistedRoot = localStorage.getItem("persist:root");
-          if (persistedRoot) {
-            const parsedRoot = JSON.parse(persistedRoot);
-            if (parsedRoot.userInfo) {
-              return JSON.parse(parsedRoot.userInfo).user;
-            }
-          }
-          return JSON.parse(localStorage.getItem("userInfo"))?.user || null;
-        } catch {
-          return null;
-        }
-      })();
-    
-      const user = reduxUser || localUser;
-      const userID = user?.id;
+   const { userID } = useAuthUser();
 
   const addToWishListHandler = async () => {
     try {
@@ -53,6 +37,8 @@ const CartAlert = ({ open, setOpen, id, refetch }) => {
     } catch (error) {
       console.error("Error adding to wishlist:", error);
       toast.error("Error adding to wishlist!");
+    }finally {
+      setOpen(false); // Always close the dialog
     }
   };
 
@@ -84,19 +70,18 @@ const CartAlert = ({ open, setOpen, id, refetch }) => {
   // };
 
   const deleteItemHandler = async () => {
-    
-  
 
     const itemID = id;
 
     try {
-      await DeleteFromCart({ userID, itemID }).unwrap();
-      toast.success("Item removed", { autoClose: 1000, theme: "colored" }); // Show toast first
-      setOpen(false); // Then close dialog
+      const result = await DeleteFromCart({ userID, itemID }).unwrap();
       await refetch();
+      toast.info(result.message, { autoClose: 1000, theme: "colored" }); // Show toast first
     } catch (err) {
       console.error("DELETE FAILED:", err);
       toast.error("Error deleting product!", { autoClose: 1000, theme: "colored" });
+    } finally {
+      setOpen(false); // Always close the dialog
     }
   };
 

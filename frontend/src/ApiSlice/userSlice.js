@@ -9,7 +9,7 @@ export const userSlice = apiSlice.injectEndpoints({
     }),
 loginUser: builder.mutation({
   query: (credentials) => ({
-    url: `/login`, // now root path
+    url: `${USERS_URL}/login`, // now root path
     method: "POST",
     body: credentials,
     headers: {
@@ -28,7 +28,7 @@ loginUser: builder.mutation({
         confPassword,
         cellNumber,
       }) => ({
-        url: `${USERS_URL}`,
+        url: `${USERS_URL}/register`,
         method: "POST",
         body: {
           FirstName,

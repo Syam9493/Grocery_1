@@ -2,55 +2,61 @@
 // import { ClipLoader } from "react-spinners";
 // //import {useLocation} from 'react-router-dom';
 
-
 // import Beverages from "../Components/Beverages";
 // import API from "../server/api";
 
-import {useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
-
- import Beverages from "../Components/Beverages";
-import { useGetFilteredProductsQuery } from '../ApiSlice/ProductApiSlice';
+import Beverages from "../Components/Beverages";
+import { useGetFilteredProductsQuery } from "../ApiSlice/ProductApiSlice";
+import {useGetUserWishListQuery} from '../ApiSlice/whishListSlice.js';
+import useAuthUser from '../Hooks/useAuthUser.js';
 
 const BeveragesScreen = () => {
-
   const location = useLocation();
-  
-    const ProductData = location.pathname.substring(1); 
-    console.log(ProductData);
+  const {userID} = useAuthUser();     
+  const {data: wishListItems} = useGetUserWishListQuery(userID);
 
-     useEffect(() => {
-                window.scrollTo(0, 0);
-            }, [location]);
-  
-    const { data: response, isLoading, isError, error } = useGetFilteredProductsQuery( ProductData);
-  
-    if (isLoading) return( <div className="flex justify-center m-20">
+  const ProductData = location.pathname.substring(1);
+  //console.log(ProductData);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  const {
+    data: response,
+    isLoading,
+    isError,
+    error,
+  } = useGetFilteredProductsQuery(ProductData);
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center m-20">
         <ClipLoader size={100} />
-      </div>);
-    if (isError) return <p>Error: {error?.error || 'Something went wrong'}</p>;
+      </div>
+    );
+  if (isError) return <p>Error: {error?.error || "Something went wrong"}</p>;
 
-    const products = response?.data || [];
-  return(
+  const products = response?.data || [];
+  return (
     <>
-    <div className="grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-6">
+      <div className="grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-6">
         {products.map((product) => (
-          <Beverages key={product._id} product={product} />
+          <Beverages key={product._id} product={product}  wishListItems={wishListItems} />
         ))}
       </div>
     </>
-  )
-}
-
+  );
+};
 
 // const BeveragesScreen = () => {
 //   const [products, setProducts] = useState([]);
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
-
-
 
 //   useEffect(() => {
 //     const fetchProducts = async () => {

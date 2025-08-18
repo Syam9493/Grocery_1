@@ -9,7 +9,7 @@ import {apiSlice} from './ApiSlice/apiSlice';
 export const store = configureStore({
     reducer: {
         cart: cartReduer,
-        whishList: wishListReduer,
+        wishList: wishListReduer,
         checkItems: checkItemsReducer,
         userInfo: authReducer,
         [apiSlice.reducerPath]:  apiSlice.reducer,

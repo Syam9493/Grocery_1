@@ -1,37 +1,52 @@
-import React, { useState } from "react";
+import React, {  useContext } from "react";
+import { ProductFilterContext } from "../Contexts/AppContext";
 
 const Brand = () => {
   const BrandNames = [
     {
       id: 1,
-      name: "Fresh Harvest",
+      type: "brand",
+      value: "Fresh Harvest",
     },
     {
       id: 2,
-      name: "Nature's Best",
+      type: "brand",
+      value: "Nature's Best",
     },
     {
       id: 3,
-      name: "Good Grains",
+      type: "brand",
+      value: "Good Grains",
     },
     {
       id: 4,
-      name: "Farm Fresh",
+      type: "brand",
+      value: "Farm Fresh",
     },
     {
       id: 5,
-      name: "Green Grocer",
+      type: "brand",
+      value: "Green Grocer",
     },
   ];
 
-  const [selectedBrands, setSelectedBrands] = useState([]);
+  const { dispatch, removeCheckItem, setCheckItems, checkItems } = useContext(ProductFilterContext);
 
-  const handleCheckboxChange = (id) => {
-    setSelectedBrands((prev) =>
-      prev.includes(id)
-        ? prev.filter((brandId) => brandId !== id)
-        : [...prev, id]
-    );
+  //const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const handleCheckboxChange = ( type, value) => {
+    // setSelectedBrands((prev) =>
+    //   prev.includes(id)
+    //     ? prev.filter((brandId) => brandId !== id)
+    //     : [...prev, id]
+    // );
+
+    const exists = checkItems.some(item => item.type === type && item.value === value);
+    if (exists) {
+      dispatch(removeCheckItem({ type, value }));
+    } else {
+      dispatch(setCheckItems({ type, value }));
+    }
   };
 
   return (
@@ -49,10 +64,12 @@ const Brand = () => {
               id={`brand-${items.id}`}
               type="checkbox"
               className="accent-green-700 size-4"
-              checked={selectedBrands.includes(items.id)}
-              onChange={() => handleCheckboxChange(items.id)}
+              checked={checkItems.some(
+        (ci) => ci.type === items.type && ci.value === items.value
+      )}
+              onChange={() => handleCheckboxChange(items.type, items.value)}
             />
-            <p className="font-sans text-base font-semibold">{items.name}</p>
+            <p className="font-sans text-base font-semibold">{items.value}</p>
           </label>
         ))}
       </form>

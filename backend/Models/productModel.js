@@ -73,7 +73,7 @@ const ProductScheema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    barnd:{
+    brand:{
        type: String,
       required: true
     },
@@ -81,7 +81,7 @@ const ProductScheema = new mongoose.Schema({
       type: String,
       required: true
      } ,
-    Availablility: {
+    Availability: {
       type: String,
       required: true
     },

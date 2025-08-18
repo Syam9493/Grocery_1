@@ -7,14 +7,16 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
-import {useParams, useLocation, useNavigate} from 'react-router-dom';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams} from 'react-router-dom';
+//import { useSearchParams } from 'react-router-dom';
 
 import Shop from "../Components/Shop";
 import ProductFilter from "../Components/ProductFilter";
 //import API from "../server/api";
 import { removeCheckItem, clearCheckItems } from "../Slice/ProdutSlice";
 import {useGetProductsQuery} from '../ApiSlice/ProductApiSlice';
+import {useGetUserWishListQuery} from '../ApiSlice/whishListSlice.js';
+import useAuthUser from "../Hooks/useAuthUser.js";
 
 
 //import axios from 'axios';
@@ -28,10 +30,13 @@ const ShopScreen = () => {
   const dispatch = useDispatch();
   const checkItems = useSelector((state) => state.checkItems);
      const categories  =  checkItems.checkItems;
-     console.log(categories);
+     //console.log(categories); // Debug log
+     const { userID } = useAuthUser();
+     const {data: wishListItems} = useGetUserWishListQuery(userID);
+     //console.log("Fetched Wishlist Items:", wishListItems); // Debug log
 
-     const clearFilteredItmeHandler = (value) => {
-    dispatch(removeCheckItem(value));
+     const clearFilteredItmeHandler = (type, value) => {
+    dispatch(removeCheckItem({type, value}));
   };
   const clearAllFilteredItmesHandler = () => {
     dispatch(clearCheckItems([]));
@@ -46,12 +51,12 @@ const ShopScreen = () => {
     const navigate = useNavigate();
   const page = Number(query.get('page')) || 1;
 
-   const keyWord = useParams();
-   console.log(keyWord);
+   //const keyWord = useParams();
+   //console.log(keyWord);
    const {data, isLoading} = useGetProductsQuery({ keyword, categories, page});
-   const res = data;
+   //const res = data;
    const products = data?.data || [];
-   console.log(res);
+   //console.log(res);
 
 
 
@@ -87,10 +92,10 @@ const ShopScreen = () => {
               checkItems.checkItems.map((items, i) => (
                 <button
                   key={i}
-                  className="sm:w-full flex items-center justify-center gap-3 bg-yellow-300 text-black font-bold font-stretch-100% border-gray-50 rounded-4xl py-2"
-                  onClick={() => clearFilteredItmeHandler(items)}
+                  className="sm:w-full flex items-center justify-center gap-3 bg-yellow-300 text-black font-light font-stretch-100% border-gray-50 rounded-4xl py-2"
+                  onClick={() => clearFilteredItmeHandler(items.type, items.value)}
                 >
-                  {items}
+                 {`${items.type === "price" ? `${items.type} : ${items.value}` : items.type === 'rating' ? `${items.value} Stars` : items.value}`}
                   <span>x</span>
                 </button>
               ))}
@@ -109,7 +114,7 @@ const ShopScreen = () => {
               ))} */}
 
             {products.map((product) => (
-              <Shop key={product._id} product={product} />
+              <Shop key={product._id} product={product} wishListItems={wishListItems} />
             ))}
             {/* {res.data.map((product) => (
               <Shop key={product._id} product={product} />

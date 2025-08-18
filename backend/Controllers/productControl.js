@@ -1,44 +1,8 @@
 import Product from '../Models/productModel.js';
-//import searchParameter from '../utilities/serch.js';
 
-// const products =   async(req, res) => {
-//     try {
-
-//        const keyword = req.query.keyword ? {name: {$regex: req.query.keyword, $options: 'i'}} : {} ;
-        
-//        console.log(keyword);
- 
-//        if(keyword){
-//         const products = await Product.find(keyword);
-//         res.status(200).json({
-//             success: true,
-//             data: products
-//         })
-//        }
-
-//         const  category  = req.body;
-//         console.log(category);
-//          //const categories = Array.isArray(category) ? category : [category];
-//         if(category){
-//              const products = await Product.find({category: { $in: category }});
-//              res.status(200).json({
-//                 success: true,
-//                 data: products
-//              })
-//         }else{
-//         const products = await Product.find({});
-//         res.status(200).json({
-//             success: true,
-//             data: products // Note the capitalization of "Products"
-//         });
-//     }
-//     } catch (error) {
-//         res.status(500).json({
-//             success: false,
-//             message: 'Failed to load products'
-//         });
-//     }
-// }
+// Get all products
+// api/products
+// get request
 
 const products = async (req, res) => {
   try {
@@ -54,13 +18,56 @@ const products = async (req, res) => {
     }
   : {};
 
-    const category = req.query.categories
-      ? { category: { $in: req.query.categories.split(',') } }
-      : {};
+    // const category = req.query.categories
+    //   ? { category : { $in: req.query.categories.split(',') } || {price: { $in: req.query.categories.split(',')[1] }} }
+    //   : {};
+
+   let category = { $and: [] };
+
+if (req.query.categories) {
+  let filters = [];
+  try {
+    filters = JSON.parse(req.query.categories); // decode JSON array
+  } catch (err) {
+    console.error("Invalid categories JSON", err);
+  }
+
+  filters.forEach((f) => {
+    switch (f.type) {
+      case "category":
+        category.$and.push({ category: { $in: [f.value] } });
+        break;
+
+      case "price":
+        category.$and.push({ price: { $gte: Number(f.value) } });
+        break;
+
+      case "rating":
+        category.$and.push({ rating: { $gte: Number(f.value) } });
+        break;
+      case "brand":
+        category.$and.push({ brand: { $in: [f.value] } });
+        break;
+      case "Product Type":
+        category.$and.push({ productType: { $in: [f.value] } });
+        break;
+      case "Availability":
+        category.$and.push({ Availability: f.value });
+        break;
+    }
+  });
+}
+
+if (category.$and.length === 0) {
+  category = {};
+}
+
+
 
     const filters = { ...keyword, ...category };
 
     const total = await Product.countDocuments(filters);
+    //console.log(total); // debug log
 
     const products = await Product.find(filters)
       .limit(limit)
@@ -83,34 +90,10 @@ const products = async (req, res) => {
 
 
 
-// const products = async (req, res) => {
-//   try {
-//     const { keyword, categories } = req.query;
 
-//     // Search logic
-//     let searchFilter = {};
-//     if (keyword) {
-//       searchFilter.name = { $regex: keyword, $options: 'i' };
-//     }
-
-//     // Category filter logic
-//     let categoryFilter = {};
-//     if (categories) {
-//       const categoryArray = categories.split(','); // assuming categories is comma-separated string
-//       categoryFilter.category = { $in: categoryArray };
-//     }
-
-//     // Combine filters
-//     const filters = { ...searchFilter, ...categoryFilter };
-
-//     const products = await Product.find(filters);
-//     res.status(200).json({ success: true, data: products });
-
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ success: false, message: 'Failed to load products' });
-//   }
-// };
+// get product by ID
+// api/products/:id
+// get request
 
 const productById =  async(req, res) => {
   console.log("✅ hit the single product api");
@@ -128,8 +111,6 @@ const productById =  async(req, res) => {
     }
 }
 
-// const searchProducts =  async (req, res) {
 
-// }
 
 export {products, productById};

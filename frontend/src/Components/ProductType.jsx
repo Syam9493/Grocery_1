@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { ProductFilterContext } from "../Contexts/AppContext";
 
 const productTypes = [
-  { id: 1, name: "Packaged Goods" },
-  { id: 2, name: "Fresh Product" },
-  { id: 3, name: "Frozen Foods" },
+  { id: 1, type: "Product Type", value: "Packaged Goods" },
+  { id: 2, type: "Product Type", value: "Fresh Product" },
+  { id: 3, type: "Product Type", value: "Frozen Foods" },
 ];
 
 const ProductType = () => {
-  const [selectedTypes, setSelectedTypes] = useState([]);
+  const { dispatch, removeCheckItem, setCheckItems, checkItems } =
+    useContext(ProductFilterContext);
 
-  const handleChange = (id) => {
-    setSelectedTypes((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+  const handleChange = (type, value) => {
+    const exists = checkItems.some(
+      (item) => item.type === "Product Type" && item.value === value
     );
+    if (exists) {
+      dispatch(removeCheckItem({ type, value }));
+    } else {
+      dispatch(setCheckItems({ type, value }));
+    }
   };
 
   return (
@@ -29,10 +36,13 @@ const ProductType = () => {
               id={`type-${item.id}`}
               type="checkbox"
               className="accent-green-700 size-4"
-              checked={selectedTypes.includes(item.id)}
-              onChange={() => handleChange(item.id)}
+              value={`${item.type}, ${item.value}`}
+              checked={checkItems.some(
+                (ci) => ci.type === item.type && ci.value === item.value
+              )}
+              onChange={() => handleChange(item.type, item.value)}
             />
-            <p className="font-sans text-base font-semibold">{item.name}</p>
+            <p className="font-sans text-base font-semibold">{item.value}</p>
           </label>
         ))}
       </form>

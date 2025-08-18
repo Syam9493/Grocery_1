@@ -1,11 +1,15 @@
 import Cart from "../Models/cartModel.js";
 import mongoose from 'mongoose';
 
+// Get cart for a user
+// api/cart/:userID
+// get request
+
 const getCart = async (req, res) => {
   try {
     const userId = req.params.userID;
-//     console.log("Route hit:", req.originalUrl);
-// console.log("Params:", req.params);
+    //     console.log("Route hit:", req.originalUrl); // Debug log
+    // console.log("Params:", req.params);
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ message: 'Invalid user ID' });
@@ -29,26 +33,29 @@ const getCart = async (req, res) => {
 };
 
 
- const updateCart = async (req, res) => {
+// Update cart for a user
+// api/cart/:userID
+// post request
+
+const updateCart = async (req, res) => {
   try {
     const user = req.params.userID;
     const  product  = req.body;
-   //console.log("Getting data from frontend:", product.image);
-   
+    // console.log("Product data:", product); // Debug log
 
    const cartItem = {
-  productID: product._id,          // ✅ REQUIRED
+  productID: product._id,          //  REQUIRED
   name: product.name,
   image: product.image,              // image is an array in your data
   price: product.price,
   quantity: product.quantity,
-  weight: product.weight,          // ✅ REQUIRED
+  weight: product.weight,          //  REQUIRED
   subtotal: product.price,
 };
 
 
 
-//console.log(cartItem);
+//console.log(cartItem); // Debug log
 
     if (!user || !cartItem  || cartItem .length === 0) {
       return res.status(400).json({ message: 'Missing required cart data' });
@@ -105,100 +112,48 @@ res.status(200).json({ message: 'Cart updated', cart: existingCart });
   }
 };
 
-// Quantity update
 
 
-// const updateQuantityExistItem = async (req, res) => {
-//   console.log(req.body);
-//   try {
-//     const user = req.params.userID;
-//     const { productID, quantity } = req.body;
-
-//     //const  productIDs = String(productID);
-
-//     console.log('Request body:', productID);
-
-//     // ✅ Use findOne to get a single cart document
-//     const cart = await Cart.findOne({ user });
-
-//     // ✅ Check if cart and cartItems exist
-//     if (!cart || !cart.cartItems) {
-//       return res.status(404).json({ message: 'Cart or user not found!' });
-//     }
-
-//     // ✅ Find the existing product in the cart
-//     // const existingItem = cart.cartItems.find(
-//     //   (item) => item.productID.toString() == productID
-//     // );
-// const existItem = cart.cartItems.find((item) =>
-//       item.productID.equals(new mongoose.Types.ObjectId(productID))
-//     );
-     
-//     console.log('ExistItem:',existingItem);
-
-//     if (!existingItem) {
-//       return res.status(404).json({ message: 'Product not found in cart!' });
-//     }
-
-//     // ✅ Update the quantity and subtotal
-//     existingItem.quantity += quantity;
-//     existingItem.subtotal = existingItem.quantity * existingItem.price;
-
-//     // ✅ Recalculate totals
-//     cart.totalItems = cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
-//     cart.subtotal = cart.cartItems.reduce((acc, item) => acc + item.subtotal, 0);
-//     cart.taxes = Math.round(cart.subtotal * 0.1);
-//     cart.shippingcost = Math.round(cart.subtotal / 10);
-//     cart.total = cart.subtotal + cart.taxes + cart.shippingcost;
-
-//     await cart.save();
-
-//     return res.status(200).json({
-//       message: 'Cart quantity updated successfully',
-//       cart,
-//     });
-//   } catch (error) {
-//     console.error("Error updating quantity:", error);
-//     return res.status(500).json({ message: error.message || 'Internal server error' });
-//   }
-// };
+// update product quantity for existing cart item
+// api/cart/:userID
+// put request
 
 const updateQuantityExistItem = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body); //Debug log
   try {
     const user = req.params.userID;
     const { productID, quantity } = req.body;
 
-    console.log('Request body:', productID);
+    //console.log('Request body:', productID); // Debug log
 
-    // ✅ Use findOne to get a single cart document
+    //  Use findOne to get a single cart document
     const cart = await Cart.findOne({ user });
 
-    // ✅ Check if cart and cartItems exist
+    //  Check if cart and cartItems exist
     if (!cart || !cart.cartItems) {
       return res.status(404).json({ message: 'Cart or user not found!' });
     }
 
     cart.cartItems.forEach(item => {
-  console.log('Cart item productID:', item.productID.toString());
+  //console.log('Cart item productID:', item.productID.toString()); // debug log
 });
 
-    // ✅ Find the existing product in the cart
+    // Find the existing product in the cart
    const existingItem = cart.cartItems.find((item) =>
   item.productID.toString() === productID.trim()
 );
 
-    console.log('ExistingItem:', existingItem);
+    //console.log('ExistingItem:', existingItem); //Debug log
 
     if (!existingItem) {
       return res.status(404).json({ message: 'Product not found in cart!' });
     }
 
-    // ✅ Update the quantity and subtotal
+    //  Update the quantity and subtotal
     existingItem.quantity = quantity;
     existingItem.subtotal = quantity * existingItem.price;
 
-    // ✅ Recalculate totals
+    //  Recalculate totals
     cart.totalItems = cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
     cart.subtotal = cart.cartItems.reduce((acc, item) => acc + item.subtotal, 0);
     cart.taxes = Math.round(cart.subtotal * 0.05);
@@ -218,7 +173,9 @@ const updateQuantityExistItem = async (req, res) => {
 };
 
 
-
+// Delete an item from the cart
+// api/cart/:userID
+// delete request
 
 const deletItemFromCart = async(req, res) => {
   
@@ -239,7 +196,7 @@ const deletItemFromCart = async(req, res) => {
       (item) => item.productID.toString() !== itemID.trim()
     );
 
-     console.log(cart.cartItems);
+     //console.log(cart.cartItems); // Debug log
 
    cart.totalItems = cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
     cart.subtotal = cart.cartItems.reduce((acc, item) => acc + item.subtotal, 0);
@@ -249,15 +206,16 @@ const deletItemFromCart = async(req, res) => {
 
    await cart.save();
 
-  res.status(400).json({
-    cart
-  }) }
-    catch (error) {
-      res.status(500).json({
-        message: "internal server error"
+  res.status(200).json({
+    cart,
+    message: "Item deleted from cart successfully"
+  })
+} catch (error) {
+  res.status(500).json({
+    message: "internal server error"
       })
   }
-  }
+};
 
 
 

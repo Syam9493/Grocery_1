@@ -13,6 +13,6 @@ export const apiSlice = createApi({
       headers.set("Content-Type", "application/json");
       return headers;
     },
-    tagTypes: ['Products','Orders', 'Users', 'Cart'],
+    tagTypes: ['Products','Orders', 'Users', 'Cart', 'wishList'],
     endpoints: ()=> ({}),
 })
