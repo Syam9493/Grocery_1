@@ -31,8 +31,8 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? //? 'https://grocery-52wy.onrender.com' // Your production frontend URL
-          "http://localhost:5000" // loacal production development
+         ? 'https://grocery-52wy.onrender.com' // Your production frontend URL
+          //?"http://localhost:5000" // loacal production development
         : "http://localhost:5173/", // Your development frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
