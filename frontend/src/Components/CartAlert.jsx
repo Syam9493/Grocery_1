@@ -42,12 +42,8 @@ const CartAlert = ({ open, setOpen, id, refetch, products }) => {
 
     try {
       await handleAddToWishlist(product);
-      const res = await DeleteFromCart({ userID, itemID }).unwrap();
+      await DeleteFromCart({ userID, itemID }).unwrap();
       await refetch();
-      toast.success(res.message, {
-        autoClose: 1000,
-        theme: "colored",
-      });
 
       setOpen(false); // Close modal after moving to wishlist
     } catch (error) {
