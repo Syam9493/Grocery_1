@@ -102,26 +102,6 @@ npm run dev
 
 ---
 
-📂 Project Structure
-
-grocery-app/
-│── backend/
-│   ├── controllers/    # API logic
-│   ├── models/         # MongoDB models
-│   ├── routes/         # API routes
-|   ├── utilites/
-│   ├── server.js       # Entry point
-│── frontend/
-│   ├── src/
-│   │   ├── components/ # Reusable components
-│   │   ├── context/    # Cart & Wishlist Context API
-│   │   ├── pages/      # App pages
-│   │   ├── App.jsx
-│── .gitignore
-│── README.md
-
-
----
 
 📷 Screenshots
 
