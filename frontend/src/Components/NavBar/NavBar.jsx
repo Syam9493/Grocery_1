@@ -339,7 +339,6 @@ const Navbar = () => {
 
   const Name = user?.name;
 
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const location = useLocation();
@@ -352,8 +351,6 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  
- 
   // const search = (e) => {
   //   e.preventDefault();
   //   const query = new URLSearchParams();
@@ -382,7 +379,7 @@ const Navbar = () => {
       params.delete("keyword");
       navigate(`${location.pathname}`, { replace: true });
     }
-  }, [searchTerm,navigate, location]);
+  }, [searchTerm, navigate, location]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -434,7 +431,7 @@ const Navbar = () => {
         <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-16">
           {/* Top Row */}
           {/* <div className="flex items-center justify-between gap-3 py-3"> */}
-            <div className="flex items-center gap-4 p-2">
+          <div className="flex items-center gap-4 p-2">
             {/* Left - Logo and Sidebar Toggle */}
             <div className="flex items-center gap-3">
               <button
@@ -469,31 +466,31 @@ const Navbar = () => {
             </div>
 
             {/* Search - Desktop */}
-          <div className="hidden md:flex md:items-center w-full">
-            <form onSubmit={handleSearch} className="w-full relative">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className=" w-full py-2 px-4 border rounded-full text-white bg-green-800 placeholder-white focus:outline-yellow-300"
-              />
-              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white">
-                <FaSearch />
-              </button>
-            </form>
-          </div>
+            <div className="hidden md:flex md:items-center w-full">
+              <form onSubmit={handleSearch} className="w-full relative">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className=" w-full py-2 px-4 border rounded-full text-white bg-green-800 placeholder-white focus:outline-yellow-300"
+                />
+                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white">
+                  <FaSearch />
+                </button>
+              </form>
+            </div>
 
-           <Link
-                to="/whishList"
-                className="text-white hover:text-yellow-300 p-1"
-              >
-                <FaHeart className="text-lg" />
-              </Link>
+            <Link
+              to="/whishList"
+              className="text-white hover:text-yellow-300 p-1"
+            >
+              <FaHeart className="text-lg" />
+            </Link>
 
-              <Link to="/cart" className="text-white hover:text-yellow-300 p-1">
-                <FaShoppingCart className="text-lg" />
-              </Link>
+            <Link to="/cart" className="text-white hover:text-yellow-300 p-1">
+              <FaShoppingCart className="text-lg" />
+            </Link>
 
             {/* Right - Icons */}
             <div className="flex items-center gap-3 md:gap-4">
@@ -512,7 +509,7 @@ const Navbar = () => {
                         <MenuItem>
                           <button className="flex w-full items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
                             <UserIcon className="size-4 fill-green-700" />
-                            {Name || 'Guest User'}
+                            {Name || "Guest User"}
                           </button>
                         </MenuItem>
                         <MenuItem>
@@ -564,24 +561,8 @@ const Navbar = () => {
             </form>
           </div>
 
-          {/* Search - Desktop */}
-          {/* <div className="hidden md:flex justify-center w-full my-2 -space-y-4">
-            <form onSubmit={handleSearch} className="w-2/3 relative">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full py-2 px-4 pr-10 border rounded-full text-white bg-green-800 placeholder-white focus:outline-yellow-300"
-              />
-              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white">
-                <FaSearch />
-              </button>
-            </form>
-          </div> */}
-
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center justify-between gap-4 p-3 overflow-x-auto whitespace-nowrap">
+          <div className="hidden md:flex items-center justify-between gap-4 p-3 whitespace-nowrap">
             <button className="flex items-center gap-2 border border-gray-300 bg-yellow-300 rounded-xl p-2">
               <FaBars />
               Browse All Categories
@@ -617,16 +598,16 @@ const Navbar = () => {
             <FaTimes className="text-xl" />
           </button>
         </div>
-         <div className="w-full md:w-auto flex justify-center md:justify-start">
-              <div className="flex flex-col items-center gap-1 text-white">
-                <span className="font-bold text-base md:text-[1.1rem]">
-                  Location
-                </span>
-                <span className="text-sm">
-                  <Location />
-                </span>
-              </div>
-            </div>
+        <div className="w-full md:w-auto flex justify-center md:justify-start">
+          <div className="flex flex-col items-center gap-1 text-white">
+            <span className="font-bold text-base md:text-[1.1rem]">
+              Location
+            </span>
+            <span className="text-sm">
+              <Location />
+            </span>
+          </div>
+        </div>
         <div className="p-4">
           <ul className="space-y-3 text-white">
             {NavigationMenuList.map(({ name, to }) => (

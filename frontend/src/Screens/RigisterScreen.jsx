@@ -17,11 +17,7 @@ const RigisterScreen = () => {
     confPassword: "",
     cellNumber: "",
   });
-  // const [Lname, setLname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmpassword, setConfirmPassword] = useState("");
-  // const [mobileNumber, setMobileNumber] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

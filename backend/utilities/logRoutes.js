@@ -1,11 +1,11 @@
 // utilities/logRoutes.js
 export default function logRoutes(app) {
-   console.log("===== DEBUG: logRoutes START =====");
-    if (!app || !app._router || !app._router.stack) {
-        console.log("⚠ No Express app._router found or no routes registered yet.");
-        console.log("===== DEBUG: logRoutes END =====");
-        return;
-    }
+  console.log("===== DEBUG: logRoutes START =====");
+  if (!app || !app._router || !app._router.stack) {
+    console.log("⚠ No Express app._router found or no routes registered yet.");
+    console.log("===== DEBUG: logRoutes END =====");
+    return;
+  }
 
   const routes = [];
 
@@ -14,16 +14,16 @@ export default function logRoutes(app) {
       // Direct routes on app
       const methods = Object.keys(middleware.route.methods)
         .map((m) => m.toUpperCase())
-        .join(', ');
+        .join(", ");
       routes.push(`${methods} ${middleware.route.path}`);
-    } else if (middleware.name === 'router' && middleware.handle.stack) {
+    } else if (middleware.name === "router" && middleware.handle.stack) {
       // Routes inside routers
       middleware.handle.stack.forEach((handler) => {
         const route = handler.route;
         if (route) {
           const methods = Object.keys(route.methods)
             .map((m) => m.toUpperCase())
-            .join(', ');
+            .join(", ");
           routes.push(`${methods} ${route.path}`);
         }
       });
@@ -31,12 +31,12 @@ export default function logRoutes(app) {
   });
 
   if (routes.length === 0) {
-    console.log('⚠ No routes found yet.');
+    console.log("⚠ No routes found yet.");
   } else {
-    console.log('\n=== Registered Routes ===');
+    console.log("\n=== Registered Routes ===");
     routes.forEach((r) => console.log(r));
-    console.log('=========================');
+    console.log("=========================");
   }
 
-  console.log('===== DEBUG: logRoutes END =====\n');
+  console.log("===== DEBUG: logRoutes END =====\n");
 }

@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 import { ProductFilterContext } from "../Contexts/AppContext";
 
 const Brand = () => {
@@ -30,18 +30,13 @@ const Brand = () => {
     },
   ];
 
-  const { dispatch, removeCheckItem, setCheckItems, checkItems } = useContext(ProductFilterContext);
+  const { dispatch, removeCheckItem, setCheckItems, checkItems } =
+    useContext(ProductFilterContext);
 
-  //const [selectedBrands, setSelectedBrands] = useState([]);
-
-  const handleCheckboxChange = ( type, value) => {
-    // setSelectedBrands((prev) =>
-    //   prev.includes(id)
-    //     ? prev.filter((brandId) => brandId !== id)
-    //     : [...prev, id]
-    // );
-
-    const exists = checkItems.some(item => item.type === type && item.value === value);
+  const handleCheckboxChange = (type, value) => {
+    const exists = checkItems.some(
+      (item) => item.type === type && item.value === value
+    );
     if (exists) {
       dispatch(removeCheckItem({ type, value }));
     } else {
@@ -65,8 +60,8 @@ const Brand = () => {
               type="checkbox"
               className="accent-green-700 size-4"
               checked={checkItems.some(
-        (ci) => ci.type === items.type && ci.value === items.value
-      )}
+                (ci) => ci.type === items.type && ci.value === items.value
+              )}
               onChange={() => handleCheckboxChange(items.type, items.value)}
             />
             <p className="font-sans text-base font-semibold">{items.value}</p>

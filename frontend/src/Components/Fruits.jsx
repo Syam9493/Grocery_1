@@ -1,23 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsSuitHeartFill } from "react-icons/bs";
 import useWishlistActions from "../Hooks/useWishlistActions.js";
 
 const Fruits = ({ product, wishListItems }) => {
- const { handleAddToWishlist, handleRemoveFromWishlist } = useWishlistActions();
+  const navigate = useNavigate();
+  const { handleAddToWishlist, handleRemoveFromWishlist } =
+    useWishlistActions();
   const items = wishListItems?.wishList?.products || [];
   console.log("Wish List Items:", items); // Debug log
-  const isInWishlist = items.some(
-    (item) => item.productID === product._id
-  );
+  const isInWishlist = items.some((item) => item.productID === product._id);
 
-
-   const addToCartHandler = (product) => {
-     if (isInWishlist) {
+  const addToCartHandler = (product) => {
+    if (isInWishlist) {
       handleRemoveFromWishlist(product._id);
     } else {
       handleAddToWishlist(product);
     }
+  };
+  const addToCart = () => {
+    // Add your add to cart logic here
+    navigate(`/productDetailsPage/${product._id}`);
   };
 
   return (
@@ -32,10 +35,14 @@ const Fruits = ({ product, wishListItems }) => {
           </p>
           <div className="bg-gray-100 p-2 shadow-2xl rounded-full">
             <button
-              className={`flex items-center justify-center size-6 ${isInWishlist ? 'text-red-500' : "text-gray-400 hover:text-red-500"}`}
+              className={`flex items-center justify-center size-6 ${
+                isInWishlist
+                  ? "text-red-500"
+                  : "text-gray-400 hover:text-red-500"
+              }`}
               onClick={() => addToCartHandler(product)}
             >
-               <BsSuitHeartFill />
+              <BsSuitHeartFill />
             </button>
           </div>
         </div>
@@ -74,7 +81,7 @@ const Fruits = ({ product, wishListItems }) => {
           </h3>
           <button
             className="bg-green-200 rounded-2xl font-semibold text-md/1 text-green-700 px-2 py-1"
-            onClick={addToCartHandler}
+            onClick={addToCart}
           >
             <span className="mr-1">👜</span>Add
           </button>

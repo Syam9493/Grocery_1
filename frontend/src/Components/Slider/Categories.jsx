@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,7 +9,6 @@ import "./Categories.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
 
 const Categories = () => {
   const icons = [
@@ -100,56 +99,55 @@ const Categories = () => {
       </div>
 
       <div className="relative group">
-  <Swiper
-    slidesPerView={2}
-    spaceBetween={11}
-    autoplay={{ delay: 2500, disableOnInteraction: false }}
-    navigation={{
-      nextEl: ".swiper-button-next-custom",
-      prevEl: ".swiper-button-prev-custom",
-    }}
-    breakpoints={{
-      640: { slidesPerView: 3, spaceBetween: 20 },
-      768: { slidesPerView: 4, spaceBetween: 40 },
-      1024: { slidesPerView: 5, spaceBetween: 50 },
-    }}
-    modules={[Autoplay, Navigation]}
-    className="mySwiper"
-  >
-    {icons.map((items) => (
-      <SwiperSlide key={items._id}>
-        <div className="flex items-center justify-center">
-          <Link to={items.to}>
-            <div className="flex flex-col items-center justify-center gap-x-4">
-              <div className="bg-gray-100 size-40 shadow-md flex items-center justify-center rounded-full gap-4">
-                <img
-                  className="inline-flex rounded-full"
-                  src={items.img}
-                  alt=""
-                />
+        <Swiper
+          slidesPerView={2}
+          spaceBetween={11}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          navigation={{
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+          }}
+          breakpoints={{
+            640: { slidesPerView: 3, spaceBetween: 20 },
+            768: { slidesPerView: 4, spaceBetween: 40 },
+            1024: { slidesPerView: 5, spaceBetween: 50 },
+          }}
+          modules={[Autoplay, Navigation]}
+          className="mySwiper"
+        >
+          {icons.map((items) => (
+            <SwiperSlide key={items._id}>
+              <div className="flex items-center justify-center">
+                <Link to={items.to}>
+                  <div className="flex flex-col items-center justify-center gap-x-4">
+                    <div className="bg-gray-100 size-40 shadow-md flex items-center justify-center rounded-full gap-4">
+                      <img
+                        className="inline-flex rounded-full"
+                        src={items.img}
+                        alt=""
+                      />
+                    </div>
+                    <h4 className="text-xl font-medium text-black mt-3">
+                      {items.name}
+                    </h4>
+                    <p className="font-semibold text-gray-500">
+                      {items.Quantity}
+                    </p>
+                  </div>
+                </Link>
               </div>
-              <h4 className="text-xl font-medium text-black mt-3">
-                {items.name}
-              </h4>
-              <p className="font-semibold text-gray-500">
-                {items.Quantity}
-              </p>
-            </div>
-          </Link>
-        </div>
-      </SwiperSlide>
-    ))}
-  </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-  {/* custom arrows */}
- <button className="swiper-button-prev-custom">
-  <FaChevronLeft />
-</button>
-<button className="swiper-button-next-custom">
-  <FaChevronRight />
-</button>
-
-</div>
+        {/* custom arrows */}
+        <button className="swiper-button-prev-custom">
+          <FaChevronLeft />
+        </button>
+        <button className="swiper-button-next-custom">
+          <FaChevronRight />
+        </button>
+      </div>
     </>
   );
 };

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PaymentScreen = () => {
-  return (
-    <div>PaymentScreen</div>
-  )
-}
+  return <div>PaymentScreen</div>;
+};
 
-export default PaymentScreen
+export default PaymentScreen;

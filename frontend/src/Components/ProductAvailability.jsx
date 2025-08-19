@@ -17,13 +17,8 @@ const AvailabilityData = [
 const ProductAvailability = () => {
   const { dispatch, removeCheckItem, setCheckItems, checkItems } =
     useContext(ProductFilterContext);
-  //const [selected, setSelected] = useState([]);
 
   const handleChange = (type, value) => {
-    // setSelected((prev) =>
-    //   prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    // );
-
     const exists = checkItems.some(
       (item) => item.type === type && item.value === value
     );

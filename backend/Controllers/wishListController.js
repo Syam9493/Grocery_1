@@ -1,51 +1,5 @@
 import wishList from "../Models/wishListModel.js";
 
-// const addToWishList = async (req, res) => {
-//     const { userID } = req.params;
-//     console.log(userID)
-//     const  product  = req.body;
-//     console.log("Getting data from frontend:", product)
-//   try {
-
-//     const cartItem = {
-//   productID: product._id,          // ✅ REQUIRED
-//   name: product.name,
-//   image: product.image,              // image is an array in your data
-//   price: product.price,
-//   quantity: product.quantity,
-//   weight: product.weight,          // ✅ REQUIRED
-//   subtotal: product.price,
-//  };
-
-//  console.log(cartItem);
-
-//    if (!userID || !cartItem || cartItem.length === 0) {
-//       return res.status(400).json({ message: 'Missing required cart data' });
-//     }
-
-//     // Check if the product is already in the wishlist
-//     const wishListItem = await wishList.findOne({ userID });
-//     console.log(wishListItem);
-
-//     // Create a new wishlist item
-//     if (!wishListItem) {
-//         const newItem = await wishList.create({ userID, products: [cartItem] });
-//         res.status(201).json({  wishList: newItem, message: "Product added to wishlist", });
-//     }
-
-//     const existingItem = wishListItem.products.find(item => item.productID.toString() === cartItem.productID.toString());
-
-//       if (existingItem) {
-//       return res.status(400).json({ message: "Product already in wishlist" });
-//     }
-
-//   } catch (error) {
-//     console.error("Error adding to wishlist:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// }
-
-
 // Get user wishlist
 // /api/wishlist/:userID
 // GET Request
@@ -53,15 +7,11 @@ import wishList from "../Models/wishListModel.js";
 const getUserWishList = async (req, res) => {
   const { userID } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(userID || req.params.userID)) {
-  return res.status(400).json({ message: "Invalid user ID" });
-}
-
   try {
     const wishListItem = await wishList.findOne({ userID });
 
     if (!wishListItem) {
-      return res.status(404).json({ message: 'Wishlist not found' });
+      return res.status(404).json({ message: "Wishlist not found" });
     }
 
     res.status(200).json({ wishList: wishListItem });
@@ -71,20 +21,22 @@ const getUserWishList = async (req, res) => {
   }
 };
 
-
 // Add product to wishlist
 // /api/wishlist/:userID
 // POST Request
 
 const addToWishList = async (req, res) => {
+  //console.log(req.body); Debug log
   try {
     const { userID } = req.params;
     const product = req.body;
 
     if (!userID || !product?._id) {
-      return res.status(400).json({ message: 'Missing required userID or product data' });
+      return res
+        .status(400)
+        .json({ message: "Missing required userID or product data" });
     }
- 
+
     const cartItem = {
       productID: product._id,
       name: product.name,
@@ -100,25 +52,25 @@ const addToWishList = async (req, res) => {
 
     // If no wishlist exists, create one
     if (!wishListItem) {
-      const newItem = await wishList.create({ 
+      const newItem = await wishList.create({
         userID,
-        products: [product]
+        products: [product],
       });
-      return res.status(201).json({ 
-       wishList: newItem,
-        message: "Product added to wishlist" 
+      return res.status(201).json({
+        wishList: newItem,
+        message: "Product added to wishlist",
       });
     }
 
     // Check if product already exists in wishlist
     const productExists = wishListItem.products.some(
-      item => item.productID.toString() === cartItem.productID.toString()
+      (item) => item.productID.toString() === cartItem.productID.toString()
     );
 
     if (productExists) {
-      return res.status(409).json({ 
+      return res.status(409).json({
         message: "Product already in wishlist",
-        wishList: wishListItem
+        wishList: wishListItem,
       });
     }
 
@@ -128,29 +80,28 @@ const addToWishList = async (req, res) => {
 
     return res.status(200).json({
       wishList: updatedWishlist,
-      message: "Product added to wishlist"
+      message: "Product added to wishlist",
     });
-
   } catch (error) {
     console.error("Error adding to wishlist:", error);
-    
+
     // Handle specific errors
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({ 
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
         message: "Validation error",
-        error: error.message 
+        error: error.message,
       });
     }
-    
-    if (error.name === 'CastError') {
-      return res.status(400).json({ 
-        message: "Invalid ID format" 
+
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        message: "Invalid ID format",
       });
     }
-    
-    return res.status(500).json({ 
+
+    return res.status(500).json({
       message: "Internal server error",
-      error: error.message 
+      error: error.message,
     });
   }
 };
@@ -170,7 +121,7 @@ const deleteFromWishList = async (req, res) => {
     }
 
     const userWishlist = await wishList.findOne({ userID });
-    
+
     if (!userWishlist) {
       return res.status(404).json({ message: "Wishlist not found" });
     }
@@ -178,7 +129,7 @@ const deleteFromWishList = async (req, res) => {
     // Convert both IDs to string for comparison
     const initialCount = userWishlist.products.length;
     userWishlist.products = userWishlist.products.filter(
-      item => item.productID.toString() !== productID.toString()
+      (item) => item.productID.toString() !== productID.toString()
     );
 
     if (userWishlist.products.length === initialCount) {
@@ -186,21 +137,20 @@ const deleteFromWishList = async (req, res) => {
     }
 
     const savedWishlist = await userWishlist.save();
-    return res.status(200).json({ 
+    return res.status(200).json({
       message: "Product removed successfully",
-      wishList: savedWishlist 
+      wishList: savedWishlist,
     });
-
   } catch (error) {
     console.error("Error:", error);
-    
-    if (error.name === 'CastError') {
+
+    if (error.name === "CastError") {
       return res.status(400).json({ message: "Invalid ID format" });
     }
-    
-    return res.status(500).json({ 
+
+    return res.status(500).json({
       message: "Server error",
-      error: error.message 
+      error: error.message,
     });
   }
 };

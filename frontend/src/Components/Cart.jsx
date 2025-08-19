@@ -4,7 +4,7 @@ import CartAlert from "./CartAlert";
 import Quantity from "./Quantity";
 
 const Cart = ({ product, refetch }) => {
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
 
   const handleRemoveClick = (itemId) => {
@@ -36,14 +36,23 @@ const Cart = ({ product, refetch }) => {
             </div>
           </td>
           <td className="p-4">₹{item.price}</td>
-          <td className="p-1">
-            <Quantity product={{ _id: item.productID, quantity: item.quantity }} refetch={refetch} />
+          <td className="p-4">
+            <Quantity
+              product={{ _id: item.productID, quantity: item.quantity }}
+              refetch={refetch}
+            />
           </td>
           <td className="p-4">₹{item.subtotal.toFixed(2)}</td>
         </tr>
       ))}
-      
-      <CartAlert open={open} setOpen={setOpen} id={id} refetch={refetch} />
+
+      <CartAlert
+        open={open}
+        setOpen={setOpen}
+        id={id}
+        products={product}
+        refetch={refetch}
+      />
     </>
   );
 };

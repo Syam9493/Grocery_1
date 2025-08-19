@@ -1,17 +1,16 @@
-import {apiSlice} from './apiSlice';
-import {CHECKOUT_URL} from '../server/allAPI';
+import { apiSlice } from "./apiSlice";
+import { CHECKOUT_URL } from "../server/allAPI";
 
 export const checkoutApi = apiSlice.injectEndpoints({
-   endpoints: (builder) => ({
+  endpoints: (builder) => ({
     createOrder: builder.mutation({
       query: (payload) => ({
         url: `${CHECKOUT_URL}`,
-        method: 'POST',
+        method: "POST",
         body: payload,
       }),
     }),
   }),
-})
+});
 
-
-export const {useCreateOrderMutation} = checkoutApi;
+export const { useCreateOrderMutation } = checkoutApi;

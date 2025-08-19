@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
-import useAuthUser from '../Hooks/useAuthUser';
+import { useState, useEffect } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import useAuthUser from "../Hooks/useAuthUser";
 
 const PrivateRoute = () => {
-  const [loading, setLoading] = useState(true);       // add loading flag
+  const [loading, setLoading] = useState(true); // add loading flag
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const { userID } = useAuthUser(); // get userID from custom hook 
+  const { userID } = useAuthUser(); // get userID from custom hook
 
   useEffect(() => {
     // Check if userID exists in localStorage

@@ -17,12 +17,8 @@
 // //import Quantity from "./Quantity";
 // //import {useGetUserCartQuery} from '../ApiSlice/cartApi.js';
 
-
-
 // const ProductDetails = () => {
 //   const {product} = useContext(ProductContext);
-    
-      
 
 //    const [icount,setIcount] = useState(0);
 
@@ -42,14 +38,12 @@
 //   //const [qty, setQty] = useState(1);
 
 //   //console.log(product._id);
- 
 
 // const [updateUserCart] = useUpdateUserCartMutation();
 
 // const addToCartHandler = async (product) => {
 //   const userID = userInfo?.user.id;
 //   console.log(userID)
- 
 
 //   if (!userID) {
 //     toast.error("Please log in to add items to your cart.");
@@ -76,7 +70,6 @@
 //   }
 // };
 
-
 //   const addToWhishList = () => {
 //     dispatch(addToWishList(product));
 //     toast.success("Product added to whishList !", {
@@ -100,7 +93,6 @@
 //   // const decreaseQtyHandler = (id) => {
 //   //   dispatch(decreaseQty(id));
 //   // };
-
 
 //   const handleNext = () => {
 //     if (icount < product.data.image.length - 1) {
@@ -145,7 +137,7 @@
 
 //     <div className="w-full max-w-[320px] sm:max-w-[360px] md:max-w-[420px] lg:max-w-[500px] bg-white rounded-2xl shadow-md p-4 mx-auto">
 //   <div className="relative w-full md:h-[400px] aspect-square overflow-hidden rounded-xl">
-    
+
 //     <button
 //       className={`absolute left-2 top-1/2 -translate-y-1/2 ${icount === 0 ? "bg-gray-200" : "bg-yellow-500"} text-white hover:bg-white hover:text-yellow-500 rounded-full p-2 z-10`}
 //       onClick={handlePrev}
@@ -251,34 +243,39 @@ import { toast } from "react-toastify";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { addingToCart } from "../Slice/cartSlice";
-import { ProductContext } from '../Screens/ProductDetailsScreen';
-import { useUpdateUserCartMutation } from '../ApiSlice/cartApi.js';
+import { ProductContext } from "../Screens/ProductDetailsScreen";
+import { useUpdateUserCartMutation } from "../ApiSlice/cartApi.js";
 import useAuthUser from "../Hooks/useAuthUser.js";
 import useWishlistActions from "../Hooks/useWishlistActions.js";
 
-const ProductDetails = ({wishListItems}) => {
+const ProductDetails = ({ wishListItems }) => {
   const { product } = useContext(ProductContext);
   const [icount, setIcount] = useState(0);
-  const { userID } = useAuthUser(); 
-  const { handleAddToWishlist, handleRemoveFromWishlist } = useWishlistActions();
+  const { userID } = useAuthUser();
+  const { handleAddToWishlist, handleRemoveFromWishlist } =
+    useWishlistActions();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateUserCart] = useUpdateUserCartMutation();
 
-  
   const items = wishListItems?.wishList?.products || [];
-   const isInWishlist = items.some(
+  const isInWishlist = items.some(
     (item) => item.productID === product.data._id
   );
-
 
   if (!product) {
     return <div className="p-4 text-center">Loading product details...</div>;
   }
 
-  if (!product.data || !product.data.image || !Array.isArray(product.data.image)) {
-    return <div className="p-4 text-center text-red-500">Invalid product data</div>;
+  if (
+    !product.data ||
+    !product.data.image ||
+    !Array.isArray(product.data.image)
+  ) {
+    return (
+      <div className="p-4 text-center text-red-500">Invalid product data</div>
+    );
   }
 
   const addToCartHandler = async (productData) => {
@@ -289,12 +286,15 @@ const ProductDetails = ({wishListItems}) => {
 
     if (!userID) {
       toast.error("Please log in to add items to your cart.");
-      navigate('/login');
+      navigate("/login");
       return;
     }
 
     try {
-      const result = await updateUserCart({ userID, product: productData }).unwrap();
+      const result = await updateUserCart({
+        userID,
+        product: productData,
+      }).unwrap();
       console.log(result);
       dispatch(addingToCart(productData));
       toast.success("Product added to cart!", {
@@ -308,15 +308,39 @@ const ProductDetails = ({wishListItems}) => {
     }
   };
 
-  
-
   const addToWhishList = async (product) => {
-   if (isInWishlist) {
+    if (isInWishlist) {
       handleRemoveFromWishlist(product._id);
     } else {
       handleAddToWishlist(product);
     }
   };
+
+  const buyNowhandler = async (productData) => {
+     if (!productData) {
+      toast.error("Invalid product data");
+      return;
+    }
+
+    if (!userID) {
+      toast.error("Please log in to add items to your cart.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const result = await updateUserCart({
+        userID,
+        product: productData,
+      }).unwrap();
+      console.log(result);
+      dispatch(addingToCart(productData));
+      navigate("/checkout");
+    } catch (err) {
+      console.error("Cart Update Failed:", err);
+      toast.error(err.data?.message || "Failed to add product to cart.");
+    }
+  }
 
   const handleNext = () => {
     if (icount < product.data.image.length - 1) {
@@ -330,14 +354,14 @@ const ProductDetails = ({wishListItems}) => {
     }
   };
 
-  const currentImage = product.data?.image?.[icount] || '';
-  const category = product.data?.category || '';
-  const name = product.data?.name || '';
+  const currentImage = product.data?.image?.[icount] || "";
+  const category = product.data?.category || "";
+  const name = product.data?.name || "";
   const rating = product.data?.rating || 0;
   const price = product.data?.price || 0;
-  const description = product.data?.description || '';
-  const availability = product.data?.Availability || 'Out of Stock';
-  const weight = product.data?.weight || '';
+  const description = product.data?.description || "";
+  const availability = product.data?.Availability || "Out of Stock";
+  const weight = product.data?.weight || "";
 
   return (
     <div className="p-4 w-full max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-6">
@@ -346,13 +370,15 @@ const ProductDetails = ({wishListItems}) => {
         <div className="w-full max-w-[320px] sm:max-w-[360px] md:max-w-[420px] lg:max-w-[500px] bg-white rounded-2xl shadow-md p-4 mx-auto">
           <div className="relative w-full md:h-[400px] aspect-square overflow-hidden rounded-xl">
             <button
-              className={`absolute left-2 top-1/2 -translate-y-1/2 ${icount === 0 ? "bg-gray-200" : "bg-yellow-500"} text-white hover:bg-white hover:text-yellow-500 rounded-full p-2 z-10`}
+              className={`absolute left-2 top-1/2 -translate-y-1/2 ${
+                icount === 0 ? "bg-gray-200" : "bg-yellow-500"
+              } text-white hover:bg-white hover:text-yellow-500 rounded-full p-2 z-10`}
               onClick={handlePrev}
               disabled={icount === 0}
             >
               <FaAngleLeft />
             </button>
-            
+
             <div className="p-10">
               <img
                 src={currentImage}
@@ -362,7 +388,11 @@ const ProductDetails = ({wishListItems}) => {
             </div>
 
             <button
-              className={`absolute right-2 top-1/2 -translate-y-1/2 ${icount === product.data.image.length - 1 ? 'bg-gray-200' : 'bg-green-700'} text-white hover:bg-white hover:text-green-700 rounded-full p-2 z-10`}
+              className={`absolute right-2 top-1/2 -translate-y-1/2 ${
+                icount === product.data.image.length - 1
+                  ? "bg-gray-200"
+                  : "bg-green-700"
+              } text-white hover:bg-white hover:text-green-700 rounded-full p-2 z-10`}
               onClick={handleNext}
               disabled={icount === product.data.image.length - 1}
             >
@@ -378,7 +408,11 @@ const ProductDetails = ({wishListItems}) => {
               key={index}
               src={img}
               onClick={() => setIcount(index)}
-              className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer border-2 ${icount === index ? 'border-green-500 border-4' : 'border-gray-300'}`}
+              className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer border-2 ${
+                icount === index
+                  ? "border-green-500 border-4"
+                  : "border-gray-300"
+              }`}
               alt={`Thumbnail ${index}`}
             />
           ))}
@@ -390,12 +424,22 @@ const ProductDetails = ({wishListItems}) => {
         <div className="space-y-4">
           <h2 className="text-sm font-semibold text-gray-500">{category}</h2>
           <div className="flex flex-row gap-2.5">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">{name}</h1>
-            <h1 className={`border ${availability === 'In Stock' ? "border-green-700 bg-green-100 text-green-700" : "border-red-700 bg-red-300 text-red-700"} text-sm font-semibold rounded-3xl px-6 py-1.5`}>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+              {name}
+            </h1>
+            <h1
+              className={`border ${
+                availability === "In Stock"
+                  ? "border-green-700 bg-green-100 text-green-700"
+                  : "border-red-700 bg-red-300 text-red-700"
+              } text-sm font-semibold rounded-3xl px-6 py-1.5`}
+            >
               {availability}
             </h1>
           </div>
-          <p className="text-lg">⭐⭐⭐⭐⭐ <span>{rating}</span></p>
+          <p className="text-lg">
+            ⭐⭐⭐⭐⭐ <span>{rating}</span>
+          </p>
           <p className="text-xl font-semibold text-green-700">₹ {price}</p>
           <p className="text-gray-700">{description}</p>
 
@@ -414,17 +458,24 @@ const ProductDetails = ({wishListItems}) => {
             <button
               className="bg-green-700 text-white px-6 py-2 rounded-full hover:bg-green-800"
               onClick={() => addToCartHandler(product.data)}
+              disabled={availability !== "In Stock"}
             >
               Add To Cart
             </button>
-            <button className="bg-yellow-400 px-6 py-2 rounded-full hover:bg-yellow-300">
+            <button className="bg-yellow-400 px-6 py-2 rounded-full hover:bg-yellow-300"
+            onClick={() => buyNowhandler(product.data)}
+            >
               Buy Now
             </button>
             <button
-             className={`flex items-center justify-center size-6 ${isInWishlist ? 'text-red-500' : "text-gray-400 hover:text-red-500"}`}
-              onClick={() =>addToWhishList(product.data)}
+              className={`flex items-center justify-center size-6 ${
+                isInWishlist
+                  ? "text-red-500"
+                  : "text-gray-400 hover:text-red-500"
+              }`}
+              onClick={() => addToWhishList(product.data)}
             >
-               <BsSuitHeartFill />
+              <BsSuitHeartFill />
             </button>
           </div>
         </div>

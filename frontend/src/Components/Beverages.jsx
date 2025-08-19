@@ -1,72 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsSuitHeartFill } from "react-icons/bs";
 
 //import useWishListItemIDs from "../Hooks/useCartItem.js";
 import useWishlistActions from "../Hooks/useWishlistActions.js";
 
 const Beverages = ({ product, wishListItems }) => {
-  const { handleAddToWishlist, handleRemoveFromWishlist } = useWishlistActions();
+  const navigate = useNavigate();
+  const { handleAddToWishlist, handleRemoveFromWishlist } =
+    useWishlistActions();
   const items = wishListItems?.wishList?.products || [];
-  const isInWishlist = items.some(
-    (item) => item.productID === product._id
-  );
+  const isInWishlist = items.some((item) => item.productID === product._id);
 
   const addToCartHandler = (product) => {
-     if (isInWishlist) {
+    if (isInWishlist) {
       handleRemoveFromWishlist(product._id);
     } else {
       handleAddToWishlist(product);
     }
   };
-  
 
-  // const CartHandler = () =>{
-  //     setItems();
-  // }
+  const addToCart = () => {
+    // Add your add to cart logic here
+    navigate(`/productDetailsPage/${product._id}`);
+  };
 
-  // function setItems(){
-  //     const storedFormData = JSON.parse(localStorage.getItem('cart'));
-  //     const data = storedFormData;
-  //     // storedFormData.push(product);
-  //     localStorage.setItem("cart", JSON.stringify([data,product]));
-  // }
-
-  // const CartHandler = () => {
-  //     setItems(product); // Pass the product to add
-  //     navigate('/cart');
-  // };
-
-  // function setItems(productToAdd) {
-  //     // Get current cart from localStorage or initialize as empty array
-  //     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  //     // Check if product already exists in cart
-  //     const existingItemIndex = currentCart.findIndex(item =>
-  //         item._id === productToAdd._id && item.category === productToAdd.category
-  //     );
-
-  //     let updatedCart;
-
-  //     if (existingItemIndex >= 0) {
-  //         // If product exists, update quantity
-  //         updatedCart = [...currentCart];
-  //         updatedCart[existingItemIndex] = {
-  //             ...updatedCart[existingItemIndex],
-  //             quantity: (updatedCart[existingItemIndex].quantity || 1) + 1
-  //         };
-
-  //     } else {
-  //         // If new product, add to cart with quantity 1
-  //         updatedCart = [...currentCart, { ...productToAdd, quantity: 1 }];
-  //     }
-
-  //     // Save to localStorage
-  //     localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-  // Update state if needed (assuming you're using React state)
-  //setItemsState(updatedCart); // You'll need to define this state
-  //}
   return (
     <>
       <div
@@ -79,10 +37,14 @@ const Beverages = ({ product, wishListItems }) => {
           </p>
           <div className="bg-gray-100 p-2 shadow-2xl rounded-full">
             <button
-              className={`flex items-center justify-center size-6 ${isInWishlist ? 'text-red-500' : "text-gray-400 hover:text-red-500"}`}
+              className={`flex items-center justify-center size-6 ${
+                isInWishlist
+                  ? "text-red-500"
+                  : "text-gray-400 hover:text-red-500"
+              }`}
               onClick={() => addToCartHandler(product)}
             >
-               <BsSuitHeartFill />
+              <BsSuitHeartFill />
             </button>
           </div>
         </div>
@@ -121,7 +83,7 @@ const Beverages = ({ product, wishListItems }) => {
           </h3>
           <button
             className="bg-green-200 rounded-2xl font-semibold text-md/1 text-green-700 px-2 py-1"
-            onClick={addToCartHandler}
+            onClick={addToCart}
           >
             <span className="mr-1">👜</span>Add
           </button>

@@ -1,4 +1,7 @@
-import {useAddToWishListMutation, useDeleteFromWishListMutation} from "../ApiSlice/whishListSlice.js";
+import {
+  useAddToWishListMutation,
+  useDeleteFromWishListMutation,
+} from "../ApiSlice/whishListSlice.js";
 import { toast } from "react-toastify";
 
 import useAuthUser from "./useAuthUser.js";
@@ -8,15 +11,13 @@ const useWishlistActions = () => {
   const [deleteFromWishList] = useDeleteFromWishListMutation();
   const { userID } = useAuthUser();
 
-  
-
   const handleAddToWishlist = async (product) => {
     if (!userID || userID === "null" || userID === null) {
-    toast.error("You must be logged in to add to wishlist");
-    return;
-  }
+      toast.error("You must be logged in to add to wishlist");
+      return;
+    }
     try {
-     const res =  await addToWishList({ userID, product }).unwrap();
+      const res = await addToWishList({ userID, product }).unwrap();
       toast.success(res.message || "Product added to wish list!");
     } catch (err) {
       console.error("Failed to add to wishlist:", err);
@@ -25,12 +26,12 @@ const useWishlistActions = () => {
 
   const handleRemoveFromWishlist = async (productID) => {
     if (!userID || userID === "null" || userID === null) {
-    toast.error("You must be logged in to add to wishlist");
-    return;
-  }
+      toast.error("You must be logged in to add to wishlist");
+      return;
+    }
     try {
-     const res =  await deleteFromWishList({ userID, productID }).unwrap();
-        toast.info(res.message || "Product removed from wish list!");
+      const res = await deleteFromWishList({ userID, productID }).unwrap();
+      toast.info(res.message || "Product removed from wish list!");
     } catch (err) {
       console.error("Failed to remove from wishlist:", err);
     }

@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import { ProductFilterContext } from "../Contexts/AppContext";
 
 const ratingData = [
@@ -34,13 +34,14 @@ const ratingData = [
   },
 ];
 
-
 const Review = () => {
-
-   const { dispatch, removeCheckItem, setCheckItems, checkItems } = useContext(ProductFilterContext);
+  const { dispatch, removeCheckItem, setCheckItems, checkItems } =
+    useContext(ProductFilterContext);
 
   const handleRatingChange = (type, value) => {
-    const exists = checkItems.some((item) => item.type === "rating" && item.value === value);
+    const exists = checkItems.some(
+      (item) => item.type === "rating" && item.value === value
+    );
     if (exists) {
       dispatch(removeCheckItem({ type, value }));
     } else {
@@ -50,25 +51,25 @@ const Review = () => {
 
   return (
     <>
-    
-    <div className="flex flex-col items-start"> 
-      <h1 className="font-sans text-[20px] font-bold">Review</h1>
-      {ratingData.map((items) => (
-        <label key={items.id} className="inline-flex items-center gap-2">
-          <input 
-          type="checkbox" 
-          className="accent-green-700 size-4" 
-          value={`${items.type}, ${items.value}`}
-          checked={checkItems.some(
-        (ci) => ci.type === items.type && ci.value === items.value
-      )}
-          onChange={() => handleRatingChange(items.type, items.value)} />
-          <p>{items.stars}</p>
-          <p>{items.value} Star</p>
-        </label>
-      ))}
-    </div>
-    <div className="mt-7 border-b border-gray-400"></div>
+      <div className="flex flex-col items-start">
+        <h1 className="font-sans text-[20px] font-bold">Review</h1>
+        {ratingData.map((items) => (
+          <label key={items.id} className="inline-flex items-center gap-2">
+            <input
+              type="checkbox"
+              className="accent-green-700 size-4"
+              value={`${items.type}, ${items.value}`}
+              checked={checkItems.some(
+                (ci) => ci.type === items.type && ci.value === items.value
+              )}
+              onChange={() => handleRatingChange(items.type, items.value)}
+            />
+            <p>{items.stars}</p>
+            <p>{items.value} Star</p>
+          </label>
+        ))}
+      </div>
+      <div className="mt-7 border-b border-gray-400"></div>
     </>
   );
 };

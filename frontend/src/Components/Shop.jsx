@@ -1,63 +1,20 @@
-// import {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-//import { IoMdHeartEmpty } from "react-icons/io";
 import { BsSuitHeartFill } from "react-icons/bs";
-//import { toast } from "react-toastify";
-//import { useDispatch } from "react-redux";
 
-//import { addToWishList } from "../Slice/WhishListSlice.js";
-//import { useAddToWishListMutation } from "../ApiSlice/whishListSlice.js";
-//import useAuthUser from "../Hooks/useAuthUser.js";
-//import useWishListItemIDs from "../Hooks/useCartItem.js";
 import useWishlistActions from "../Hooks/useWishlistActions.js";
 
-
 const Shop = ({ product, wishListItems }) => {
- 
-  //const dispatch = useDispatch();
-  //const [addToWishLists] = useAddToWishListMutation();
- // const { userID } = useAuthUser(); // get userID from custom hook
-  //const wishListItemIDs = useWishListItemIDs(); // get wishListItem from custom hook
-  const { handleAddToWishlist, handleRemoveFromWishlist } = useWishlistActions();
+  const { handleAddToWishlist, handleRemoveFromWishlist } =
+    useWishlistActions();
 
   const items = wishListItems?.wishList?.products || [];
   //console.log("Wish List Items:", items); // Debug log
-  const isInWishlist = items.some(
-    (item) => item.productID === product._id
-  );
+  const isInWishlist = items.some((item) => item.productID === product._id);
   //console.log("Wishlist Data:", isInWishlist); // Debug log
   const navigate = useNavigate();
 
   const addToWishListHandler = async (product) => {
-    //console.log("Adding to Wish List:", product); // debug log 
-    // Add your add to cart logic here
-    // if (!product) {
-    //   toast.error("Invalid product data");
-    //   return;
-    // }
-
-    // if (!userID) {
-    //   toast.error("User not authenticated");
-    //   await navigate("/login");
-    //   return;
-    // }
-
-    // try {
-    //   const res = await addToWishLists({ userID, product }).unwrap();
-    //   dispatch(
-    //     addToWishList({
-    //       ...res.wishListItem,
-    //       pending: false,
-    //     })
-    //   );
-    //   toast.success(res.message || "Product added to wish list!");
-      
-    //   console.log("Wish List Response:", res.wishListItem);
-    // } catch (error) {
-    //   toast.error("Failed to add product to wish list", error.message);
-    // }
-
     if (isInWishlist) {
       handleRemoveFromWishlist(product._id);
     } else {
@@ -83,12 +40,11 @@ const Shop = ({ product, wishListItems }) => {
           <div className="bg-gray-100  p-2 shadow-2xl rounded-full">
             <button
               className={`size-6 flex items-center justify-center ${
-              isInWishlist
+                isInWishlist
                   ? "text-red-500"
                   : "text-gray-400 hover:text-red-500"
               }`}
               onClick={() => addToWishListHandler(product)}
-              // disabled={wishListItemIDs?.includes(product._id)}
             >
               <BsSuitHeartFill />
             </button>
