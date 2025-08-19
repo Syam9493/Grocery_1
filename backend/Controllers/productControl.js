@@ -91,7 +91,7 @@ const products = async (req, res) => {
 // get request
 
 const productById = async (req, res) => {
-  console.log("✅ hit the single product api");
+  //console.log("✅ hit the single product api"); Debug log
   try {
     const products = await Product.findById(req.params.id);
     res.status(200).json({

@@ -28,6 +28,7 @@ const registerUser = async (req, res) => {
     cellNumber,
   });
 
+
   if (user) {
     await generateToken(res, user._id);
     await res.status(201).json({

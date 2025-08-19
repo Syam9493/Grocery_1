@@ -6,8 +6,15 @@ import wishList from "../Models/wishListModel.js";
 
 const getUserWishList = async (req, res) => {
   const { userID } = req.params;
+  //console.log(userID);
   try {
+    if (!userID) {
+      return res
+        .status(400)
+        .json({ message: "Missing required userID or product data" });
+    }
     const wishListItem = await wishList.findOne({ userID });
+
 
     if (!wishListItem) {
       return res.status(404).json({ message: "Wishlist not found" });
@@ -25,7 +32,7 @@ const getUserWishList = async (req, res) => {
 // POST Request
 
 const addToWishList = async (req, res) => {
-  //console.log(req.body); Debug log
+  //console.log(req.body); //Debug log
   try {
     const { userID } = req.params;
     const product = req.body;
@@ -53,7 +60,7 @@ const addToWishList = async (req, res) => {
     if (!wishListItem) {
       const newItem = await wishList.create({
         userID,
-        products: [product],
+        products: [cartItem],
       });
       return res.status(201).json({
         wishList: newItem,

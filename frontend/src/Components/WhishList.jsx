@@ -10,7 +10,7 @@ import { useDeleteFromWishListMutation } from "../ApiSlice/whishListSlice.js";
 import { useUpdateUserCartMutation } from "../ApiSlice/cartApi.js";
 import useAuthUser from "../Hooks/useAuthUser.js";
 
-const WhishList = ({ wishListItems, isLoading, isError }) => {
+const WhishList = ({ wishListItems}) => {
   const [open, setOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const dispatch = useDispatch();
@@ -97,13 +97,7 @@ const WhishList = ({ wishListItems, isLoading, isError }) => {
   //  console.log(deleteItmehandler);
   return (
     <>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : isError ? (
-        <tr>
-          <td>{isError.message}</td>
-        </tr>
-      ) : Array.isArray(items) ? (
+      {Array.isArray(items) ? (
         items.map((item) => (
           <tr key={item._id} className="bg-white rounded-lg shadow-sm mt-4">
             <td className="flex items-center gap-7 p-6">

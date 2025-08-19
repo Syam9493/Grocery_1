@@ -13,8 +13,8 @@ const WhishListScreen = () => {
   const { userID } = useAuthUser();
   const {
     data: wishListItems,
-    isLoading,
-    error,
+    isSuccess,
+    isLoading
   } = useGetUserWishListQuery(userID);
   console.log("Fetched Wishlist Items:", wishListItems);
 
@@ -23,13 +23,13 @@ const WhishListScreen = () => {
   }, [location]);
 
   useEffect(() => {
-    if (wishListItems) {
+     if(!userID) return;
+    if (userID & isSuccess & wishListItems) {
       dispatch(addToWishList(wishListItems.wishList || []));
     }
-  }, [dispatch, wishListItems]);
+  }, [userID,isSuccess, dispatch, wishListItems]);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching wishlist</div>;
 
   return (
     <>
@@ -48,7 +48,6 @@ const WhishListScreen = () => {
               <WhishList
                 wishListItems={wishListItems}
                 isLoading={isLoading}
-                isError={error}
               />
             </tbody>
           </table>

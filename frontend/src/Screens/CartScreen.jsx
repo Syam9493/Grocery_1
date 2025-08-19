@@ -24,11 +24,12 @@ const CartScreen = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  useEffect(() => {
-    if (isSuccess && data) {
+  useEffect(() => { 
+    if(!userID) return;
+    if (userID & isSuccess && data) {
       dispatch(addingToCart(data));
     }
-  }, [isSuccess, data, dispatch]);
+  }, [userID,isSuccess, data, dispatch]);
 
   return (
     <>
