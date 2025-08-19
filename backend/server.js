@@ -34,7 +34,7 @@ app.use(
          ? 'https://grocery-52wy.onrender.com' // Your production frontend URL
           //?"http://localhost:5000" // loacal production development
         : "http://localhost:5173/", // Your development frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE"], 
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Content-Length", "X-Foo", "X-Bar"],
