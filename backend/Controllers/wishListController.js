@@ -6,7 +6,6 @@ import wishList from "../Models/wishListModel.js";
 
 const getUserWishList = async (req, res) => {
   const { userID } = req.params;
-
   try {
     const wishListItem = await wishList.findOne({ userID });
 
