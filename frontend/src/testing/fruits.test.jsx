@@ -135,6 +135,45 @@ describe("Fruits Component", () => {
   expect(fruitItems.slice(21,22)).toHaveLength(1);
  });
 
+ it("displays 1 item per row on mobile screens",()=>{
+  const prodoucts = Array.from({length:22},(_,i)=>({
+    ...mockProduct,
+    _id:`product-${i}`,
+    name:`product ${i+1}`
+  }));
+
+  render(
+    <MemoryRouter>
+      {prodoucts.map((p)=>(<Fruits key={p._id} product={p}/>))}
+    </MemoryRouter>
+  );
+
+  const fruitItems = screen.getAllByTestId("fruit-item");
+  expect(fruitItems).toHaveLength(22);
+  // Optional: just check slices for row assumptions
+  expect(fruitItems.slice(0,1)).toHaveLength(1);
+  expect(fruitItems.slice(1,2)).toHaveLength(1);
+  expect(fruitItems.slice(2,3)).toHaveLength(1);
+  expect(fruitItems.slice(3,4)).toHaveLength(1);
+  expect(fruitItems.slice(4,5)).toHaveLength(1);
+  expect(fruitItems.slice(5,6)).toHaveLength(1);
+  expect(fruitItems.slice(6,7)).toHaveLength(1);
+  expect(fruitItems.slice(7,8)).toHaveLength(1);
+  expect(fruitItems.slice(8,9)).toHaveLength(1);
+  expect(fruitItems.slice(9,10)).toHaveLength(1);
+  expect(fruitItems.slice(10,11)).toHaveLength(1);
+  expect(fruitItems.slice(11,12)).toHaveLength(1);
+  expect(fruitItems.slice(12,13)).toHaveLength(1);
+  expect(fruitItems.slice(13,14)).toHaveLength(1);
+  expect(fruitItems.slice(15,16)).toHaveLength(1);
+  expect(fruitItems.slice(16,17)).toHaveLength(1);
+  expect(fruitItems.slice(18,19)).toHaveLength(1);
+  expect(fruitItems.slice(19,20)).toHaveLength(1);
+  expect(fruitItems.slice(20,21)).toHaveLength(1);
+  expect(fruitItems.slice(21,22)).toHaveLength(1);
+  
+ })
+
   it("renders fruit item container with correct testid", () => {
     render(
       <MemoryRouter>
