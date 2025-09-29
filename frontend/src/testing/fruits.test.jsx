@@ -171,8 +171,7 @@ describe("Fruits Component", () => {
   expect(fruitItems.slice(19,20)).toHaveLength(1);
   expect(fruitItems.slice(20,21)).toHaveLength(1);
   expect(fruitItems.slice(21,22)).toHaveLength(1);
-  
- })
+ });
 
   it("renders fruit item container with correct testid", () => {
     render(
